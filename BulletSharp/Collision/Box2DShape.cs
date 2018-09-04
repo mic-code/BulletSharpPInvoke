@@ -8,7 +8,7 @@ namespace BulletSharp
 		private Vector3Array _normals;
 		private Vector3Array _vertices;
 
-		public Box2DShape(Vector3 boxHalfExtents)
+		public Box2DShape(Vector3d boxHalfExtents)
 			: base(btBox2dShape_new(ref boxHalfExtents))
 		{
 		}
@@ -28,31 +28,31 @@ namespace BulletSharp
 			btBox2dShape_getPlaneEquation(Native, out plane, i);
 		}
 
-		public Vector3 Centroid
+		public Vector3d Centroid
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBox2dShape_getCentroid(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 HalfExtentsWithMargin
+		public Vector3d HalfExtentsWithMargin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBox2dShape_getHalfExtentsWithMargin(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 HalfExtentsWithoutMargin
+		public Vector3d HalfExtentsWithoutMargin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBox2dShape_getHalfExtentsWithoutMargin(Native, out value);
 				return value;
 			}

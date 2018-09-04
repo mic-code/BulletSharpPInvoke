@@ -7,32 +7,32 @@ namespace BulletSharp.Math
 {
     internal class Vector3ListDebugView
     {
-        private IList<Vector3> _list;
+        private IList<Vector3d> _list;
 
-        public Vector3ListDebugView(IList<Vector3> list)
+        public Vector3ListDebugView(IList<Vector3d> list)
         {
             _list = list;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public Vector3[] Items
+        public Vector3d[] Items
         {
             get
             {
-                var arr = new Vector3[_list.Count];
+                var arr = new Vector3d[_list.Count];
                 _list.CopyTo(arr, 0);
                 return arr;
             }
         }
     };
 
-    public class Vector3ArrayEnumerator : IEnumerator<Vector3>
+    public class Vector3ArrayEnumerator : IEnumerator<Vector3d>
     {
         private int _i;
         private int _count;
-        private IList<Vector3> _array;
+        private IList<Vector3d> _array;
 
-        public Vector3ArrayEnumerator(IList<Vector3> array)
+        public Vector3ArrayEnumerator(IList<Vector3d> array)
         {
             _array = array;
             _count = array.Count;
@@ -54,31 +54,31 @@ namespace BulletSharp.Math
             _i = 0;
         }
 
-        public Vector3 Current => _array[_i];
+        public Vector3d Current => _array[_i];
 
         object System.Collections.IEnumerator.Current => _array[_i];
     }
 
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(Vector3ListDebugView))]
-    public class Vector3Array : FixedSizeArray, IList<Vector3>
+    public class Vector3Array : FixedSizeArray, IList<Vector3d>
     {
         internal Vector3Array(IntPtr native, int count)
             : base(native, count)
         {
         }
 
-        public int IndexOf(Vector3 item)
+        public int IndexOf(Vector3d item)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(int index, Vector3 item)
+        public void Insert(int index, Vector3d item)
         {
             throw new NotSupportedException();
         }
 
-        public Vector3 this[int index]
+        public Vector3d this[int index]
         {
             get
             {
@@ -86,7 +86,7 @@ namespace BulletSharp.Math
                 {
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
-                Vector3 value;
+                Vector3d value;
                 btVector3_array_at(_native, index, out value);
                 return value;
             }
@@ -100,17 +100,17 @@ namespace BulletSharp.Math
             }
         }
 
-        public void Add(Vector3 item)
+        public void Add(Vector3d item)
         {
             throw new NotSupportedException();
         }
 
-        public bool Contains(Vector3 item)
+        public bool Contains(Vector3d item)
         {
             throw new NotImplementedException();
         }
 
-        public void CopyTo(Vector3[] array, int arrayIndex)
+        public void CopyTo(Vector3d[] array, int arrayIndex)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
@@ -128,12 +128,12 @@ namespace BulletSharp.Math
             }
         }
 
-        public bool Remove(Vector3 item)
+        public bool Remove(Vector3d item)
         {
             throw new NotSupportedException();
         }
 
-        public IEnumerator<Vector3> GetEnumerator()
+        public IEnumerator<Vector3d> GetEnumerator()
         {
             return new Vector3ArrayEnumerator(this);
         }

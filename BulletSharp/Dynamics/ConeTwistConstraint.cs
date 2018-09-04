@@ -75,9 +75,9 @@ namespace BulletSharp
 			return btConeTwistConstraint_getLimit(Native, limitIndex);
 		}
 
-		public Vector3 GetPointForAngle(double fAngleInRadians, double fLength)
+		public Vector3d GetPointForAngle(double fAngleInRadians, double fLength)
 		{
-			Vector3 value;
+			Vector3d value;
 			btConeTwistConstraint_GetPointForAngle(Native, fAngleInRadians, fLength,
 				out value);
 			return value;

@@ -93,13 +93,13 @@ namespace BulletSharp
 			Marshal.Copy(vertexArray, 0, VertexBase, vertices.Count);
 		}
 
-		public void SetData(ICollection<int> triangles, ICollection<Vector3> vertices)
+		public void SetData(ICollection<int> triangles, ICollection<Vector3d> vertices)
 		{
 			SetTriangles(triangles);
 
 			double[] vertexArray = new double[vertices.Count * 3];
 			int i = 0;
-			foreach (Vector3 v in vertices)
+			foreach (Vector3d v in vertices)
 			{
 				vertexArray[i] = v.X;
 				vertexArray[i + 1] = v.Y;
@@ -218,7 +218,7 @@ namespace BulletSharp
 			AddIndexedMesh(_initialMesh);
 		}
 
-		public TriangleIndexVertexArray(ICollection<int> triangles, ICollection<Vector3> vertices)
+		public TriangleIndexVertexArray(ICollection<int> triangles, ICollection<Vector3d> vertices)
 			: base(btTriangleIndexVertexArray_new())
 		{
 			_initialMesh = new IndexedMesh();

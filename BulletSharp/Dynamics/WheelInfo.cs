@@ -6,14 +6,14 @@ namespace BulletSharp
 	public struct WheelInfoConstructionInfo
 	{
         public bool IsFrontWheel;
-        public Vector3 ChassisConnectionCS;
+        public Vector3d ChassisConnectionCS;
         public double FrictionSlip;
         public double MaxSuspensionForce;
         public double MaxSuspensionTravelCm;
         public double SuspensionRestLength;
         public double SuspensionStiffness;
-        public Vector3 WheelAxleCS;
-        public Vector3 WheelDirectionCS;
+        public Vector3d WheelAxleCS;
+        public Vector3d WheelDirectionCS;
         public double WheelRadius;
         public double WheelsDampingCompression;
         public double WheelsDampingRelaxation;
@@ -21,14 +21,14 @@ namespace BulletSharp
 
     public struct RaycastInfo
     {
-        public Vector3 ContactNormalWS;
-        public Vector3 ContactPointWS;
+        public Vector3d ContactNormalWS;
+        public Vector3d ContactPointWS;
         public Object GroundObject;
-        public Vector3 HardPointWS;
+        public Vector3d HardPointWS;
         public bool IsInContact;
         public double SuspensionLength;
-        public Vector3 WheelAxleWS;
-        public Vector3 WheelDirectionWS;
+        public Vector3d WheelAxleWS;
+        public Vector3d WheelDirectionWS;
     }
 
     public class WheelInfo
@@ -68,11 +68,11 @@ namespace BulletSharp
         {
             if (raycastInfo.IsInContact)
             {
-                double project = Vector3.Dot(raycastInfo.ContactNormalWS, raycastInfo.WheelDirectionWS);
-                Vector3 chassis_velocity_at_contactPoint;
-                Vector3 relpos = raycastInfo.ContactPointWS - chassis.CenterOfMassPosition;
+                double project = Vector3d.Dot(raycastInfo.ContactNormalWS, raycastInfo.WheelDirectionWS);
+                Vector3d chassis_velocity_at_contactPoint;
+                Vector3d relpos = raycastInfo.ContactPointWS - chassis.CenterOfMassPosition;
                 chassis_velocity_at_contactPoint = chassis.GetVelocityInLocalPoint(relpos);
-                double projVel = Vector3.Dot(raycastInfo.ContactNormalWS, chassis_velocity_at_contactPoint);
+                double projVel = Vector3d.Dot(raycastInfo.ContactNormalWS, chassis_velocity_at_contactPoint);
                 if (project >= -0.1f)
                 {
                     SuspensionRelativeVelocity = 0;
@@ -103,7 +103,7 @@ namespace BulletSharp
 
         public bool IsFrontWheel;
         public double Brake;
-        public Vector3 ChassisConnectionPointCS;
+        public Vector3d ChassisConnectionPointCS;
         public IntPtr ClientInfo;
         public double ClippedInvContactDotSuspension;
         public double DeltaRotation;
@@ -119,8 +119,8 @@ namespace BulletSharp
         public double SuspensionRelativeVelocity;
         public double SuspensionRestLength1;
         public double SuspensionStiffness;
-        public Vector3 WheelAxleCS;
-        public Vector3 WheelDirectionCS;
+        public Vector3d WheelAxleCS;
+        public Vector3d WheelDirectionCS;
         public double WheelsDampingCompression;
         public double WheelsDampingRelaxation;
         public double WheelsRadius;

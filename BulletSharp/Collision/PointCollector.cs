@@ -22,22 +22,22 @@ namespace BulletSharp
 			set => btPointCollector_setHasResult(Native, value);
 		}
 
-		public Vector3 NormalOnBInWorld
+		public Vector3d NormalOnBInWorld
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btPointCollector_getNormalOnBInWorld(Native, out value);
 				return value;
 			}
 			set => btPointCollector_setNormalOnBInWorld(Native, ref value);
 		}
 
-		public Vector3 PointInWorld
+		public Vector3d PointInWorld
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btPointCollector_getPointInWorld(Native, out value);
 				return value;
 			}

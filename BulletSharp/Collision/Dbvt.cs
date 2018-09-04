@@ -13,7 +13,7 @@ namespace BulletSharp
 			Native = native;
 		}
 
-		public int Classify(Vector3 n, double o, int s)
+		public int Classify(Vector3d n, double o, int s)
 		{
 			return btDbvtAabbMm_Classify(Native, ref n, o, s);
 		}
@@ -23,7 +23,7 @@ namespace BulletSharp
 			return btDbvtAabbMm_Contain(Native, a.Native);
 		}
 
-		public void Expand(Vector3 e)
+		public void Expand(Vector3d e)
 		{
 			btDbvtAabbMm_Expand(Native, ref e);
 		}
@@ -53,81 +53,81 @@ namespace BulletSharp
 			return btDbvtAabbMm_FromPoints2(ref pts, n);
 		}
 		*/
-		public double ProjectMinimum(Vector3 v, uint signs)
+		public double ProjectMinimum(Vector3d v, uint signs)
 		{
 			return btDbvtAabbMm_ProjectMinimum(Native, ref v, signs);
 		}
 
-		public void SignedExpand(Vector3 e)
+		public void SignedExpand(Vector3d e)
 		{
 			btDbvtAabbMm_SignedExpand(Native, ref e);
 		}
 
-		public Vector3 Center
+		public Vector3d Center
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_Center(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 Extents
+		public Vector3d Extents
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_Extents(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 Lengths
+		public Vector3d Lengths
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_Lengths(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 Maxs
+		public Vector3d Maxs
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_Maxs(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 Mins
+		public Vector3d Mins
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_Mins(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 TMaxs
+		public Vector3d TMaxs
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_tMaxs(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 TMins
+		public Vector3d TMins
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDbvtAabbMm_tMins(Native, out value);
 				return value;
 			}
@@ -792,12 +792,12 @@ namespace BulletSharp
 			return btDbvt_update4(Native, leaf.Native, volume.Native, margin);
 		}
 
-		public bool Update(DbvtNode leaf, DbvtVolume volume, Vector3 velocity)
+		public bool Update(DbvtNode leaf, DbvtVolume volume, Vector3d velocity)
 		{
 			return btDbvt_update5(Native, leaf.Native, volume.Native, ref velocity);
 		}
 
-		public bool Update(DbvtNode leaf, DbvtVolume volume, Vector3 velocity, double margin)
+		public bool Update(DbvtNode leaf, DbvtVolume volume, Vector3d velocity, double margin)
 		{
 			return btDbvt_update6(Native, leaf.Native, volume.Native, ref velocity,
 				margin);

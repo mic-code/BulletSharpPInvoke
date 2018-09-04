@@ -37,44 +37,44 @@ namespace BulletSharp
 			Native = btJointFeedback_new();
 		}
 
-		public Vector3 AppliedForceBodyA
+		public Vector3d AppliedForceBodyA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btJointFeedback_getAppliedForceBodyA(Native, out value);
 				return value;
 			}
 			set => btJointFeedback_setAppliedForceBodyA(Native, ref value);
 		}
 
-		public Vector3 AppliedForceBodyB
+		public Vector3d AppliedForceBodyB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btJointFeedback_getAppliedForceBodyB(Native, out value);
 				return value;
 			}
 			set => btJointFeedback_setAppliedForceBodyB(Native, ref value);
 		}
 
-		public Vector3 AppliedTorqueBodyA
+		public Vector3d AppliedTorqueBodyA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btJointFeedback_getAppliedTorqueBodyA(Native, out value);
 				return value;
 			}
 			set => btJointFeedback_setAppliedTorqueBodyA(Native, ref value);
 		}
 
-		public Vector3 AppliedTorqueBodyB
+		public Vector3d AppliedTorqueBodyB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btJointFeedback_getAppliedTorqueBodyB(Native, out value);
 				return value;
 			}
@@ -295,7 +295,7 @@ namespace BulletSharp
 				using (var cinfo = new RigidBodyConstructionInfo(0, null, null))
 				{
 					_fixedBody = new RigidBody(cinfo);
-					_fixedBody.SetMassProps(0, Vector3.Zero);
+					_fixedBody.SetMassProps(0, Vector3d.Zero);
 				}
 			}
 			return _fixedBody;

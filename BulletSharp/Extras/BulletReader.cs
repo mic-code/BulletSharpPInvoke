@@ -147,31 +147,31 @@ namespace BulletSharp
             }
         }
 
-        public Vector3 ReadVector3()
+        public Vector3d ReadVector3()
         {
             double x = ReadSingle();
             double y = ReadSingle();
             double z = ReadSingle();
             BaseStream.Position += sizeof(float); // double w = ReadSingle();
-            return new Vector3(x, y, z);
+            return new Vector3d(x, y, z);
         }
 
-        public Vector3 ReadVector3Double()
+        public Vector3d ReadVector3Double()
         {
             double x = ReadDouble();
             double y = ReadDouble();
             double z = ReadDouble();
             BaseStream.Position += sizeof(double); // double w = ReadDouble();
-            return new Vector3(x, y, z);
+            return new Vector3d(x, y, z);
         }
 
-        public Vector3 ReadVector3(int position)
+        public Vector3d ReadVector3(int position)
         {
             BaseStream.Position = position;
             return ReadVector3();
         }
 
-        public Vector3 ReadVector3Double(int position)
+        public Vector3d ReadVector3Double(int position)
         {
             BaseStream.Position = position;
             return ReadVector3Double();
@@ -226,17 +226,17 @@ namespace BulletSharp
                 : BitConverter.ToInt32(value, startIndex);
         }
 
-        public static Vector3 ToVector3(byte[] value, int startIndex)
+        public static Vector3d ToVector3(byte[] value, int startIndex)
         {
-            return new Vector3(
+            return new Vector3d(
                 BitConverter.ToSingle(value, startIndex),
                 BitConverter.ToSingle(value, startIndex + 4),
                 BitConverter.ToSingle(value, startIndex + 8));
         }
 
-        public static Vector3 ToVector3Double(byte[] value, int startIndex)
+        public static Vector3d ToVector3Double(byte[] value, int startIndex)
         {
-            return new Vector3(
+            return new Vector3d(
                 (float)BitConverter.ToDouble(value, startIndex),
                 (float)BitConverter.ToDouble(value, startIndex + 8),
                 (float)BitConverter.ToDouble(value, startIndex + 16));

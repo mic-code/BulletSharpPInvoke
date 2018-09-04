@@ -125,22 +125,22 @@ namespace BulletSharp
 			return btBroadphaseProxy_isSoftBody(proxyType);
 		}
 
-		public Vector3 AabbMax
+		public Vector3d AabbMax
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBroadphaseProxy_getAabbMax(Native, out value);
 				return value;
 			}
 			set => btBroadphaseProxy_setAabbMax(Native, ref value);
 		}
 
-		public Vector3 AabbMin
+		public Vector3d AabbMin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBroadphaseProxy_getAabbMin(Native, out value);
 				return value;
 			}

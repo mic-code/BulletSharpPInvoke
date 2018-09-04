@@ -51,10 +51,10 @@ namespace BulletSharp.SoftBody
 			}
 		}
 
-		public static SoftBody CreateEllipsoid(SoftBodyWorldInfo worldInfo, Vector3 center, Vector3 radius, int res)
+		public static SoftBody CreateEllipsoid(SoftBodyWorldInfo worldInfo, Vector3d center, Vector3d radius, int res)
 		{
 			int numVertices = res + 3;
-			Vector3[] vtx = new Vector3[numVertices];
+			Vector3d[] vtx = new Vector3d[numVertices];
 			for (int i = 0; i < numVertices; i++)
 			{
 				double p = 0.5f, t = 0;
@@ -67,13 +67,13 @@ namespace BulletSharp.SoftBody
 				double w = 2 * t - 1;
 				double a = ((1 + 2 * i) * (double)System.Math.PI) / numVertices;
 				double s = (double)System.Math.Sqrt(1 - w * w);
-				vtx[i] = new Vector3(s * (double)System.Math.Cos(a), s * (double)System.Math.Sin(a), w) * radius + center;
+				vtx[i] = new Vector3d(s * (double)System.Math.Cos(a), s * (double)System.Math.Sin(a), w) * radius + center;
 			}
 			return CreateFromConvexHull(worldInfo, vtx);
 		}
 
 		public static SoftBody CreateFromConvexHull(SoftBodyWorldInfo worldInfo,
-			Vector3[] vertices, int nVertices, bool randomizeConstraints = true)
+			Vector3d[] vertices, int nVertices, bool randomizeConstraints = true)
 		{
 			var body = new SoftBody(btSoftBodyHelpers_CreateFromConvexHull(
 				worldInfo.Native, vertices, nVertices, randomizeConstraints));
@@ -82,7 +82,7 @@ namespace BulletSharp.SoftBody
 		}
 
 		public static SoftBody CreateFromConvexHull(SoftBodyWorldInfo worldInfo,
-			Vector3[] vertices, bool randomizeConstraints = true)
+			Vector3d[] vertices, bool randomizeConstraints = true)
 		{
 			var body = new SoftBody(btSoftBodyHelpers_CreateFromConvexHull(
 				worldInfo.Native, vertices, vertices.Length, randomizeConstraints));
@@ -95,7 +95,7 @@ namespace BulletSharp.SoftBody
 		{
 			CultureInfo culture = CultureInfo.InvariantCulture;
 			char[] separator = new[] { ' ' };
-			Vector3[] pos;
+			Vector3d[] pos;
 
 			using (var nodeReader = new StringReader(node))
 			{
@@ -105,11 +105,11 @@ namespace BulletSharp.SoftBody
 				//int numAttrs = int.Parse(nodeHeader[2]);
 				//bool hasBounds = !nodeHeader[3].Equals("0");
 
-				pos = new Vector3[numNodes];
+				pos = new Vector3d[numNodes];
 				for (int n = 0; n < numNodes; n++)
 				{
 					string[] nodeLine = nodeReader.ReadLine().Split(separator, StringSplitOptions.RemoveEmptyEntries);
-					pos[int.Parse(nodeLine[0])] = new Vector3(
+					pos[int.Parse(nodeLine[0])] = new Vector3d(
 						double.Parse(nodeLine[1], culture),
 						double.Parse(nodeLine[2], culture),
 						double.Parse(nodeLine[3], culture));
@@ -173,15 +173,15 @@ namespace BulletSharp.SoftBody
 			int[] triangles, bool randomizeConstraints = true)
 		{
 			int numVertices = vertices.Length / 3;
-			Vector3[] vtx = new Vector3[numVertices];
+			Vector3d[] vtx = new Vector3d[numVertices];
 			for (int i = 0, j = 0; j < numVertices; j++, i += 3)
 			{
-				vtx[j] = new Vector3(vertices[i], vertices[i + 1], vertices[i + 2]);
+				vtx[j] = new Vector3d(vertices[i], vertices[i + 1], vertices[i + 2]);
 			}
 			return CreateFromTriMesh(worldInfo, vtx, triangles, randomizeConstraints);
 		}
 
-		public static SoftBody CreateFromTriMesh(SoftBodyWorldInfo worldInfo, Vector3[] vertices,
+		public static SoftBody CreateFromTriMesh(SoftBodyWorldInfo worldInfo, Vector3d[] vertices,
 			int[] triangles, bool randomizeConstraints = true)
 		{
 			int numTriangleIndices = triangles.Length;
@@ -223,8 +223,8 @@ namespace BulletSharp.SoftBody
 			return psb;
 		}
 
-		public static SoftBody CreatePatch(SoftBodyWorldInfo worldInfo, Vector3 corner00,
-			Vector3 corner10, Vector3 corner01, Vector3 corner11, int resolutionX, int resolutionY,
+		public static SoftBody CreatePatch(SoftBodyWorldInfo worldInfo, Vector3d corner00,
+			Vector3d corner10, Vector3d corner01, Vector3d corner11, int resolutionX, int resolutionY,
 			int fixedCorners, bool generateDiagonals)
 		{
 			// Create nodes
@@ -234,20 +234,20 @@ namespace BulletSharp.SoftBody
 			int rx = resolutionX;
 			int ry = resolutionY;
 			int total = rx * ry;
-			var positions = new Vector3[total];
+			var positions = new Vector3d[total];
 			var masses = new double[total];
 
 			for (int y = 0; y < ry; y++)
 			{
 				double ty = y / (double)(ry - 1);
-				Vector3 py0, py1;
-				Vector3.Lerp(ref corner00, ref corner01, ty, out py0);
-				Vector3.Lerp(ref corner10, ref corner11, ty, out py1);
+				Vector3d py0, py1;
+				Vector3d.Lerp(ref corner00, ref corner01, ty, out py0);
+				Vector3d.Lerp(ref corner10, ref corner11, ty, out py1);
 				for (int ix = 0; ix < rx; ix++)
 				{
 					double tx = ix / (double)(rx - 1);
 					int index = rx * y + ix;
-					Vector3.Lerp(ref py0, ref py1, tx, out positions[index]);
+					Vector3d.Lerp(ref py0, ref py1, tx, out positions[index]);
 					masses[index] = 1;
 				}
 			}
@@ -306,8 +306,8 @@ namespace BulletSharp.SoftBody
 			return body;
 		}
 
-		public static SoftBody CreatePatchUV(SoftBodyWorldInfo worldInfo, Vector3 corner00,
-			Vector3 corner10, Vector3 corner01, Vector3 corner11, int resolutionX, int resolutionY,
+		public static SoftBody CreatePatchUV(SoftBodyWorldInfo worldInfo, Vector3d corner00,
+			Vector3d corner10, Vector3d corner01, Vector3d corner11, int resolutionX, int resolutionY,
 			int fixedCorners, bool generateDiagonals, double[] texCoords = null)
 		{
 			var body = new SoftBody(btSoftBodyHelpers_CreatePatchUV(worldInfo.Native,
@@ -317,17 +317,17 @@ namespace BulletSharp.SoftBody
 			return body;
 		}
 
-		public static SoftBody CreateRope(SoftBodyWorldInfo worldInfo, Vector3 from,
-			Vector3 to, int resolution, int fixedTips)
+		public static SoftBody CreateRope(SoftBodyWorldInfo worldInfo, Vector3d from,
+			Vector3d to, int resolution, int fixedTips)
 		{
 			// Create nodes
 			int numLinks = resolution + 2;
-			var positions = new Vector3[numLinks];
+			var positions = new Vector3d[numLinks];
 			var masses = new double[numLinks];
 
 			for (int i = 0; i < numLinks; i++)
 			{
-				Vector3.Lerp(ref from, ref to, i / (double)(numLinks - 1), out positions[i]);
+				Vector3d.Lerp(ref from, ref to, i / (double)(numLinks - 1), out positions[i]);
 				masses[i] = 1;
 			}
 
@@ -386,7 +386,7 @@ namespace BulletSharp.SoftBody
 					{
 						text += $" A({node.Area:F2})";
 					}
-					Vector3 location = node.Position;
+					Vector3d location = node.Position;
 					iDraw.Draw3DText(ref location, text);
 				}
 			}

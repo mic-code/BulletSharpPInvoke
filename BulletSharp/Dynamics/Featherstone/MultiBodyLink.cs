@@ -30,16 +30,16 @@ namespace BulletSharp
 			Native = native;
 		}
 
-		public Vector3 GetAxisBottom(int dof)
+		public Vector3d GetAxisBottom(int dof)
 		{
-			Vector3 value;
+			Vector3d value;
 			btMultibodyLink_getAxisBottom(Native, dof, out value);
 			return value;
 		}
 
-		public Vector3 GetAxisTop(int dof)
+		public Vector3d GetAxisTop(int dof)
 		{
-			Vector3 value;
+			Vector3d value;
 			btMultibodyLink_getAxisTop(Native, dof, out value);
 			return value;
 		}
@@ -49,7 +49,7 @@ namespace BulletSharp
 			btMultibodyLink_setAxisBottom(Native, dof, x, y, z);
 		}
 
-		public void SetAxisBottom(int dof, Vector3 axis)
+		public void SetAxisBottom(int dof, Vector3d axis)
 		{
 			btMultibodyLink_setAxisBottom2(Native, dof, ref axis);
 		}
@@ -59,7 +59,7 @@ namespace BulletSharp
 			btMultibodyLink_setAxisTop(Native, dof, x, y, z);
 		}
 
-		public void SetAxisTop(int dof, Vector3 axis)
+		public void SetAxisTop(int dof, Vector3d axis)
 		{
 			btMultibodyLink_setAxisTop2(Native, dof, ref axis);
 		}
@@ -81,44 +81,44 @@ namespace BulletSharp
 			set { btMultibodyLink_setAbsFrameTotVelocity(_native, value._native); }
 		}
 */
-		public Vector3 AppliedConstraintForce
+		public Vector3d AppliedConstraintForce
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getAppliedConstraintForce(Native, out value);
 				return value;
 			}
 			set => btMultibodyLink_setAppliedConstraintForce(Native, ref value);
 		}
 
-		public Vector3 AppliedConstraintTorque
+		public Vector3d AppliedConstraintTorque
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getAppliedConstraintTorque(Native, out value);
 				return value;
 			}
 			set => btMultibodyLink_setAppliedConstraintTorque(Native, ref value);
 		}
 
-		public Vector3 AppliedForce
+		public Vector3d AppliedForce
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getAppliedForce(Native, out value);
 				return value;
 			}
 			set => btMultibodyLink_setAppliedForce(Native, ref value);
 		}
 
-		public Vector3 AppliedTorque
+		public Vector3d AppliedTorque
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getAppliedTorque(Native, out value);
 				return value;
 			}
@@ -141,11 +141,11 @@ namespace BulletSharp
 			set => btMultibodyLink_setCachedRotParentToThis(Native, ref value);
 		}
 
-		public Vector3 CachedRVector
+		public Vector3d CachedRVector
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getCachedRVector(Native, out value);
 				return value;
 			}
@@ -187,22 +187,22 @@ namespace BulletSharp
 			set => btMultibodyLink_setDofOffset(Native, value);
 		}
 
-		public Vector3 DVector
+		public Vector3d DVector
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getDVector(Native, out value);
 				return value;
 			}
 			set => btMultibodyLink_setDVector(Native, ref value);
 		}
 
-		public Vector3 EVector
+		public Vector3d EVector
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getEVector(Native, out value);
 				return value;
 			}
@@ -215,11 +215,11 @@ namespace BulletSharp
 			set => btMultibodyLink_setFlags(Native, value);
 		}
 
-		public Vector3 InertiaLocal
+		public Vector3d InertiaLocal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultibodyLink_getInertiaLocal(Native, out value);
 				return value;
 			}

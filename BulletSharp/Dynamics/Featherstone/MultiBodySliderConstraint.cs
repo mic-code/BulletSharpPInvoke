@@ -6,15 +6,15 @@ namespace BulletSharp
 	public class MultiBodySliderConstraint : MultiBodyConstraint
 	{
 		public MultiBodySliderConstraint(MultiBody body, int link, RigidBody bodyB,
-			Vector3 pivotInA, Vector3 pivotInB, Matrix frameInA, Matrix frameInB, Vector3 jointAxis)
+			Vector3d pivotInA, Vector3d pivotInB, Matrix frameInA, Matrix frameInB, Vector3d jointAxis)
 			: base(btMultiBodySliderConstraint_new(body.Native, link, bodyB.Native,
 				ref pivotInA, ref pivotInB, ref frameInA, ref frameInB, ref jointAxis), body, null)
 		{
 		}
 
 		public MultiBodySliderConstraint(MultiBody bodyA, int linkA, MultiBody bodyB,
-			int linkB, Vector3 pivotInA, Vector3 pivotInB, Matrix frameInA, Matrix frameInB,
-			Vector3 jointAxis)
+			int linkB, Vector3d pivotInA, Vector3d pivotInB, Matrix frameInA, Matrix frameInB,
+			Vector3d jointAxis)
 			: base(btMultiBodySliderConstraint_new2(bodyA.Native, linkA, bodyB.Native,
 				linkB, ref pivotInA, ref pivotInB, ref frameInA, ref frameInB, ref jointAxis), bodyA, bodyB)
 		{
@@ -42,33 +42,33 @@ namespace BulletSharp
 			set => btMultiBodySliderConstraint_setFrameInB(Native, ref value);
 		}
 
-		public Vector3 JointAxis
+		public Vector3d JointAxis
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySliderConstraint_getJointAxis(Native, out value);
 				return value;
 			}
 			set => btMultiBodySliderConstraint_setJointAxis(Native, ref value);
 		}
 
-		public Vector3 PivotInA
+		public Vector3d PivotInA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySliderConstraint_getPivotInA(Native, out value);
 				return value;
 			}
 			set => btMultiBodySliderConstraint_setPivotInA(Native, ref value);
 		}
 
-		public Vector3 PivotInB
+		public Vector3d PivotInB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySliderConstraint_getPivotInB(Native, out value);
 				return value;
 			}

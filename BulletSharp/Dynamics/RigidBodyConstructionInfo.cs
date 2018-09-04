@@ -21,7 +21,7 @@ namespace BulletSharp
 		}
 
 		public RigidBodyConstructionInfo(double mass, MotionState motionState,
-			CollisionShape collisionShape, Vector3 localInertia)
+			CollisionShape collisionShape, Vector3d localInertia)
 		{
 			Native = btRigidBody_btRigidBodyConstructionInfo_new2(mass, motionState != null ? motionState._native : IntPtr.Zero,
 				collisionShape != null ? collisionShape.Native : IntPtr.Zero, ref localInertia);
@@ -99,11 +99,11 @@ namespace BulletSharp
 			set => btRigidBody_btRigidBodyConstructionInfo_setLinearSleepingThreshold(Native, value);
 		}
 
-		public Vector3 LocalInertia
+		public Vector3d LocalInertia
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btRigidBody_btRigidBodyConstructionInfo_getLocalInertia(Native, out value);
 				return value;
 			}

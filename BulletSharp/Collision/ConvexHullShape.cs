@@ -26,13 +26,13 @@ namespace BulletSharp
 		{
 		}
 
-		public ConvexHullShape(IEnumerable<Vector3> points, int numPoints)
+		public ConvexHullShape(IEnumerable<Vector3d> points, int numPoints)
 			: base(btConvexHullShape_new())
 		{
 			int i = 0;
-			foreach (Vector3 v in points)
+			foreach (Vector3d v in points)
 			{
-				Vector3 viter = v;
+				Vector3d viter = v;
 				AddPointRef(ref viter, false);
 				i++;
 				if (i == numPoints)
@@ -43,35 +43,35 @@ namespace BulletSharp
 			RecalcLocalAabb();
 		}
 
-		public ConvexHullShape(IEnumerable<Vector3> points)
+		public ConvexHullShape(IEnumerable<Vector3d> points)
 			: base(btConvexHullShape_new())
 		{
-			foreach (Vector3 v in points)
+			foreach (Vector3d v in points)
 			{
-				Vector3 viter = v;
+				Vector3d viter = v;
 				AddPointRef(ref viter, false);
 			}
 			RecalcLocalAabb();
 		}
 
-		public void AddPointRef(ref Vector3 point, bool recalculateLocalAabb = true)
+		public void AddPointRef(ref Vector3d point, bool recalculateLocalAabb = true)
 		{
 			btConvexHullShape_addPoint(Native, ref point, recalculateLocalAabb);
 		}
 
-		public void AddPoint(Vector3 point, bool recalculateLocalAabb = true)
+		public void AddPoint(Vector3d point, bool recalculateLocalAabb = true)
 		{
 			btConvexHullShape_addPoint(Native, ref point, recalculateLocalAabb);
 		}
 
-		public void GetScaledPoint(int i, out Vector3 value)
+		public void GetScaledPoint(int i, out Vector3d value)
 		{
 			btConvexHullShape_getScaledPoint(Native, i, out value);
 		}
 
-		public Vector3 GetScaledPoint(int i)
+		public Vector3d GetScaledPoint(int i)
 		{
-			Vector3 value;
+			Vector3d value;
 			btConvexHullShape_getScaledPoint(Native, i, out value);
 			return value;
 		}

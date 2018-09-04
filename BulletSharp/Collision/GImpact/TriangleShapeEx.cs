@@ -176,7 +176,7 @@ namespace BulletSharp
 		{
 		}
 
-		public TriangleShapeEx(Vector3 p0, Vector3 p1, Vector3 p2)
+		public TriangleShapeEx(Vector3d p0, Vector3d p1, Vector3d p2)
 			: base(btTriangleShapeEx_new2(ref p0, ref p1, ref p2))
 		{
 		}

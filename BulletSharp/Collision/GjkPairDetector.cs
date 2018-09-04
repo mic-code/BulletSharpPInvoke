@@ -53,11 +53,11 @@ namespace BulletSharp
 			btGjkPairDetector_setPenetrationDepthSolver(Native, penetrationDepthSolver.Native);
 		}
 
-		public Vector3 CachedSeparatingAxis
+		public Vector3d CachedSeparatingAxis
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGjkPairDetector_getCachedSeparatingAxis(Native, out value);
 				return value;
 			}

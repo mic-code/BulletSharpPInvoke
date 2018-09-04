@@ -8,7 +8,7 @@ namespace BulletSharp
 {
 	[DebuggerDisplay("Count = {Count}")]
 	[DebuggerTypeProxy(typeof(Vector3ListDebugView))]
-	public class AlignedVector3Array : IList<Vector3>, IDisposable
+	public class AlignedVector3Array : IList<Vector3d>, IDisposable
 	{
 		internal IntPtr _native;
 		private bool _preventDelete;
@@ -47,12 +47,12 @@ namespace BulletSharp
 			Dispose(false);
 		}
 
-		public int IndexOf(Vector3 item)
+		public int IndexOf(Vector3d item)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void Insert(int index, Vector3 item)
+		public void Insert(int index, Vector3d item)
 		{
 			throw new NotImplementedException();
 		}
@@ -62,7 +62,7 @@ namespace BulletSharp
 			throw new NotImplementedException();
 		}
 
-		public Vector3 this[int index]
+		public Vector3d this[int index]
 		{
 			get
 			{
@@ -70,7 +70,7 @@ namespace BulletSharp
 				{
 					throw new ArgumentOutOfRangeException(nameof(index));
 				}
-				Vector3 value;
+				Vector3d value;
 				btAlignedObjectArray_btVector3_at(_native, index, out value);
 				return value;
 			}
@@ -84,7 +84,7 @@ namespace BulletSharp
 			}
 		}
 
-		public void Add(Vector3 item)
+		public void Add(Vector3d item)
 		{
 			btAlignedObjectArray_btVector3_push_back(_native, ref item);
 		}
@@ -94,12 +94,12 @@ namespace BulletSharp
 			throw new NotImplementedException();
 		}
 
-		public bool Contains(Vector3 item)
+		public bool Contains(Vector3d item)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void CopyTo(Vector3[] array, int arrayIndex)
+		public void CopyTo(Vector3d[] array, int arrayIndex)
 		{
 			if (array == null)
 				throw new ArgumentNullException(nameof(array));
@@ -121,12 +121,12 @@ namespace BulletSharp
 
 		public bool IsReadOnly => false;
 
-		public bool Remove(Vector3 item)
+		public bool Remove(Vector3d item)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerator<Vector3> GetEnumerator()
+		public IEnumerator<Vector3d> GetEnumerator()
 		{
 			return new Vector3ArrayEnumerator(this);
 		}

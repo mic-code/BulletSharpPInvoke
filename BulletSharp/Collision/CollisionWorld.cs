@@ -10,15 +10,15 @@ namespace BulletSharp
 {
 	public class AllHitsRayResultCallback : RayResultCallback
 	{
-		public AllHitsRayResultCallback(Vector3 rayFromWorld, Vector3 rayToWorld)
+		public AllHitsRayResultCallback(Vector3d rayFromWorld, Vector3d rayToWorld)
 		{
 			RayFromWorld = rayFromWorld;
 			RayToWorld = rayToWorld;
 
 			CollisionObjects = new List<CollisionObject>();
 			HitFractions = new List<double>();
-			HitNormalWorld = new List<Vector3>();
-			HitPointWorld = new List<Vector3>();
+			HitNormalWorld = new List<Vector3d>();
+			HitPointWorld = new List<Vector3d>();
 		}
 
 		public override double AddSingleResult(LocalRayResult rayResult, bool normalInWorldSpace)
@@ -32,19 +32,19 @@ namespace BulletSharp
 			else
 			{
 				// need to transform normal into worldspace
-				HitNormalWorld.Add(Vector3.TransformCoordinate(rayResult.HitNormalLocal, CollisionObject.WorldTransform.Basis));
+				HitNormalWorld.Add(Vector3d.TransformCoordinate(rayResult.HitNormalLocal, CollisionObject.WorldTransform.Basis));
 			}
-			HitPointWorld.Add(Vector3.Lerp(RayFromWorld, RayToWorld, rayResult.HitFraction));
+			HitPointWorld.Add(Vector3d.Lerp(RayFromWorld, RayToWorld, rayResult.HitFraction));
 			HitFractions.Add(rayResult.HitFraction);
 			return ClosestHitFraction;
 		}
 
 		public List<CollisionObject> CollisionObjects { get; set; }
 		public List<double> HitFractions { get; set; }
-		public List<Vector3> HitNormalWorld { get; set; }
-		public List<Vector3> HitPointWorld { get; set; }
-		public Vector3 RayFromWorld { get; set; }
-		public Vector3 RayToWorld { get; set; }
+		public List<Vector3d> HitNormalWorld { get; set; }
+		public List<Vector3d> HitPointWorld { get; set; }
+		public Vector3d RayFromWorld { get; set; }
+		public Vector3d RayToWorld { get; set; }
 	}
 
 	public class ClosestConvexResultCallback : ConvexResultCallback
@@ -53,7 +53,7 @@ namespace BulletSharp
 		{
 		}
 
-		public ClosestConvexResultCallback(ref Vector3 convexFromWorld, ref Vector3 convexToWorld)
+		public ClosestConvexResultCallback(ref Vector3d convexFromWorld, ref Vector3d convexToWorld)
 		{
 			ConvexFromWorld = convexFromWorld;
 			ConvexToWorld = convexToWorld;
@@ -73,22 +73,22 @@ namespace BulletSharp
 			else
 			{
 				// need to transform normal into worldspace
-				HitNormalWorld = Vector3.TransformCoordinate(convexResult.HitNormalLocal, HitCollisionObject.WorldTransform.Basis);
+				HitNormalWorld = Vector3d.TransformCoordinate(convexResult.HitNormalLocal, HitCollisionObject.WorldTransform.Basis);
 			}
 			HitPointWorld = convexResult.HitPointLocal;
 			return convexResult.HitFraction;
 		}
 
-		public Vector3 ConvexFromWorld { get; set; }
-		public Vector3 ConvexToWorld { get; set; }
+		public Vector3d ConvexFromWorld { get; set; }
+		public Vector3d ConvexToWorld { get; set; }
 		public CollisionObject HitCollisionObject { get; set; }
-		public Vector3 HitNormalWorld { get; set; }
-		public Vector3 HitPointWorld { get; set; }
+		public Vector3d HitNormalWorld { get; set; }
+		public Vector3d HitPointWorld { get; set; }
 	}
 
 	public class ClosestRayResultCallback : RayResultCallback
 	{
-		public ClosestRayResultCallback(ref Vector3 rayFromWorld, ref Vector3 rayToWorld)
+		public ClosestRayResultCallback(ref Vector3d rayFromWorld, ref Vector3d rayToWorld)
 		{
 			RayFromWorld = rayFromWorld;
 			RayToWorld = rayToWorld;
@@ -108,17 +108,17 @@ namespace BulletSharp
 			else
 			{
 				// need to transform normal into worldspace
-				HitNormalWorld = Vector3.TransformCoordinate(rayResult.HitNormalLocal, CollisionObject.WorldTransform.Basis);
+				HitNormalWorld = Vector3d.TransformCoordinate(rayResult.HitNormalLocal, CollisionObject.WorldTransform.Basis);
 			}
-			HitPointWorld = Vector3.Lerp(RayFromWorld, RayToWorld, rayResult.HitFraction);
+			HitPointWorld = Vector3d.Lerp(RayFromWorld, RayToWorld, rayResult.HitFraction);
 			return rayResult.HitFraction;
 		}
 
-		public Vector3 RayFromWorld { get; set; } //used to calculate hitPointWorld from hitFraction
-		public Vector3 RayToWorld { get; set; }
+		public Vector3d RayFromWorld { get; set; } //used to calculate hitPointWorld from hitFraction
+		public Vector3d RayToWorld { get; set; }
 
-		public Vector3 HitNormalWorld { get; set; }
-		public Vector3 HitPointWorld { get; set; }
+		public Vector3d HitNormalWorld { get; set; }
+		public Vector3d HitPointWorld { get; set; }
 	}
 
 	public abstract class ContactResultCallback : IDisposable
@@ -297,7 +297,7 @@ namespace BulletSharp
 		}
 
 		public LocalConvexResult(CollisionObject hitCollisionObject, LocalShapeInfo localShapeInfo,
-			Vector3 hitNormalLocal, Vector3 hitPointLocal, double hitFraction)
+			Vector3d hitNormalLocal, Vector3d hitPointLocal, double hitFraction)
 		{
 			Native = btCollisionWorld_LocalConvexResult_new(hitCollisionObject.Native,
 				localShapeInfo.Native, ref hitNormalLocal, ref hitPointLocal,
@@ -322,22 +322,22 @@ namespace BulletSharp
 			set => btCollisionWorld_LocalConvexResult_setHitFraction(Native, value);
 		}
 
-		public Vector3 HitNormalLocal
+		public Vector3d HitNormalLocal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionWorld_LocalConvexResult_getHitNormalLocal(Native, out value);
 				return value;
 			}
 			set => btCollisionWorld_LocalConvexResult_setHitNormalLocal(Native, ref value);
 		}
 
-		public Vector3 HitPointLocal
+		public Vector3d HitPointLocal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionWorld_LocalConvexResult_getHitPointLocal(Native, out value);
 				return value;
 			}
@@ -395,7 +395,7 @@ namespace BulletSharp
 		}
 
 		public LocalRayResult(CollisionObject collisionObject, LocalShapeInfo localShapeInfo,
-			Vector3 hitNormalLocal, double hitFraction)
+			Vector3d hitNormalLocal, double hitFraction)
 		{
 			Native = btCollisionWorld_LocalRayResult_new(collisionObject.Native,
 				localShapeInfo.Native, ref hitNormalLocal, hitFraction);
@@ -419,11 +419,11 @@ namespace BulletSharp
 			set => btCollisionWorld_LocalRayResult_setHitFraction(Native, value);
 		}
 
-		public Vector3 HitNormalLocal
+		public Vector3d HitNormalLocal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionWorld_LocalRayResult_getHitNormalLocal(Native, out value);
 				return value;
 			}
@@ -683,13 +683,13 @@ namespace BulletSharp
 				ref to, resultCallback.Native, allowedCcdPenetration);
 		}
 
-		public void DebugDrawObjectRef(ref Matrix worldTransform, CollisionShape shape, ref Vector3 color)
+		public void DebugDrawObjectRef(ref Matrix worldTransform, CollisionShape shape, ref Vector3d color)
 		{
 			btCollisionWorld_debugDrawObject(Native, ref worldTransform, shape.Native, ref color);
 		}
 
 		public void DebugDrawObject(Matrix worldTransform, CollisionShape shape,
-			Vector3 color)
+			Vector3d color)
 		{
 			btCollisionWorld_debugDrawObject(Native, ref worldTransform, shape.Native,
 				ref color);
@@ -739,12 +739,12 @@ namespace BulletSharp
 			btCollisionWorld_performDiscreteCollisionDetection(Native);
 		}
 
-		public void RayTestRef(ref Vector3 rayFromWorld, ref Vector3 rayToWorld, RayResultCallback resultCallback)
+		public void RayTestRef(ref Vector3d rayFromWorld, ref Vector3d rayToWorld, RayResultCallback resultCallback)
 		{
 			btCollisionWorld_rayTest(Native, ref rayFromWorld, ref rayToWorld, resultCallback.Native);
 		}
 
-		public void RayTest(Vector3 rayFromWorld, Vector3 rayToWorld, RayResultCallback resultCallback)
+		public void RayTest(Vector3d rayFromWorld, Vector3d rayToWorld, RayResultCallback resultCallback)
 		{
 			btCollisionWorld_rayTest(Native, ref rayFromWorld, ref rayToWorld, resultCallback.Native);
 		}

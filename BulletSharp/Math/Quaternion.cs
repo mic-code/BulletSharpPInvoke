@@ -106,7 +106,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X, Y, and Z components.</param>
         /// <param name="angle">Initial value for the angle of the quaternion.</param>
-        public Quaternion(Vector3 axis, double angle)
+        public Quaternion(Vector3d axis, double angle)
         {
             double angle2 = angle * 0.5f;
             double s = (double)System.Math.Sin(angle2) / axis.Length;
@@ -189,15 +189,15 @@ namespace BulletSharp.Math
         /// Gets the axis components of the quaternion.
         /// </summary>
         /// <value>The axis components of the quaternion.</value>
-        public Vector3 Axis
+        public Vector3d Axis
         {
             get
             {
                 double inv = 1.0f / (W * W);
                 if (inv < 10.0f * Utilities.ZeroTolerance)
-                    return Vector3.UnitX;
+                    return Vector3d.UnitX;
 
-                return new Vector3(X * inv, Y * inv, Z * inv);
+                return new Vector3d(X * inv, Y * inv, Z * inv);
             }
         }
 
@@ -771,13 +771,13 @@ namespace BulletSharp.Math
             return value;
         }
 
-        public Vector3 Rotate(Vector3 v)
+        public Vector3d Rotate(Vector3d v)
         {
             Quaternion rotation = this;
             Quaternion q = rotation * v;
             rotation.Invert();
             q *= rotation;
-            return new Vector3(q.X, q.Y, q.Z);
+            return new Vector3d(q.X, q.Y, q.Z);
         }
 
         /// <summary>
@@ -786,10 +786,10 @@ namespace BulletSharp.Math
         /// <param name="axis">The axis of rotation.</param>
         /// <param name="angle">The angle of rotation.</param>
         /// <param name="result">When the method completes, contains the newly created quaternion.</param>
-        public static void RotationAxis(ref Vector3 axis, double angle, out Quaternion result)
+        public static void RotationAxis(ref Vector3d axis, double angle, out Quaternion result)
         {
-            Vector3 normalized;
-            Vector3.Normalize(ref axis, out normalized);
+            Vector3d normalized;
+            Vector3d.Normalize(ref axis, out normalized);
 
             double half = angle * 0.5f;
             double sin = (double)System.Math.Sin(half);
@@ -807,7 +807,7 @@ namespace BulletSharp.Math
         /// <param name="axis">The axis of rotation.</param>
         /// <param name="angle">The angle of rotation.</param>
         /// <returns>The newly created quaternion.</returns>
-        public static Quaternion RotationAxis(Vector3 axis, double angle)
+        public static Quaternion RotationAxis(Vector3d axis, double angle)
         {
             Quaternion result;
             RotationAxis(ref axis, angle, out result);
@@ -1124,7 +1124,7 @@ namespace BulletSharp.Math
         /// <param name="left">The quaternion to multiply.</param>
         /// <param name="right">The vector to multiply.</param>
         /// <returns>The multiplied quaternion.</returns>
-        public static Quaternion operator *(Quaternion q, Vector3 w)
+        public static Quaternion operator *(Quaternion q, Vector3d w)
         {
             return new Quaternion(
                 q.W * w.X + q.Y * w.Z - q.Z * w.Y,

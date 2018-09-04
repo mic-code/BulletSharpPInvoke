@@ -38,14 +38,14 @@ namespace BulletSharp
 			BT_BOX_BOX_TRANSFORM_CACHE_calc_from_homogenic(Native, ref transform0, ref transform1);
 		}
 
-		public void TransformRef(ref Vector3 point, out Vector3 value)
+		public void TransformRef(ref Vector3d point, out Vector3d value)
 		{
 			BT_BOX_BOX_TRANSFORM_CACHE_transform(Native, ref point, out value);
 		}
 
-		public Vector3 Transform(Vector3 point)
+		public Vector3d Transform(Vector3d point)
 		{
-			Vector3 value;
+			Vector3d value;
 			BT_BOX_BOX_TRANSFORM_CACHE_transform(Native, ref point, out value);
 			return value;
 		}
@@ -72,11 +72,11 @@ namespace BulletSharp
 			set { BT_BOX_BOX_TRANSFORM_CACHE_setR1to0(Native, ref value); }
 		}
 
-		public Vector3 Translation1To0
+		public Vector3d Translation1To0
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				BT_BOX_BOX_TRANSFORM_CACHE_getT1to0(Native, out value);
 				return value;
 			}
@@ -120,12 +120,12 @@ namespace BulletSharp
 			Native = btAABB_new();
 		}
 
-		public Aabb(Vector3 v1, Vector3 v2, Vector3 v3)
+		public Aabb(Vector3d v1, Vector3d v2, Vector3d v3)
 		{
 			Native = btAABB_new2(ref v1, ref v2, ref v3);
 		}
 
-		public Aabb(Vector3 v1, Vector3 v2, Vector3 v3, double margin)
+		public Aabb(Vector3d v1, Vector3d v2, Vector3d v3, double margin)
 		{
 			Native = btAABB_new3(ref v1, ref v2, ref v3, margin);
 		}
@@ -165,23 +165,23 @@ namespace BulletSharp
 			return btAABB_collide_plane(Native, ref plane);
 		}
 
-		public bool CollideRayRef(ref Vector3 origin, ref Vector3 direction)
+		public bool CollideRayRef(ref Vector3d origin, ref Vector3d direction)
 		{
 			return btAABB_collide_ray(Native, ref origin, ref direction);
 		}
 
-		public bool CollideRay(Vector3 origin, Vector3 direction)
+		public bool CollideRay(Vector3d origin, Vector3d direction)
 		{
 			return btAABB_collide_ray(Native, ref origin, ref direction);
 		}
 
-		public bool CollideTriangleExactRef(ref Vector3 p1, ref Vector3 p2, ref Vector3 p3, ref Vector4 trianglePlane)
+		public bool CollideTriangleExactRef(ref Vector3d p1, ref Vector3d p2, ref Vector3d p3, ref Vector4 trianglePlane)
 		{
 			return btAABB_collide_triangle_exact(Native, ref p1, ref p2, ref p3,
 				ref trianglePlane);
 		}
 
-		public bool CollideTriangleExact(Vector3 p1, Vector3 p2, Vector3 p3, Vector4 trianglePlane)
+		public bool CollideTriangleExact(Vector3d p1, Vector3d p2, Vector3d p3, Vector4 trianglePlane)
 		{
 			return btAABB_collide_triangle_exact(Native, ref p1, ref p2, ref p3,
 				ref trianglePlane);
@@ -197,7 +197,7 @@ namespace BulletSharp
 			btAABB_find_intersection(Native, other.Native, intersection.Native);
 		}
 
-		public void GetCenterExtend(out Vector3 center, out Vector3 extend)
+		public void GetCenterExtend(out Vector3d center, out Vector3d extend)
 		{
 			btAABB_get_center_extend(Native, out center, out extend);
 		}
@@ -249,32 +249,32 @@ namespace BulletSharp
 			return btAABB_plane_classify(Native, ref plane);
 		}
 
-		public void ProjectionIntervalRef(ref Vector3 direction, out double vmin, out double vmax)
+		public void ProjectionIntervalRef(ref Vector3d direction, out double vmin, out double vmax)
 		{
 			btAABB_projection_interval(Native, ref direction, out vmin, out vmax);
 		}
 
-		public void ProjectionInterval(Vector3 direction, out double vmin, out double vmax)
+		public void ProjectionInterval(Vector3d direction, out double vmin, out double vmax)
 		{
 			btAABB_projection_interval(Native, ref direction, out vmin, out vmax);
 		}
 
-		public Vector3 Max
+		public Vector3d Max
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btAABB_getMax(Native, out value);
 				return value;
 			}
 			set { btAABB_setMax(Native, ref value); }
 		}
 
-		public Vector3 Min
+		public Vector3d Min
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btAABB_getMin(Native, out value);
 				return value;
 			}

@@ -5,7 +5,7 @@ namespace BulletSharp
 {
 	public class BoxShape : PolyhedralConvexShape
 	{
-		public BoxShape(Vector3 boxHalfExtents)
+		public BoxShape(Vector3d boxHalfExtents)
 			: base(btBoxShape_new(ref boxHalfExtents))
 		{
 		}
@@ -25,21 +25,21 @@ namespace BulletSharp
 			btBoxShape_getPlaneEquation(Native, out plane, i);
 		}
 
-		public Vector3 HalfExtentsWithMargin
+		public Vector3d HalfExtentsWithMargin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBoxShape_getHalfExtentsWithMargin(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 HalfExtentsWithoutMargin
+		public Vector3d HalfExtentsWithoutMargin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBoxShape_getHalfExtentsWithoutMargin(Native, out value);
 				return value;
 			}

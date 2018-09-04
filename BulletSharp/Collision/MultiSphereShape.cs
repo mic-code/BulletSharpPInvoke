@@ -8,7 +8,7 @@ namespace BulletSharp
 {
 	public class MultiSphereShape : ConvexInternalAabbCachingShape
 	{
-		public MultiSphereShape(Vector3[] positions, double[] radi)
+		public MultiSphereShape(Vector3d[] positions, double[] radi)
 			: base(btMultiSphereShape_new(positions, radi, (radi.Length < positions.Length) ? radi.Length : positions.Length))
 		{
 		}
@@ -18,9 +18,9 @@ namespace BulletSharp
 		{
 		}
 
-		public Vector3 GetSpherePosition(int index)
+		public Vector3d GetSpherePosition(int index)
 		{
-			Vector3 value;
+			Vector3d value;
 			btMultiSphereShape_getSpherePosition(Native, index, out value);
 			return value;
 		}

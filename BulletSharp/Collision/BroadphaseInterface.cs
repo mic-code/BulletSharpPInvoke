@@ -74,11 +74,11 @@ namespace BulletSharp
 			set => btBroadphaseRayCallback_setLambda_max(Native, value);
 		}
 
-		public Vector3 RayDirectionInverse
+		public Vector3d RayDirectionInverse
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btBroadphaseRayCallback_getRayDirectionInverse(Native, out value);
 				return value;
 			}
@@ -111,12 +111,12 @@ namespace BulletSharp
 			Native = native;
 		}
 
-		public void AabbTestRef(ref Vector3 aabbMin, ref Vector3 aabbMax, BroadphaseAabbCallback callback)
+		public void AabbTestRef(ref Vector3d aabbMin, ref Vector3d aabbMax, BroadphaseAabbCallback callback)
 		{
 			btBroadphaseInterface_aabbTest(Native, ref aabbMin, ref aabbMax, callback.Native);
 		}
 
-		public void AabbTest(Vector3 aabbMin, Vector3 aabbMax, BroadphaseAabbCallback callback)
+		public void AabbTest(Vector3d aabbMin, Vector3d aabbMax, BroadphaseAabbCallback callback)
 		{
 			btBroadphaseInterface_aabbTest(Native, ref aabbMin, ref aabbMax, callback.Native);
 		}
@@ -126,7 +126,7 @@ namespace BulletSharp
 			btBroadphaseInterface_calculateOverlappingPairs(Native, dispatcher.Native);
 		}
 
-		public abstract BroadphaseProxy CreateProxy(ref Vector3 aabbMin, ref Vector3 aabbMax,
+		public abstract BroadphaseProxy CreateProxy(ref Vector3d aabbMin, ref Vector3d aabbMax,
 			int shapeType, IntPtr userPtr, int collisionFilterGroup, int collisionFilterMask,
 			Dispatcher dispatcher);
 
@@ -135,12 +135,12 @@ namespace BulletSharp
 			btBroadphaseInterface_destroyProxy(Native, proxy.Native, dispatcher.Native);
 		}
 
-		public void GetAabb(BroadphaseProxy proxy, out Vector3 aabbMin, out Vector3 aabbMax)
+		public void GetAabb(BroadphaseProxy proxy, out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btBroadphaseInterface_getAabb(Native, proxy.Native, out aabbMin, out aabbMax);
 		}
 
-		public void GetBroadphaseAabb(out Vector3 aabbMin, out Vector3 aabbMax)
+		public void GetBroadphaseAabb(out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btBroadphaseInterface_getBroadphaseAabb(Native, out aabbMin, out aabbMax);
 		}
@@ -150,23 +150,23 @@ namespace BulletSharp
 			btBroadphaseInterface_printStats(Native);
 		}
 
-		public void RayTestRef(ref Vector3 rayFrom, ref Vector3 rayTo, BroadphaseRayCallback rayCallback)
+		public void RayTestRef(ref Vector3d rayFrom, ref Vector3d rayTo, BroadphaseRayCallback rayCallback)
 		{
 			btBroadphaseInterface_rayTest(Native, ref rayFrom, ref rayTo, rayCallback.Native);
 		}
 
-		public void RayTest(Vector3 rayFrom, Vector3 rayTo, BroadphaseRayCallback rayCallback)
+		public void RayTest(Vector3d rayFrom, Vector3d rayTo, BroadphaseRayCallback rayCallback)
 		{
 			btBroadphaseInterface_rayTest(Native, ref rayFrom, ref rayTo, rayCallback.Native);
 		}
 
-		public void RayTestRef(ref Vector3 rayFrom, ref Vector3 rayTo, BroadphaseRayCallback rayCallback, ref Vector3 aabbMin, ref Vector3 aabbMax)
+		public void RayTestRef(ref Vector3d rayFrom, ref Vector3d rayTo, BroadphaseRayCallback rayCallback, ref Vector3d aabbMin, ref Vector3d aabbMax)
 		{
 			btBroadphaseInterface_rayTest3(Native, ref rayFrom, ref rayTo, rayCallback.Native, ref aabbMin, ref aabbMax);
 		}
 
-		public void RayTest(Vector3 rayFrom, Vector3 rayTo, BroadphaseRayCallback rayCallback,
-			Vector3 aabbMin, Vector3 aabbMax)
+		public void RayTest(Vector3d rayFrom, Vector3d rayTo, BroadphaseRayCallback rayCallback,
+			Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btBroadphaseInterface_rayTest3(Native, ref rayFrom, ref rayTo, rayCallback.Native,
 				ref aabbMin, ref aabbMax);
@@ -177,12 +177,12 @@ namespace BulletSharp
 			btBroadphaseInterface_resetPool(Native, dispatcher.Native);
 		}
 
-		public void SetAabbRef(BroadphaseProxy proxy, ref Vector3 aabbMin, ref Vector3 aabbMax, Dispatcher dispatcher)
+		public void SetAabbRef(BroadphaseProxy proxy, ref Vector3d aabbMin, ref Vector3d aabbMax, Dispatcher dispatcher)
 		{
 			btBroadphaseInterface_setAabb(Native, proxy.Native, ref aabbMin, ref aabbMax, dispatcher.Native);
 		}
 
-		public void SetAabb(BroadphaseProxy proxy, Vector3 aabbMin, Vector3 aabbMax,
+		public void SetAabb(BroadphaseProxy proxy, Vector3d aabbMin, Vector3d aabbMax,
 			Dispatcher dispatcher)
 		{
 			btBroadphaseInterface_setAabb(Native, proxy.Native, ref aabbMin, ref aabbMax,

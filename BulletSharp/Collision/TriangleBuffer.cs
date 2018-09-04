@@ -34,33 +34,33 @@ namespace BulletSharp
 			set => btTriangle_setTriangleIndex(Native, value);
 		}
 
-		public Vector3 Vertex0
+		public Vector3d Vertex0
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTriangle_getVertex0(Native, out value);
 				return value;
 			}
 			set => btTriangle_setVertex0(Native, ref value);
 		}
 
-		public Vector3 Vertex1
+		public Vector3d Vertex1
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTriangle_getVertex1(Native, out value);
 				return value;
 			}
 			set => btTriangle_setVertex1(Native, ref value);
 		}
 
-		public Vector3 Vertex2
+		public Vector3d Vertex2
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTriangle_getVertex2(Native, out value);
 				return value;
 			}
@@ -113,7 +113,7 @@ namespace BulletSharp
 			return new Triangle(btTriangleBuffer_getTriangle(Native, index), true);
 		}
 
-		public override void ProcessTriangle(ref Vector3 vector0, ref Vector3 vector1, ref Vector3 vector2, int partId, int triangleIndex)
+		public override void ProcessTriangle(ref Vector3d vector0, ref Vector3d vector1, ref Vector3d vector2, int partId, int triangleIndex)
 		{
 			throw new NotImplementedException();
 		}

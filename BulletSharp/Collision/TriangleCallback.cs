@@ -27,13 +27,13 @@ namespace BulletSharp
 		{
 			double[] triangleData = new double[11];
 			Marshal.Copy(triangle, triangleData, 0, 11);
-			Vector3 p0 = new Vector3(triangleData[0], triangleData[1], triangleData[2]);
-			Vector3 p1 = new Vector3(triangleData[4], triangleData[5], triangleData[6]);
-			Vector3 p2 = new Vector3(triangleData[8], triangleData[9], triangleData[10]);
+			Vector3d p0 = new Vector3d(triangleData[0], triangleData[1], triangleData[2]);
+			Vector3d p1 = new Vector3d(triangleData[4], triangleData[5], triangleData[6]);
+			Vector3d p2 = new Vector3d(triangleData[8], triangleData[9], triangleData[10]);
 			ProcessTriangle(ref p0, ref p1, ref p2, partId, triangleIndex);
 		}
 
-		public abstract void ProcessTriangle(ref Vector3 point0, ref Vector3 point1, ref Vector3 point2, int partId, int triangleIndex);
+		public abstract void ProcessTriangle(ref Vector3d point0, ref Vector3d point1, ref Vector3d point2, int partId, int triangleIndex);
 
 		public void Dispose()
 		{
@@ -77,13 +77,13 @@ namespace BulletSharp
 		{
 			double[] triangleData = new double[11];
 			Marshal.Copy(triangle, triangleData, 0, 11);
-			Vector3 p0 = new Vector3(triangleData[0], triangleData[1], triangleData[2]);
-			Vector3 p1 = new Vector3(triangleData[4], triangleData[5], triangleData[6]);
-			Vector3 p2 = new Vector3(triangleData[8], triangleData[9], triangleData[10]);
+			Vector3d p0 = new Vector3d(triangleData[0], triangleData[1], triangleData[2]);
+			Vector3d p1 = new Vector3d(triangleData[4], triangleData[5], triangleData[6]);
+			Vector3d p2 = new Vector3d(triangleData[8], triangleData[9], triangleData[10]);
 			InternalProcessTriangleIndex(ref p0, ref p1, ref p2, partId, triangleIndex);
 		}
 
-		public abstract void InternalProcessTriangleIndex(ref Vector3 point0, ref Vector3 point1, ref Vector3 point2, int partId, int triangleIndex);
+		public abstract void InternalProcessTriangleIndex(ref Vector3d point0, ref Vector3d point1, ref Vector3d point2, int partId, int triangleIndex);
 
 		public void Dispose()
 		{

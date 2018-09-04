@@ -8,13 +8,13 @@ namespace BulletSharp
         bool OnGround { get; }
 
         void Jump();
-        void Jump(Vector3 dir);
+        void Jump(Vector3d dir);
         void PlayerStep(CollisionWorld collisionWorld, double deltaTime);
         void PreStep(CollisionWorld collisionWorld);
         void Reset(CollisionWorld collisionWorld);
         void SetUpInterpolate(bool value);
-        void SetVelocityForTimeInterval(ref Vector3 velocity, double timeInterval);
-        void SetWalkDirection(ref Vector3 walkDirection);
-        void Warp(ref Vector3 origin);
+        void SetVelocityForTimeInterval(ref Vector3d velocity, double timeInterval);
+        void SetWalkDirection(ref Vector3d walkDirection);
+        void Warp(ref Vector3d origin);
 	}
 }

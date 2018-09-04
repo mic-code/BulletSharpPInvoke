@@ -79,22 +79,22 @@ namespace BulletSharp
 			_native = btOptimizedBvhNode_new();
 		}
 
-		public Vector3 AabbMaxOrg
+		public Vector3d AabbMaxOrg
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btOptimizedBvhNode_getAabbMaxOrg(_native, out value);
 				return value;
 			}
 			set => btOptimizedBvhNode_setAabbMaxOrg(_native, ref value);
 		}
 
-		public Vector3 AabbMinOrg
+		public Vector3d AabbMinOrg
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btOptimizedBvhNode_getAabbMinOrg(_native, out value);
 				return value;
 			}
@@ -241,21 +241,21 @@ namespace BulletSharp
 		}
 		*/
 		public void ReportAabbOverlappingNodex(NodeOverlapCallback nodeCallback,
-			Vector3 aabbMin, Vector3 aabbMax)
+			Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btQuantizedBvh_reportAabbOverlappingNodex(_native, nodeCallback._native,
 				ref aabbMin, ref aabbMax);
 		}
 
 		public void ReportBoxCastOverlappingNodex(NodeOverlapCallback nodeCallback,
-			Vector3 raySource, Vector3 rayTarget, Vector3 aabbMin, Vector3 aabbMax)
+			Vector3d raySource, Vector3d rayTarget, Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btQuantizedBvh_reportBoxCastOverlappingNodex(_native, nodeCallback._native,
 				ref raySource, ref rayTarget, ref aabbMin, ref aabbMax);
 		}
 
-		public void ReportRayOverlappingNodex(NodeOverlapCallback nodeCallback, Vector3 raySource,
-			Vector3 rayTarget)
+		public void ReportRayOverlappingNodex(NodeOverlapCallback nodeCallback, Vector3d raySource,
+			Vector3d rayTarget)
 		{
 			btQuantizedBvh_reportRayOverlappingNodex(_native, nodeCallback._native,
 				ref raySource, ref rayTarget);
@@ -272,7 +272,7 @@ namespace BulletSharp
 			return Marshal.PtrToStringAnsi(btQuantizedBvh_serialize2(_native, dataBuffer, serializer._native));
 		}
 
-		public void SetQuantizationValues(Vector3 bvhAabbMin, Vector3 bvhAabbMax,
+		public void SetQuantizationValues(Vector3d bvhAabbMin, Vector3d bvhAabbMax,
 			double quantizationMargin = 1.0f)
 		{
 			btQuantizedBvh_setQuantizationValues(_native, ref bvhAabbMin, ref bvhAabbMax,

@@ -150,11 +150,11 @@ namespace BulletSharp
 			NPoints = arrayLen / 3;
 		}
 
-		public void SetPoints(ICollection<Vector3> points)
+		public void SetPoints(ICollection<Vector3d> points)
 		{
 			double[] pointsArray = new double[points.Count * 3];
 			int i = 0;
-			foreach (Vector3 v in points)
+			foreach (Vector3d v in points)
 			{
 				pointsArray[i++] = v.X;
 				pointsArray[i++] = v.Y;

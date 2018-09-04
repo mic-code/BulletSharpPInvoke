@@ -23,7 +23,7 @@ namespace BulletSharp
 		}
 
 		public BvhTriangleMeshShape(StridingMeshInterface meshInterface, bool useQuantizedAabbCompression,
-			Vector3 bvhAabbMin, Vector3 bvhAabbMax, bool buildBvh = true)
+			Vector3d bvhAabbMin, Vector3d bvhAabbMax, bool buildBvh = true)
 			: base(btBvhTriangleMeshShape_new2(meshInterface.Native, useQuantizedAabbCompression,
 				ref bvhAabbMin, ref bvhAabbMax, buildBvh))
 		{
@@ -36,36 +36,36 @@ namespace BulletSharp
 			_optimizedBvh = null;
 		}
 
-		public void PartialRefitTreeRef(ref Vector3 aabbMin, ref Vector3 aabbMax)
+		public void PartialRefitTreeRef(ref Vector3d aabbMin, ref Vector3d aabbMax)
 		{
 			btBvhTriangleMeshShape_partialRefitTree(Native, ref aabbMin, ref aabbMax);
 		}
 
-		public void PartialRefitTree(Vector3 aabbMin, Vector3 aabbMax)
+		public void PartialRefitTree(Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btBvhTriangleMeshShape_partialRefitTree(Native, ref aabbMin, ref aabbMax);
 		}
 
-		public void PerformConvexcast(TriangleCallback callback, Vector3 boxSource,
-			Vector3 boxTarget, Vector3 boxMin, Vector3 boxMax)
+		public void PerformConvexcast(TriangleCallback callback, Vector3d boxSource,
+			Vector3d boxTarget, Vector3d boxMin, Vector3d boxMax)
 		{
 			btBvhTriangleMeshShape_performConvexcast(Native, callback.Native, ref boxSource,
 				ref boxTarget, ref boxMin, ref boxMax);
 		}
 
-		public void PerformRaycast(TriangleCallback callback, Vector3 raySource,
-			Vector3 rayTarget)
+		public void PerformRaycast(TriangleCallback callback, Vector3d raySource,
+			Vector3d rayTarget)
 		{
 			btBvhTriangleMeshShape_performRaycast(Native, callback.Native, ref raySource,
 				ref rayTarget);
 		}
 
-		public void RefitTreeRef(ref Vector3 aabbMin, ref Vector3 aabbMax)
+		public void RefitTreeRef(ref Vector3d aabbMin, ref Vector3d aabbMax)
 		{
 			btBvhTriangleMeshShape_refitTree(Native, ref aabbMin, ref aabbMax);
 		}
 
-		public void RefitTree(Vector3 aabbMin, Vector3 aabbMax)
+		public void RefitTree(Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btBvhTriangleMeshShape_refitTree(Native, ref aabbMin, ref aabbMax);
 		}
@@ -80,7 +80,7 @@ namespace BulletSharp
 			btBvhTriangleMeshShape_serializeSingleTriangleInfoMap(Native, serializer._native);
 		}
 
-		public void SetOptimizedBvh(OptimizedBvh bvh, Vector3 localScaling)
+		public void SetOptimizedBvh(OptimizedBvh bvh, Vector3d localScaling)
 		{
 			System.Diagnostics.Debug.Assert(!OwnsBvh);
 			btBvhTriangleMeshShape_setOptimizedBvh2(Native, (bvh != null) ? bvh._native : IntPtr.Zero, ref localScaling);

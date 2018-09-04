@@ -122,7 +122,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X, Y, and Z components.</param>
         /// <param name="w">Initial value for the W component of the vector.</param>
-        public Vector4(Vector3 value, double w)
+        public Vector4(Vector3d value, double w)
         {
             X = value.X;
             Y = value.Y;
@@ -1378,9 +1378,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector3(Vector4 value)
+        public static explicit operator Vector3d(Vector4 value)
         {
-            return new Vector3(value.X, value.Y, value.Z);
+            return new Vector3d(value.X, value.Y, value.Z);
         }
 
         /// <summary>

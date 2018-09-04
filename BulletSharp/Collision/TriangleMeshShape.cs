@@ -14,27 +14,27 @@ namespace BulletSharp
 		{
 		}
 
-		public void LocalGetSupportingVertex(ref Vector3 vec, out Vector3 value)
+		public void LocalGetSupportingVertex(ref Vector3d vec, out Vector3d value)
 		{
 			btTriangleMeshShape_localGetSupportingVertex(Native, ref vec, out value);
 		}
 
-		public Vector3 LocalGetSupportingVertex(Vector3 vec)
+		public Vector3d LocalGetSupportingVertex(Vector3d vec)
 		{
-			Vector3 value;
+			Vector3d value;
 			btTriangleMeshShape_localGetSupportingVertex(Native, ref vec, out value);
 			return value;
 		}
 
-		public void LocalGetSupportingVertexWithoutMargin(ref Vector3 vec, out Vector3 value)
+		public void LocalGetSupportingVertexWithoutMargin(ref Vector3d vec, out Vector3d value)
 		{
 			btTriangleMeshShape_localGetSupportingVertexWithoutMargin(Native, ref vec,
 				out value);
 		}
 
-		public Vector3 LocalGetSupportingVertexWithoutMargin(Vector3 vec)
+		public Vector3d LocalGetSupportingVertexWithoutMargin(Vector3d vec)
 		{
-			Vector3 value;
+			Vector3d value;
 			btTriangleMeshShape_localGetSupportingVertexWithoutMargin(Native, ref vec,
 				out value);
 			return value;
@@ -45,21 +45,21 @@ namespace BulletSharp
 			btTriangleMeshShape_recalcLocalAabb(Native);
 		}
 
-		public Vector3 LocalAabbMax
+		public Vector3d LocalAabbMax
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTriangleMeshShape_getLocalAabbMax(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 LocalAabbMin
+		public Vector3d LocalAabbMin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTriangleMeshShape_getLocalAabbMin(Native, out value);
 				return value;
 			}

@@ -59,11 +59,11 @@ namespace BulletSharp
 				set => btConvexCast_CastResult_setFraction(Native, value);
 			}
 
-			public Vector3 HitPoint
+			public Vector3d HitPoint
 			{
 				get
 				{
-					Vector3 value;
+					Vector3d value;
 					btConvexCast_CastResult_getHitPoint(Native, out value);
 					return value;
 				}
@@ -92,11 +92,11 @@ namespace BulletSharp
 				set => btConvexCast_CastResult_setHitTransformB(Native, ref value);
 			}
 
-			public Vector3 Normal
+			public Vector3d Normal
 			{
 				get
 				{
-					Vector3 value;
+					Vector3d value;
 					btConvexCast_CastResult_getNormal(Native, out value);
 					return value;
 				}

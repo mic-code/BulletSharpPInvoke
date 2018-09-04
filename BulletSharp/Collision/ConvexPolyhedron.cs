@@ -77,15 +77,15 @@ namespace BulletSharp
 			btConvexPolyhedron_initialize2(Native);
 		}
 
-		public void ProjectRef(ref Matrix trans, ref Vector3 dir, out double minProj, out double maxProj,
-			out Vector3 witnesPtMin, out Vector3 witnesPtMax)
+		public void ProjectRef(ref Matrix trans, ref Vector3d dir, out double minProj, out double maxProj,
+			out Vector3d witnesPtMin, out Vector3d witnesPtMax)
 		{
 			btConvexPolyhedron_project(Native, ref trans, ref dir, out minProj,
 				out maxProj, out witnesPtMin, out witnesPtMax);
 		}
 
-		public void Project(Matrix trans, Vector3 dir, out double minProj, out double maxProj,
-			out Vector3 witnesPtMin, out Vector3 witnesPtMax)
+		public void Project(Matrix trans, Vector3d dir, out double minProj, out double maxProj,
+			out Vector3d witnesPtMin, out Vector3d witnesPtMax)
 		{
 			btConvexPolyhedron_project(Native, ref trans, ref dir, out minProj,
 				out maxProj, out witnesPtMin, out witnesPtMax);
@@ -96,11 +96,11 @@ namespace BulletSharp
 			return btConvexPolyhedron_testContainment(Native);
 		}
 
-		public Vector3 Extents
+		public Vector3d Extents
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btConvexPolyhedron_getExtents(Native, out value);
 				return value;
 			}
@@ -112,33 +112,33 @@ namespace BulletSharp
 			get { return btConvexPolyhedron_getFaces(Native); }
 		}
 		*/
-		public Vector3 LocalCenter
+		public Vector3d LocalCenter
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btConvexPolyhedron_getLocalCenter(Native, out value);
 				return value;
 			}
 			set => btConvexPolyhedron_setLocalCenter(Native, ref value);
 		}
 
-		public Vector3 C
+		public Vector3d C
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btConvexPolyhedron_getMC(Native, out value);
 				return value;
 			}
 			set => btConvexPolyhedron_setMC(Native, ref value);
 		}
 
-		public Vector3 E
+		public Vector3d E
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btConvexPolyhedron_getME(Native, out value);
 				return value;
 			}

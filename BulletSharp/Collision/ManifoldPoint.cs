@@ -70,7 +70,7 @@ namespace BulletSharp
 			Native = btManifoldPoint_new();
 		}
 
-		public ManifoldPoint(Vector3 pointA, Vector3 pointB, Vector3 normal, double distance)
+		public ManifoldPoint(Vector3d pointA, Vector3d pointB, Vector3d normal, double distance)
 		{
 			Native = btManifoldPoint_new2(ref pointA, ref pointB, ref normal, distance);
 		}
@@ -183,22 +183,22 @@ namespace BulletSharp
 			set => btManifoldPoint_setIndex1(Native, value);
 		}
 
-		public Vector3 LateralFrictionDir1
+		public Vector3d LateralFrictionDir1
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getLateralFrictionDir1(Native, out value);
 				return value;
 			}
 			set => btManifoldPoint_setLateralFrictionDir1(Native, ref value);
 		}
 
-		public Vector3 LateralFrictionDir2
+		public Vector3d LateralFrictionDir2
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getLateralFrictionDir2(Native, out value);
 				return value;
 			}
@@ -211,33 +211,33 @@ namespace BulletSharp
             set => btManifoldPoint_setLifeTime(Native, value);
 		}
 
-		public Vector3 LocalPointA
+		public Vector3d LocalPointA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getLocalPointA(Native, out value);
 				return value;
 			}
 			set => btManifoldPoint_setLocalPointA(Native, ref value);
 		}
 
-		public Vector3 LocalPointB
+		public Vector3d LocalPointB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getLocalPointB(Native, out value);
 				return value;
 			}
 			set => btManifoldPoint_setLocalPointB(Native, ref value);
 		}
 
-		public Vector3 NormalWorldOnB
+		public Vector3d NormalWorldOnB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getNormalWorldOnB(Native, out value);
 				return value;
 			}
@@ -256,22 +256,22 @@ namespace BulletSharp
 			set => btManifoldPoint_setPartId1(Native, value);
 		}
 
-		public Vector3 PositionWorldOnA
+		public Vector3d PositionWorldOnA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getPositionWorldOnA(Native, out value);
 				return value;
 			}
 			set => btManifoldPoint_setPositionWorldOnA(Native, ref value);
 		}
 
-		public Vector3 PositionWorldOnB
+		public Vector3d PositionWorldOnB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btManifoldPoint_getPositionWorldOnB(Native, out value);
 				return value;
 			}

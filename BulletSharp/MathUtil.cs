@@ -91,7 +91,7 @@ namespace BulletSharp
             return a >= 0 ? b : c;
         }
 
-        public static int MaxAxis(ref Vector3 a)
+        public static int MaxAxis(ref Vector3d a)
         {
             return a.X < a.Y ? (a.Y < a.Z ? 2 : 1) : (a.X < a.Z ? 2 : 0);
         }
@@ -427,7 +427,7 @@ namespace BulletSharp
         //            Debug.Assert(false);
         //        }
 
-        public static double Vector3Triple(ref Vector3 a, ref Vector3 b, ref Vector3 c)
+        public static double Vector3Triple(ref Vector3d a, ref Vector3d b, ref Vector3d c)
         {
             return a.X * (b.Y * c.Z - b.Z * c.Y) +
                 a.Y * (b.Z * c.X - b.X * c.Z) +
@@ -622,7 +622,7 @@ namespace BulletSharp
             return (value < min) ? min : (value > max) ? max : value;
         }
 
-        public static void VectorClampMax(ref Vector3 input, ref Vector3 bounds)
+        public static void VectorClampMax(ref Vector3d input, ref Vector3d bounds)
         {
             input.X = System.Math.Min(input.X, bounds.X);
             input.Y = System.Math.Min(input.Y, bounds.Y);
@@ -630,38 +630,38 @@ namespace BulletSharp
         }
 
 
-        public static void VectorClampMin(ref Vector3 input, ref Vector3 bounds)
+        public static void VectorClampMin(ref Vector3d input, ref Vector3d bounds)
         {
             input.X = System.Math.Max(input.X, bounds.X);
             input.Y = System.Math.Max(input.Y, bounds.Y);
             input.Z = System.Math.Max(input.Z, bounds.Z);
         }
 
-        public static void VectorMin(ref Vector3 input, ref Vector3 output)
+        public static void VectorMin(ref Vector3d input, ref Vector3d output)
         {
             output.X = System.Math.Min(input.X, output.X);
             output.Y = System.Math.Min(input.Y, output.Y);
             output.Z = System.Math.Min(input.Z, output.Z);
         }
 
-        public static void VectorMin(ref Vector3 input1, ref Vector3 input2, out Vector3 output)
+        public static void VectorMin(ref Vector3d input1, ref Vector3d input2, out Vector3d output)
         {
-            output = new Vector3(
+            output = new Vector3d(
                 System.Math.Min(input1.X, input2.X),
                 System.Math.Min(input1.Y, input2.Y),
                 System.Math.Min(input1.Z, input2.Z));
         }
 
-        public static void VectorMax(ref Vector3 input, ref Vector3 output)
+        public static void VectorMax(ref Vector3d input, ref Vector3d output)
         {
             output.X = System.Math.Max(input.X, output.X);
             output.Y = System.Math.Max(input.Y, output.Y);
             output.Z = System.Math.Max(input.Z, output.Z);
         }
 
-        public static void VectorMax(ref Vector3 input1, ref Vector3 input2, out Vector3 output)
+        public static void VectorMax(ref Vector3d input1, ref Vector3d input2, out Vector3d output)
         {
-            output = new Vector3(
+            output = new Vector3d(
                 System.Math.Max(input1.X, input2.X),
                 System.Math.Max(input1.Y, input2.Y),
                 System.Math.Max(input1.Z, input2.Z));
@@ -720,11 +720,11 @@ namespace BulletSharp
         //            return matrixOut;
         //        }
 
-        public static Quaternion ShortestArcQuat(ref Vector3 axisInA, ref Vector3 axisInB)
+        public static Quaternion ShortestArcQuat(ref Vector3d axisInA, ref Vector3d axisInB)
         {
-            Vector3 c = Vector3.Cross(axisInA, axisInB);
+            Vector3d c = Vector3d.Cross(axisInA, axisInB);
             double d;
-            Vector3.Dot(ref axisInA, ref axisInB, out d);
+            Vector3d.Dot(ref axisInA, ref axisInB, out d);
 
             if (d < -1.0 + SIMD_EPSILON)
             {
@@ -755,15 +755,15 @@ namespace BulletSharp
             return (-input2);
         }
 
-        public static Vector3 QuatRotate(ref Quaternion rotation, ref Vector3 v)
+        public static Vector3d QuatRotate(ref Quaternion rotation, ref Vector3d v)
         {
             Quaternion q = QuatVectorMultiply(ref rotation, ref v);
             q *= QuaternionInverse(ref rotation);
-            return new Vector3(q.X, q.Y, q.Z);
+            return new Vector3d(q.X, q.Y, q.Z);
         }
 
 
-        public static Quaternion QuatVectorMultiply(ref Quaternion q, ref Vector3 w)
+        public static Quaternion QuatVectorMultiply(ref Quaternion q, ref Vector3d w)
         {
             return new Quaternion(q.W * w.X + q.Y * w.Z - q.Z * w.Y,
                                     q.W * w.Y + q.Z * w.X - q.X * w.Z,
@@ -866,15 +866,15 @@ namespace BulletSharp
 
 
 
-        public static void GetSkewSymmetricMatrix(ref Vector3 vecin, out Vector3 v0, out Vector3 v1, out Vector3 v2)
+        public static void GetSkewSymmetricMatrix(ref Vector3d vecin, out Vector3d v0, out Vector3d v1, out Vector3d v2)
         {
-            v0 = new Vector3(0f, -vecin.Z, vecin.Y);
-            v1 = new Vector3(vecin.Z, 0f, -vecin.X);
-            v2 = new Vector3(-vecin.Y, vecin.X, 0f);
+            v0 = new Vector3d(0f, -vecin.Z, vecin.Y);
+            v1 = new Vector3d(vecin.Z, 0f, -vecin.X);
+            v2 = new Vector3d(-vecin.Y, vecin.X, 0f);
         }
 
         [Conditional("DEBUG")]
-        public static void ZeroCheckVector(ref Vector3 v)
+        public static void ZeroCheckVector(ref Vector3d v)
         {
             if (FuzzyZero(v.LengthSquared))
             {
@@ -883,7 +883,7 @@ namespace BulletSharp
         }
 
         [Conditional("DEBUG")]
-        public static void SanityCheckVector(ref Vector3 v)
+        public static void SanityCheckVector(ref Vector3d v)
         {
             if (double.IsNaN(v.X) || double.IsNaN(v.Y) || double.IsNaN(v.Z))
             {
@@ -1103,9 +1103,9 @@ namespace BulletSharp
         //        }
         */
 
-        public static Vector3 Vector4ToVector3(ref Vector4 v4)
+        public static Vector3d Vector4ToVector3(ref Vector4 v4)
         {
-            return new Vector3(v4.X, v4.Y, v4.Z);
+            return new Vector3d(v4.X, v4.Y, v4.Z);
         }
 
 
@@ -1126,26 +1126,26 @@ namespace BulletSharp
         //        //    return Vector3.TransformNormal(ref v, ref mt);
         //        //}
 
-        public static bool IsAlmostZero(ref Vector3 v)
+        public static bool IsAlmostZero(ref Vector3d v)
         {
             if (System.Math.Abs(v.X) > 1e-6 || System.Math.Abs(v.Y) > 1e-6 || System.Math.Abs(v.Z) > 1e-6) return false;
             return true;
         }
 
 
-        public static Vector3 Vector3Lerp(ref Vector3 a, ref Vector3 b, double t)
+        public static Vector3d Vector3Lerp(ref Vector3d a, ref Vector3d b, double t)
         {
-            return new Vector3(
+            return new Vector3d(
                 a.X + (b.X - a.X) * t,
                 a.Y + (b.Y - a.Y) * t,
                 a.Z + (b.Z - a.Z) * t);
         }
 
 
-        public static double Vector3Distance2XZ(Vector3 x, Vector3 y)
+        public static double Vector3Distance2XZ(Vector3d x, Vector3d y)
         {
-            Vector3 xa = new Vector3(x.X, 0, x.Z);
-            Vector3 ya = new Vector3(y.X, 0, y.Z);
+            Vector3d xa = new Vector3d(x.X, 0, x.Z);
+            Vector3d ya = new Vector3d(y.X, 0, y.Z);
             return (xa - ya).LengthSquared;
         }
 
@@ -1165,8 +1165,8 @@ namespace BulletSharp
         public const double SIMDSQRT12 = 0.7071067811865475244008443621048490f;
 
         public const double BT_LARGE_DOUBLE = 1e18f;
-        public static Vector3 MAX_VECTOR = new Vector3(BT_LARGE_DOUBLE);
-        public static Vector3 MIN_VECTOR = new Vector3(-BT_LARGE_DOUBLE);
+        public static Vector3d MAX_VECTOR = new Vector3d(BT_LARGE_DOUBLE);
+        public static Vector3d MIN_VECTOR = new Vector3d(-BT_LARGE_DOUBLE);
         public const double SIMD_2_PI = 6.283185307179586232f;
         public const double SIMD_PI = SIMD_2_PI * 0.5f;
         public const double SIMD_HALF_PI = SIMD_PI * 0.5f;

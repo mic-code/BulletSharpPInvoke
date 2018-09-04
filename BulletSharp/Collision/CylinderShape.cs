@@ -12,7 +12,7 @@ namespace BulletSharp
 		{
 		}
 
-		public CylinderShape(Vector3 halfExtents)
+		public CylinderShape(Vector3d halfExtents)
 			: base(btCylinderShape_new(ref halfExtents))
 		{
 		}
@@ -22,21 +22,21 @@ namespace BulletSharp
 		{
 		}
 
-		public Vector3 HalfExtentsWithMargin
+		public Vector3d HalfExtentsWithMargin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCylinderShape_getHalfExtentsWithMargin(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 HalfExtentsWithoutMargin
+		public Vector3d HalfExtentsWithoutMargin
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCylinderShape_getHalfExtentsWithoutMargin(Native, out value);
 				return value;
 			}
@@ -49,7 +49,7 @@ namespace BulletSharp
 
 	public class CylinderShapeX : CylinderShape
 	{
-		public CylinderShapeX(Vector3 halfExtents)
+		public CylinderShapeX(Vector3d halfExtents)
 			: base(btCylinderShapeX_new(ref halfExtents))
 		{
 		}
@@ -62,7 +62,7 @@ namespace BulletSharp
 
 	public class CylinderShapeZ : CylinderShape
 	{
-		public CylinderShapeZ(Vector3 halfExtents)
+		public CylinderShapeZ(Vector3d halfExtents)
 			: base(btCylinderShapeZ_new(ref halfExtents))
 		{
 		}

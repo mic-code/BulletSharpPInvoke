@@ -33,37 +33,37 @@ namespace BulletSharp.Math
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     //[TypeConverter(typeof(SlimMath.Design.Vector3Converter))]
-    public struct Vector3 : IEquatable<Vector3>, IFormattable
+    public struct Vector3d : IEquatable<Vector3d>, IFormattable
     {
         /// <summary>
-        /// The size of the <see cref="Vector3"/> type, in bytes.
+        /// The size of the <see cref="Vector3d"/> type, in bytes.
         /// </summary>
         public const int SizeInBytes = 3 * sizeof(double);
 
         /// <summary>
-        /// A <see cref="Vector3"/> with all of its components set to zero.
+        /// A <see cref="Vector3d"/> with all of its components set to zero.
         /// </summary>
-        public static readonly Vector3 Zero = new Vector3();
+        public static readonly Vector3d Zero = new Vector3d();
 
         /// <summary>
-        /// The X unit <see cref="Vector3"/> (1, 0, 0).
+        /// The X unit <see cref="Vector3d"/> (1, 0, 0).
         /// </summary>
-        public static readonly Vector3 UnitX = new Vector3(1.0f, 0.0f, 0.0f);
+        public static readonly Vector3d UnitX = new Vector3d(1.0f, 0.0f, 0.0f);
 
         /// <summary>
-        /// The Y unit <see cref="Vector3"/> (0, 1, 0).
+        /// The Y unit <see cref="Vector3d"/> (0, 1, 0).
         /// </summary>
-        public static readonly Vector3 UnitY = new Vector3(0.0f, 1.0f, 0.0f);
+        public static readonly Vector3d UnitY = new Vector3d(0.0f, 1.0f, 0.0f);
 
         /// <summary>
-        /// The Z unit <see cref="Vector3"/> (0, 0, 1).
+        /// The Z unit <see cref="Vector3d"/> (0, 0, 1).
         /// </summary>
-        public static readonly Vector3 UnitZ = new Vector3(0.0f, 0.0f, 1.0f);
+        public static readonly Vector3d UnitZ = new Vector3d(0.0f, 0.0f, 1.0f);
 
         /// <summary>
-        /// A <see cref="Vector3"/> with all of its components set to one.
+        /// A <see cref="Vector3d"/> with all of its components set to one.
         /// </summary>
-        public static readonly Vector3 One = new Vector3(1.0f, 1.0f, 1.0f);
+        public static readonly Vector3d One = new Vector3d(1.0f, 1.0f, 1.0f);
 
         /// <summary>
         /// The X component of the vector.
@@ -81,10 +81,10 @@ namespace BulletSharp.Math
         public double Z;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="Vector3d"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
-        public Vector3(double value)
+        public Vector3d(double value)
         {
             X = value;
             Y = value;
@@ -92,12 +92,12 @@ namespace BulletSharp.Math
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="Vector3d"/> struct.
         /// </summary>
         /// <param name="x">Initial value for the X component of the vector.</param>
         /// <param name="y">Initial value for the Y component of the vector.</param>
         /// <param name="z">Initial value for the Z component of the vector.</param>
-        public Vector3(double x, double y, double z)
+        public Vector3d(double x, double y, double z)
         {
             X = x;
             Y = y;
@@ -105,12 +105,12 @@ namespace BulletSharp.Math
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Vector3"/> struct.
+        /// Initializes a new instance of the <see cref="Vector3d"/> struct.
         /// </summary>
         /// <param name="values">The values to assign to the X, Y, and Z components of the vector. This must be an array with three elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="values"/> contains more or less than three elements.</exception>
-        public Vector3(double[] values)
+        public Vector3d(double[] values)
         {
             if (values == null)
                 throw new ArgumentNullException("values");
@@ -134,7 +134,7 @@ namespace BulletSharp.Math
         /// Calculates the length of the vector.
         /// </summary>
         /// <remarks>
-        /// <see cref="Vector3.LengthSquared"/> may be preferred when only the relative length is needed
+        /// <see cref="Vector3d.LengthSquared"/> may be preferred when only the relative length is needed
         /// and speed is of the essence.
         /// </remarks>
         public double Length
@@ -146,7 +146,7 @@ namespace BulletSharp.Math
         /// Calculates the squared length of the vector.
         /// </summary>
         /// <remarks>
-        /// This property may be preferred to <see cref="Vector3.Length"/> when only a relative length is needed
+        /// This property may be preferred to <see cref="Vector3d.Length"/> when only a relative length is needed
         /// and speed is of the essence.
         /// </remarks>
         public double LengthSquared
@@ -237,7 +237,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the square root of.</param>
         /// <param name="result">When the method completes, contains a vector that is the square root of the input vector.</param>
-        public static void Sqrt(ref Vector3 value, out Vector3 result)
+        public static void Sqrt(ref Vector3d value, out Vector3d result)
         {
             result.X = (double)System.Math.Sqrt(value.X);
             result.Y = (double)System.Math.Sqrt(value.Y);
@@ -249,9 +249,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the square root of.</param>
         /// <returns>A vector that is the square root of the input vector.</returns>
-        public static Vector3 Sqrt(Vector3 value)
+        public static Vector3d Sqrt(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             Sqrt(ref value, out temp);
             return temp;
         }
@@ -261,7 +261,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the reciprocal of.</param>
         /// <param name="result">When the method completes, contains a vector that is the reciprocal of the input vector.</param>
-        public static void Reciprocal(ref Vector3 value, out Vector3 result)
+        public static void Reciprocal(ref Vector3d value, out Vector3d result)
         {
             result.X = 1.0f / value.X;
             result.Y = 1.0f / value.Y;
@@ -273,9 +273,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the reciprocal of.</param>
         /// <returns>A vector that is the reciprocal of the input vector.</returns>
-        public static Vector3 Reciprocal(Vector3 value)
+        public static Vector3d Reciprocal(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             Reciprocal(ref value, out temp);
             return temp;
         }
@@ -285,7 +285,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the square root and recpirocal of.</param>
         /// <param name="result">When the method completes, contains a vector that is the square root and reciprocal of the input vector.</param>
-        public static void ReciprocalSqrt(ref Vector3 value, out Vector3 result)
+        public static void ReciprocalSqrt(ref Vector3d value, out Vector3d result)
         {
             result.X = 1.0f / (double)System.Math.Sqrt(value.X);
             result.Y = 1.0f / (double)System.Math.Sqrt(value.Y);
@@ -297,9 +297,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the square root and recpirocal of.</param>
         /// <returns>A vector that is the square root and reciprocal of the input vector.</returns>
-        public static Vector3 ReciprocalSqrt(Vector3 value)
+        public static Vector3d ReciprocalSqrt(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             ReciprocalSqrt(ref value, out temp);
             return temp;
         }
@@ -309,7 +309,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The value to take e raised to each component of.</param>
         /// <param name="result">When the method completes, contains a vector that has e raised to each of the components in the input vector.</param>
-        public static void Exp(ref Vector3 value, out Vector3 result)
+        public static void Exp(ref Vector3d value, out Vector3d result)
         {
             result.X = (double)System.Math.Exp(value.X);
             result.Y = (double)System.Math.Exp(value.Y);
@@ -321,9 +321,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The value to take e raised to each component of.</param>
         /// <returns>A vector that has e raised to each of the components in the input vector.</returns>
-        public static Vector3 Exp(Vector3 value)
+        public static Vector3d Exp(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             Exp(ref value, out temp);
             return temp;
         }
@@ -334,7 +334,7 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to take the sine and cosine of.</param>
         /// <param name="sinResult">When the method completes, contains the sine of each component in the input vector.</param>
         /// <param name="cosResult">When the method completes, contains the cpsome pf each component in the input vector.</param>
-        public static void SinCos(ref Vector3 value, out Vector3 sinResult, out Vector3 cosResult)
+        public static void SinCos(ref Vector3d value, out Vector3d sinResult, out Vector3d cosResult)
         {
             sinResult.X = (double)System.Math.Sin(value.X);
             sinResult.Y = (double)System.Math.Sin(value.Y);
@@ -350,7 +350,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the sine of.</param>
         /// <param name="result">When the method completes, a vector that contains the sine of each component in the input vector.</param>
-        public static void Sin(ref Vector3 value, out Vector3 result)
+        public static void Sin(ref Vector3d value, out Vector3d result)
         {
             result.X = (double)System.Math.Sin(value.X);
             result.Y = (double)System.Math.Sin(value.Y);
@@ -362,9 +362,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the sine of.</param>
         /// <returns>A vector that contains the sine of each component in the input vector.</returns>
-        public static Vector3 Sin(Vector3 value)
+        public static Vector3d Sin(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             Sin(ref value, out temp);
             return temp;
         }
@@ -374,7 +374,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the cosine of.</param>
         /// <param name="result">When the method completes, contains a vector that contains the cosine of each component in the input vector.</param>
-        public static void Cos(ref Vector3 value, out Vector3 result)
+        public static void Cos(ref Vector3d value, out Vector3d result)
         {
             result.X = (double)System.Math.Cos(value.X);
             result.Y = (double)System.Math.Cos(value.Y);
@@ -386,9 +386,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the cosine of.</param>
         /// <returns>A vector that contains the cosine of each component in the input vector.</returns>
-        public static Vector3 Cos(Vector3 value)
+        public static Vector3d Cos(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             Cos(ref value, out temp);
             return temp;
         }
@@ -398,7 +398,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the tangent of.</param>
         /// <param name="result">When the method completes, contains a vector that contains the tangent of each component in the input vector.</param>
-        public static void Tan(ref Vector3 value, out Vector3 result)
+        public static void Tan(ref Vector3d value, out Vector3d result)
         {
             result.X = (double)System.Math.Tan(value.X);
             result.Y = (double)System.Math.Tan(value.Y);
@@ -410,9 +410,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the tangent of.</param>
         /// <returns>A vector that contains the tangent of each component in the input vector.</returns>
-        public static Vector3 Tan(Vector3 value)
+        public static Vector3d Tan(Vector3d value)
         {
-            Vector3 temp;
+            Vector3d temp;
             Tan(ref value, out temp);
             return temp;
         }
@@ -424,9 +424,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to add.</param>
         /// <param name="right">The second vector to add.</param>
         /// <param name="result">When the method completes, contains the sum of the two vectors.</param>
-        public static void Add(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        public static void Add(ref Vector3d left, ref Vector3d right, out Vector3d result)
         {
-            result = new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            result = new Vector3d(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
         }
 
         /// <summary>
@@ -435,9 +435,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to add.</param>
         /// <param name="right">The second vector to add.</param>
         /// <returns>The sum of the two vectors.</returns>
-        public static Vector3 Add(Vector3 left, Vector3 right)
+        public static Vector3d Add(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            return new Vector3d(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
         }
 
         /// <summary>
@@ -446,9 +446,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to subtract.</param>
         /// <param name="right">The second vector to subtract.</param>
         /// <param name="result">When the method completes, contains the difference of the two vectors.</param>
-        public static void Subtract(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        public static void Subtract(ref Vector3d left, ref Vector3d right, out Vector3d result)
         {
-            result = new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            result = new Vector3d(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
         }
 
         /// <summary>
@@ -457,9 +457,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to subtract.</param>
         /// <param name="right">The second vector to subtract.</param>
         /// <returns>The difference of the two vectors.</returns>
-        public static Vector3 Subtract(Vector3 left, Vector3 right)
+        public static Vector3d Subtract(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            return new Vector3d(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
         }
 
         /// <summary>
@@ -468,9 +468,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <param name="result">When the method completes, contains the scaled vector.</param>
-        public static void Multiply(ref Vector3 value, double scalar, out Vector3 result)
+        public static void Multiply(ref Vector3d value, double scalar, out Vector3d result)
         {
-            result = new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            result = new Vector3d(value.X * scalar, value.Y * scalar, value.Z * scalar);
         }
 
         /// <summary>
@@ -479,9 +479,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 Multiply(Vector3 value, double scalar)
+        public static Vector3d Multiply(Vector3d value, double scalar)
         {
-            return new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            return new Vector3d(value.X * scalar, value.Y * scalar, value.Z * scalar);
         }
 
         /// <summary>
@@ -490,9 +490,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to modulate.</param>
         /// <param name="right">The second vector to modulate.</param>
         /// <param name="result">When the method completes, contains the modulated vector.</param>
-        public static void Modulate(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        public static void Modulate(ref Vector3d left, ref Vector3d right, out Vector3d result)
         {
-            result = new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+            result = new Vector3d(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
         }
 
         /// <summary>
@@ -501,9 +501,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to modulate.</param>
         /// <param name="right">The second vector to modulate.</param>
         /// <returns>The modulated vector.</returns>
-        public static Vector3 Modulate(Vector3 left, Vector3 right)
+        public static Vector3d Modulate(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+            return new Vector3d(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
         }
 
         /// <summary>
@@ -512,9 +512,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <param name="result">When the method completes, contains the scaled vector.</param>
-        public static void Divide(ref Vector3 value, double scalar, out Vector3 result)
+        public static void Divide(ref Vector3d value, double scalar, out Vector3d result)
         {
-            result = new Vector3(value.X / scalar, value.Y / scalar, value.Z / scalar);
+            result = new Vector3d(value.X / scalar, value.Y / scalar, value.Z / scalar);
         }
 
         /// <summary>
@@ -523,9 +523,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 Divide(Vector3 value, double scalar)
+        public static Vector3d Divide(Vector3d value, double scalar)
         {
-            return new Vector3(value.X / scalar, value.Y / scalar, value.Z / scalar);
+            return new Vector3d(value.X / scalar, value.Y / scalar, value.Z / scalar);
         }
 
         /// <summary>
@@ -533,9 +533,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to negate.</param>
         /// <param name="result">When the method completes, contains a vector facing in the opposite direction.</param>
-        public static void Negate(ref Vector3 value, out Vector3 result)
+        public static void Negate(ref Vector3d value, out Vector3d result)
         {
-            result = new Vector3(-value.X, -value.Y, -value.Z);
+            result = new Vector3d(-value.X, -value.Y, -value.Z);
         }
 
         /// <summary>
@@ -543,9 +543,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to negate.</param>
         /// <returns>A vector facing in the opposite direction.</returns>
-        public static Vector3 Negate(Vector3 value)
+        public static Vector3d Negate(Vector3d value)
         {
-            return new Vector3(-value.X, -value.Y, -value.Z);
+            return new Vector3d(-value.X, -value.Y, -value.Z);
         }
 
         /// <summary>
@@ -553,9 +553,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the absolute value of.</param>
         /// <param name="result">When the method completes, contains a vector that has all positive components.</param>
-        public static void Abs(ref Vector3 value, out Vector3 result)
+        public static void Abs(ref Vector3d value, out Vector3d result)
         {
-            result = new Vector3(System.Math.Abs(value.X), System.Math.Abs(value.Y), System.Math.Abs(value.Z));
+            result = new Vector3d(System.Math.Abs(value.X), System.Math.Abs(value.Y), System.Math.Abs(value.Z));
         }
 
         /// <summary>
@@ -563,39 +563,39 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to take the absolute value of.</param>
         /// <returns>A vector that has all positive components.</returns>
-        public static Vector3 Abs(Vector3 value)
+        public static Vector3d Abs(Vector3d value)
         {
-            return new Vector3(System.Math.Abs(value.X), System.Math.Abs(value.Y), System.Math.Abs(value.Z));
+            return new Vector3d(System.Math.Abs(value.X), System.Math.Abs(value.Y), System.Math.Abs(value.Z));
         }
 
         /// <summary>
-        /// Returns a <see cref="Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
+        /// Returns a <see cref="Vector3d"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
         /// </summary>
-        /// <param name="value1">A <see cref="Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
+        /// <param name="value1">A <see cref="Vector3d"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
+        /// <param name="value2">A <see cref="Vector3d"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
+        /// <param name="value3">A <see cref="Vector3d"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
         /// <param name="result">When the method completes, contains the 3D Cartesian coordinates of the specified point.</param>
-        public static void Barycentric(ref Vector3 value1, ref Vector3 value2, ref Vector3 value3, double amount1, double amount2, out Vector3 result)
+        public static void Barycentric(ref Vector3d value1, ref Vector3d value2, ref Vector3d value3, double amount1, double amount2, out Vector3d result)
         {
-            result = new Vector3((value1.X + (amount1 * (value2.X - value1.X))) + (amount2 * (value3.X - value1.X)),
+            result = new Vector3d((value1.X + (amount1 * (value2.X - value1.X))) + (amount2 * (value3.X - value1.X)),
                 (value1.Y + (amount1 * (value2.Y - value1.Y))) + (amount2 * (value3.Y - value1.Y)),
                 (value1.Z + (amount1 * (value2.Z - value1.Z))) + (amount2 * (value3.Z - value1.Z)));
         }
 
         /// <summary>
-        /// Returns a <see cref="Vector3"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
+        /// Returns a <see cref="Vector3d"/> containing the 3D Cartesian coordinates of a point specified in Barycentric coordinates relative to a 3D triangle.
         /// </summary>
-        /// <param name="value1">A <see cref="Vector3"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
-        /// <param name="value2">A <see cref="Vector3"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
-        /// <param name="value3">A <see cref="Vector3"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
+        /// <param name="value1">A <see cref="Vector3d"/> containing the 3D Cartesian coordinates of vertex 1 of the triangle.</param>
+        /// <param name="value2">A <see cref="Vector3d"/> containing the 3D Cartesian coordinates of vertex 2 of the triangle.</param>
+        /// <param name="value3">A <see cref="Vector3d"/> containing the 3D Cartesian coordinates of vertex 3 of the triangle.</param>
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
-        /// <returns>A new <see cref="Vector3"/> containing the 3D Cartesian coordinates of the specified point.</returns>
-        public static Vector3 Barycentric(Vector3 value1, Vector3 value2, Vector3 value3, double amount1, double amount2)
+        /// <returns>A new <see cref="Vector3d"/> containing the 3D Cartesian coordinates of the specified point.</returns>
+        public static Vector3d Barycentric(Vector3d value1, Vector3d value2, Vector3d value3, double amount1, double amount2)
         {
-            Vector3 result;
+            Vector3d result;
             Barycentric(ref value1, ref value2, ref value3, amount1, amount2, out result);
             return result;
         }
@@ -607,7 +607,7 @@ namespace BulletSharp.Math
         /// <param name="min">The minimum value.</param>
         /// <param name="max">The maximum value.</param>
         /// <param name="result">When the method completes, contains the clamped value.</param>
-        public static void Clamp(ref Vector3 value, ref Vector3 min, ref Vector3 max, out Vector3 result)
+        public static void Clamp(ref Vector3d value, ref Vector3d min, ref Vector3d max, out Vector3d result)
         {
             double x = value.X;
             x = (x > max.X) ? max.X : x;
@@ -621,7 +621,7 @@ namespace BulletSharp.Math
             z = (z > max.Z) ? max.Z : z;
             z = (z < min.Z) ? min.Z : z;
 
-            result = new Vector3(x, y, z);
+            result = new Vector3d(x, y, z);
         }
 
         /// <summary>
@@ -631,9 +631,9 @@ namespace BulletSharp.Math
         /// <param name="min">The minimum value.</param>
         /// <param name="max">The maximum value.</param>
         /// <returns>The clamped value.</returns>
-        public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
+        public static Vector3d Clamp(Vector3d value, Vector3d min, Vector3d max)
         {
-            Vector3 result;
+            Vector3d result;
             Clamp(ref value, ref min, ref max, out result);
             return result;
         }
@@ -644,9 +644,9 @@ namespace BulletSharp.Math
         /// <param name="left">First source vector.</param>
         /// <param name="right">Second source vector.</param>
         /// <param name="result">When the method completes, contains the cross product of the two vectors.</param>
-        public static void Cross(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        public static void Cross(ref Vector3d left, ref Vector3d right, out Vector3d result)
         {
-            result = new Vector3(
+            result = new Vector3d(
                 (left.Y * right.Z) - (left.Z * right.Y),
                 (left.Z * right.X) - (left.X * right.Z),
                 (left.X * right.Y) - (left.Y * right.X));
@@ -658,9 +658,9 @@ namespace BulletSharp.Math
         /// <param name="left">First source vector.</param>
         /// <param name="right">Second source vector.</param>
         /// <returns>The cross product of the two vectors.</returns>
-        public static Vector3 Cross(Vector3 left, Vector3 right)
+        public static Vector3d Cross(Vector3d left, Vector3d right)
         {
-            Vector3 result;
+            Vector3d result;
             Cross(ref left, ref right, out result);
             return result;
         }
@@ -670,9 +670,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="v">Second source vector.</param>
         /// <returns>The cross product of the two vectors.</returns>
-        public Vector3 Cross(Vector3 v)
+        public Vector3d Cross(Vector3d v)
         {
-            Vector3 result;
+            Vector3d result;
             Cross(ref this, ref v, out result);
             return result;
         }
@@ -684,11 +684,11 @@ namespace BulletSharp.Math
         /// <param name="value2">Second source vector.</param>
         /// <param name="value3">Third source vector.</param>
         /// <param name="result">When the method completes, contains the triple cross product of the three vectors.</param>
-        public static void TripleProduct(ref Vector3 value1, ref Vector3 value2, ref Vector3 value3, out double result)
+        public static void TripleProduct(ref Vector3d value1, ref Vector3d value2, ref Vector3d value3, out double result)
         {
-            Vector3 temp;
-            Vector3.Cross(ref value2, ref value3, out temp);
-            Vector3.Dot(ref value1, ref temp, out result);
+            Vector3d temp;
+            Vector3d.Cross(ref value2, ref value3, out temp);
+            Vector3d.Dot(ref value1, ref temp, out result);
         }
 
         /// <summary>
@@ -698,7 +698,7 @@ namespace BulletSharp.Math
         /// <param name="value2">Second source vector.</param>
         /// <param name="value3">Third source vector.</param>
         /// <returns>The tripple cross product of the three vectors.</returns>
-        public static double TripleProduct(Vector3 value1, Vector3 value2, Vector3 value3)
+        public static double TripleProduct(Vector3d value1, Vector3d value2, Vector3d value3)
         {
             double result;
             TripleProduct(ref value1, ref value2, ref value3, out result);
@@ -712,10 +712,10 @@ namespace BulletSharp.Math
         /// <param name="value2">The second vector.</param>
         /// <param name="result">When the method completes, contains the distance between the two vectors.</param>
         /// <remarks>
-        /// <see cref="Vector3.DistanceSquared(ref Vector3, ref Vector3, out double)"/> may be preferred when only the relative distance is needed
+        /// <see cref="Vector3d.DistanceSquared(ref Vector3d, ref Vector3d, out double)"/> may be preferred when only the relative distance is needed
         /// and speed is of the essence.
         /// </remarks>
-        public static void Distance(ref Vector3 value1, ref Vector3 value2, out double result)
+        public static void Distance(ref Vector3d value1, ref Vector3d value2, out double result)
         {
             double x = value1.X - value2.X;
             double y = value1.Y - value2.Y;
@@ -731,10 +731,10 @@ namespace BulletSharp.Math
         /// <param name="value2">The second vector.</param>
         /// <returns>The distance between the two vectors.</returns>
         /// <remarks>
-        /// <see cref="Vector3.DistanceSquared(Vector3, Vector3)"/> may be preferred when only the relative distance is needed
+        /// <see cref="Vector3d.DistanceSquared(Vector3d, Vector3d)"/> may be preferred when only the relative distance is needed
         /// and speed is of the essence.
         /// </remarks>
-        public static double Distance(Vector3 value1, Vector3 value2)
+        public static double Distance(Vector3d value1, Vector3d value2)
         {
             double x = value1.X - value2.X;
             double y = value1.Y - value2.Y;
@@ -756,7 +756,7 @@ namespace BulletSharp.Math
         /// involves two square roots, which are computationally expensive. However, using distance squared 
         /// provides the same information and avoids calculating two square roots.
         /// </remarks>
-        public static void DistanceSquared(ref Vector3 value1, ref Vector3 value2, out double result)
+        public static void DistanceSquared(ref Vector3d value1, ref Vector3d value2, out double result)
         {
             double x = value1.X - value2.X;
             double y = value1.Y - value2.Y;
@@ -778,7 +778,7 @@ namespace BulletSharp.Math
         /// involves two square roots, which are computationally expensive. However, using distance squared 
         /// provides the same information and avoids calculating two square roots.
         /// </remarks>
-        public static double DistanceSquared(Vector3 value1, Vector3 value2)
+        public static double DistanceSquared(Vector3d value1, Vector3d value2)
         {
             double x = value1.X - value2.X;
             double y = value1.Y - value2.Y;
@@ -793,7 +793,7 @@ namespace BulletSharp.Math
         /// <param name="left">First source vector.</param>
         /// <param name="right">Second source vector.</param>
         /// <param name="result">When the method completes, contains the dot product of the two vectors.</param>
-        public static void Dot(ref Vector3 left, ref Vector3 right, out double result)
+        public static void Dot(ref Vector3d left, ref Vector3d right, out double result)
         {
             result = (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
         }
@@ -804,7 +804,7 @@ namespace BulletSharp.Math
         /// <param name="left">First source vector.</param>
         /// <param name="right">Second source vector.</param>
         /// <returns>The dot product of the two vectors.</returns>
-        public static double Dot(Vector3 left, Vector3 right)
+        public static double Dot(Vector3d left, Vector3d right)
         {
             return (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z);
         }
@@ -814,7 +814,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="v">Second source vector.</param>
         /// <param name="result">When the method completes, contains the dot product of the two vectors.</param>
-        public void Dot(ref Vector3 v, out double result)
+        public void Dot(ref Vector3d v, out double result)
         {
             result = (X * v.X) + (Y * v.Y) + (Z * v.Z);
         }
@@ -824,7 +824,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="v">Second source vector.</param>
         /// <returns>The dot product of the two vectors.</returns>
-        public double Dot(Vector3 v)
+        public double Dot(Vector3d v)
         {
             return (X * v.X) + (Y * v.Y) + (Z * v.Z);
         }
@@ -834,7 +834,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to normalize.</param>
         /// <param name="result">When the method completes, contains the normalized vector.</param>
-        public static void Normalize(ref Vector3 value, out Vector3 result)
+        public static void Normalize(ref Vector3d value, out Vector3d result)
         {
             result = value;
             result.Normalize();
@@ -845,7 +845,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to normalize.</param>
         /// <returns>The normalized vector.</returns>
-        public static Vector3 Normalize(Vector3 value)
+        public static Vector3d Normalize(Vector3d value)
         {
             value.Normalize();
             return value;
@@ -863,7 +863,7 @@ namespace BulletSharp.Math
         /// <code>start + (end - start) * amount</code>
         /// Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned. 
         /// </remarks>
-        public static void Lerp(ref Vector3 start, ref Vector3 end, double amount, out Vector3 result)
+        public static void Lerp(ref Vector3d start, ref Vector3d end, double amount, out Vector3d result)
         {
             result.X = start.X + ((end.X - start.X) * amount);
             result.Y = start.Y + ((end.Y - start.Y) * amount);
@@ -882,9 +882,9 @@ namespace BulletSharp.Math
         /// <code>start + (end - start) * amount</code>
         /// Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned. 
         /// </remarks>
-        public static Vector3 Lerp(Vector3 start, Vector3 end, double amount)
+        public static Vector3d Lerp(Vector3d start, Vector3d end, double amount)
         {
-            Vector3 result;
+            Vector3d result;
             Lerp(ref start, ref end, amount, out result);
             return result;
         }
@@ -896,7 +896,7 @@ namespace BulletSharp.Math
         /// <param name="end">End vector.</param>
         /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
         /// <param name="result">When the method completes, contains the cubic interpolation of the two vectors.</param>
-        public static void SmoothStep(ref Vector3 start, ref Vector3 end, double amount, out Vector3 result)
+        public static void SmoothStep(ref Vector3d start, ref Vector3d end, double amount, out Vector3d result)
         {
             amount = (amount > 1.0f) ? 1.0f : ((amount < 0.0f) ? 0.0f : amount);
             amount = (amount * amount) * (3.0f - (2.0f * amount));
@@ -913,9 +913,9 @@ namespace BulletSharp.Math
         /// <param name="end">End vector.</param>
         /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
         /// <returns>The cubic interpolation of the two vectors.</returns>
-        public static Vector3 SmoothStep(Vector3 start, Vector3 end, double amount)
+        public static Vector3d SmoothStep(Vector3d start, Vector3d end, double amount)
         {
-            Vector3 result;
+            Vector3d result;
             SmoothStep(ref start, ref end, amount, out result);
             return result;
         }
@@ -929,7 +929,7 @@ namespace BulletSharp.Math
         /// <param name="tangent2">Second source tangent vector.</param>
         /// <param name="amount">Weighting factor.</param>
         /// <param name="result">When the method completes, contains the result of the Hermite spline interpolation.</param>
-        public static void Hermite(ref Vector3 value1, ref Vector3 tangent1, ref Vector3 value2, ref Vector3 tangent2, double amount, out Vector3 result)
+        public static void Hermite(ref Vector3d value1, ref Vector3d tangent1, ref Vector3d value2, ref Vector3d tangent2, double amount, out Vector3d result)
         {
             double squared = amount * amount;
             double cubed = amount * squared;
@@ -952,9 +952,9 @@ namespace BulletSharp.Math
         /// <param name="tangent2">Second source tangent vector.</param>
         /// <param name="amount">Weighting factor.</param>
         /// <returns>The result of the Hermite spline interpolation.</returns>
-        public static Vector3 Hermite(Vector3 value1, Vector3 tangent1, Vector3 value2, Vector3 tangent2, double amount)
+        public static Vector3d Hermite(Vector3d value1, Vector3d tangent1, Vector3d value2, Vector3d tangent2, double amount)
         {
-            Vector3 result;
+            Vector3d result;
             Hermite(ref value1, ref tangent1, ref value2, ref tangent2, amount, out result);
             return result;
         }
@@ -968,7 +968,7 @@ namespace BulletSharp.Math
         /// <param name="value4">The fourth position in the interpolation.</param>
         /// <param name="amount">Weighting factor.</param>
         /// <param name="result">When the method completes, contains the result of the Catmull-Rom interpolation.</param>
-        public static void CatmullRom(ref Vector3 value1, ref Vector3 value2, ref Vector3 value3, ref Vector3 value4, double amount, out Vector3 result)
+        public static void CatmullRom(ref Vector3d value1, ref Vector3d value2, ref Vector3d value3, ref Vector3d value4, double amount, out Vector3d result)
         {
             double squared = amount * amount;
             double cubed = amount * squared;
@@ -995,9 +995,9 @@ namespace BulletSharp.Math
         /// <param name="value4">The fourth position in the interpolation.</param>
         /// <param name="amount">Weighting factor.</param>
         /// <returns>A vector that is the result of the Catmull-Rom interpolation.</returns>
-        public static Vector3 CatmullRom(Vector3 value1, Vector3 value2, Vector3 value3, Vector3 value4, double amount)
+        public static Vector3d CatmullRom(Vector3d value1, Vector3d value2, Vector3d value3, Vector3d value4, double amount)
         {
-            Vector3 result;
+            Vector3d result;
             CatmullRom(ref value1, ref value2, ref value3, ref value4, amount, out result);
             return result;
         }
@@ -1008,7 +1008,7 @@ namespace BulletSharp.Math
         /// <param name="value1">The first source vector.</param>
         /// <param name="value2">The second source vector.</param>
         /// <param name="result">When the method completes, contains an new vector composed of the largest components of the source vectors.</param>
-        public static void Max(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
+        public static void Max(ref Vector3d value1, ref Vector3d value2, out Vector3d result)
         {
             result.X = (value1.X > value2.X) ? value1.X : value2.X;
             result.Y = (value1.Y > value2.Y) ? value1.Y : value2.Y;
@@ -1021,9 +1021,9 @@ namespace BulletSharp.Math
         /// <param name="value1">The first source vector.</param>
         /// <param name="value2">The second source vector.</param>
         /// <returns>A vector containing the largest components of the source vectors.</returns>
-        public static Vector3 Max(Vector3 value1, Vector3 value2)
+        public static Vector3d Max(Vector3d value1, Vector3d value2)
         {
-            Vector3 result;
+            Vector3d result;
             Max(ref value1, ref value2, out result);
             return result;
         }
@@ -1034,7 +1034,7 @@ namespace BulletSharp.Math
         /// <param name="value1">The first source vector.</param>
         /// <param name="value2">The second source vector.</param>
         /// <param name="result">When the method completes, contains an new vector composed of the smallest components of the source vectors.</param>
-        public static void Min(ref Vector3 value1, ref Vector3 value2, out Vector3 result)
+        public static void Min(ref Vector3d value1, ref Vector3d value2, out Vector3d result)
         {
             result.X = (value1.X < value2.X) ? value1.X : value2.X;
             result.Y = (value1.Y < value2.Y) ? value1.Y : value2.Y;
@@ -1047,9 +1047,9 @@ namespace BulletSharp.Math
         /// <param name="value1">The first source vector.</param>
         /// <param name="value2">The second source vector.</param>
         /// <returns>A vector containing the smallest components of the source vectors.</returns>
-        public static Vector3 Min(Vector3 value1, Vector3 value2)
+        public static Vector3d Min(Vector3d value1, Vector3d value2)
         {
-            Vector3 result;
+            Vector3d result;
             Min(ref value1, ref value2, out result);
             return result;
         }
@@ -1066,12 +1066,12 @@ namespace BulletSharp.Math
         /// <param name="maxZ">The maximum depth of the viewport.</param>
         /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
         /// <param name="result">When the method completes, contains the vector in screen space.</param>
-        public static void Project(ref Vector3 vector, double x, double y, double width, double height, double minZ, double maxZ, ref Matrix worldViewProjection, out Vector3 result)
+        public static void Project(ref Vector3d vector, double x, double y, double width, double height, double minZ, double maxZ, ref Matrix worldViewProjection, out Vector3d result)
         {
-            Vector3 v;
+            Vector3d v;
             TransformCoordinate(ref vector, ref worldViewProjection, out v);
 
-            result = new Vector3(((1.0f + v.X) * 0.5f * width) + x, ((1.0f - v.Y) * 0.5f * height) + y, (v.Z * (maxZ - minZ)) + minZ);
+            result = new Vector3d(((1.0f + v.X) * 0.5f * width) + x, ((1.0f - v.Y) * 0.5f * height) + y, (v.Z * (maxZ - minZ)) + minZ);
         }
 
         /// <summary>
@@ -1086,9 +1086,9 @@ namespace BulletSharp.Math
         /// <param name="maxZ">The maximum depth of the viewport.</param>
         /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
         /// <returns>The vector in screen space.</returns>
-        public static Vector3 Project(Vector3 vector, double x, double y, double width, double height, double minZ, double maxZ, Matrix worldViewProjection)
+        public static Vector3d Project(Vector3d vector, double x, double y, double width, double height, double minZ, double maxZ, Matrix worldViewProjection)
         {
-            Vector3 result;
+            Vector3d result;
             Project(ref vector, x, y, width, height, minZ, maxZ, ref worldViewProjection, out result);
             return result;
         }
@@ -1105,9 +1105,9 @@ namespace BulletSharp.Math
         /// <param name="maxZ">The maximum depth of the viewport.</param>
         /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
         /// <param name="result">When the method completes, contains the vector in object space.</param>
-        public static void Unproject(ref Vector3 vector, double x, double y, double width, double height, double minZ, double maxZ, ref Matrix worldViewProjection, out Vector3 result)
+        public static void Unproject(ref Vector3d vector, double x, double y, double width, double height, double minZ, double maxZ, ref Matrix worldViewProjection, out Vector3d result)
         {
-            Vector3 v = new Vector3();
+            Vector3d v = new Vector3d();
             Matrix matrix;
             Matrix.Invert(ref worldViewProjection, out matrix);
 
@@ -1130,9 +1130,9 @@ namespace BulletSharp.Math
         /// <param name="maxZ">The maximum depth of the viewport.</param>
         /// <param name="worldViewProjection">The combined world-view-projection matrix.</param>
         /// <returns>The vector in object space.</returns>
-        public static Vector3 Unproject(Vector3 vector, double x, double y, double width, double height, double minZ, double maxZ, Matrix worldViewProjection)
+        public static Vector3d Unproject(Vector3d vector, double x, double y, double width, double height, double minZ, double maxZ, Matrix worldViewProjection)
         {
-            Vector3 result;
+            Vector3d result;
             Unproject(ref vector, x, y, width, height, minZ, maxZ, ref worldViewProjection, out result);
             return result;
         }
@@ -1145,7 +1145,7 @@ namespace BulletSharp.Math
         /// <param name="result">When the method completes, contains the reflected vector.</param>
         /// <remarks>Reflect only gives the direction of a reflection off a surface, it does not determine 
         /// whether the original vector was close enough to the surface to hit it.</remarks>
-        public static void Reflect(ref Vector3 vector, ref Vector3 normal, out Vector3 result)
+        public static void Reflect(ref Vector3d vector, ref Vector3d normal, out Vector3d result)
         {
             double dot = (vector.X * normal.X) + (vector.Y * normal.Y) + (vector.Z * normal.Z);
 
@@ -1162,9 +1162,9 @@ namespace BulletSharp.Math
         /// <returns>The reflected vector.</returns>
         /// <remarks>Reflect only gives the direction of a reflection off a surface, it does not determine 
         /// whether the original vector was close enough to the surface to hit it.</remarks>
-        public static Vector3 Reflect(Vector3 vector, Vector3 normal)
+        public static Vector3d Reflect(Vector3d vector, Vector3d normal)
         {
-            Vector3 result;
+            Vector3d result;
             Reflect(ref vector, ref normal, out result);
             return result;
         }
@@ -1176,7 +1176,7 @@ namespace BulletSharp.Math
         /// <param name="normal">Normal of the surface.</param>
         /// <param name="index">Index of refraction.</param>
         /// <param name="result">When the method completes, contains the refracted vector.</param>
-        public static void Refract(ref Vector3 vector, ref Vector3 normal, double index, out Vector3 result)
+        public static void Refract(ref Vector3d vector, ref Vector3d normal, double index, out Vector3d result)
         {
             double cos1;
             Dot(ref vector, ref normal, out cos1);
@@ -1185,7 +1185,7 @@ namespace BulletSharp.Math
 
             if (radicand < 0.0f)
             {
-                result = Vector3.Zero;
+                result = Vector3d.Zero;
             }
             else
             {
@@ -1201,9 +1201,9 @@ namespace BulletSharp.Math
         /// <param name="normal">Normal of the surface.</param>
         /// <param name="index">Index of refraction.</param>
         /// <returns>The refracted vector.</returns>
-        public static Vector3 Refract(Vector3 vector, Vector3 normal, double index)
+        public static Vector3d Refract(Vector3d vector, Vector3d normal, double index)
         {
-            Vector3 result;
+            Vector3d result;
             Refract(ref vector, ref normal, index, out result);
             return result;
         }
@@ -1224,7 +1224,7 @@ namespace BulletSharp.Math
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Orthogonalize(Vector3[] destination, params Vector3[] source)
+        public static void Orthogonalize(Vector3d[] destination, params Vector3d[] source)
         {
             //Uses the modified Gram-Schmidt process.
             //q1 = m1
@@ -1242,13 +1242,13 @@ namespace BulletSharp.Math
 
             for (int i = 0; i < source.Length; ++i)
             {
-                Vector3 newvector = source[i];
+                Vector3d newvector = source[i];
 
                 for (int r = 0; r < i; ++r)
                 {
                     double dotrn, dotrr;
-                    Vector3.Dot(ref destination[r], ref newvector, out dotrn);
-                    Vector3.Dot(ref destination[r], ref destination[r], out dotrr);
+                    Vector3d.Dot(ref destination[r], ref newvector, out dotrn);
+                    Vector3d.Dot(ref destination[r], ref destination[r], out dotrr);
                     newvector -= (dotrn / dotrr) * destination[r];
                 }
 
@@ -1272,7 +1272,7 @@ namespace BulletSharp.Math
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Orthonormalize(Vector3[] destination, params Vector3[] source)
+        public static void Orthonormalize(Vector3d[] destination, params Vector3d[] source)
         {
             //Uses the modified Gram-Schmidt process.
             //Because we are making unit vectors, we can optimize the math for orthogonalization
@@ -1292,12 +1292,12 @@ namespace BulletSharp.Math
 
             for (int i = 0; i < source.Length; ++i)
             {
-                Vector3 newvector = source[i];
+                Vector3d newvector = source[i];
 
                 for (int r = 0; r < i; ++r)
                 {
                     double dot;
-                    Vector3.Dot(ref destination[r], ref newvector, out dot);
+                    Vector3d.Dot(ref destination[r], ref newvector, out dot);
                     newvector -= dot * destination[r];
                 }
 
@@ -1312,7 +1312,7 @@ namespace BulletSharp.Math
         /// <param name="vector">The vector to rotate.</param>
         /// <param name="rotation">The <see cref="Quaternion"/> rotation to apply.</param>
         /// <param name="result">When the method completes, contains the transformed <see cref="Vector4"/>.</param>
-        public static void Transform(ref Vector3 vector, ref Quaternion rotation, out Vector3 result)
+        public static void Transform(ref Vector3d vector, ref Quaternion rotation, out Vector3d result)
         {
             double x = rotation.X + rotation.X;
             double y = rotation.Y + rotation.Y;
@@ -1337,7 +1337,7 @@ namespace BulletSharp.Math
             double num8 = (yz + wx);
             double num9 = ((1.0f - xx) - yy);
 
-            result = new Vector3(
+            result = new Vector3d(
                 ((vector.X * num1) + (vector.Y * num2)) + (vector.Z * num3),
                 ((vector.X * num4) + (vector.Y * num5)) + (vector.Z * num6),
                 ((vector.X * num7) + (vector.Y * num8)) + (vector.Z * num9));
@@ -1349,9 +1349,9 @@ namespace BulletSharp.Math
         /// <param name="vector">The vector to rotate.</param>
         /// <param name="rotation">The <see cref="Quaternion"/> rotation to apply.</param>
         /// <returns>The transformed <see cref="Vector4"/>.</returns>
-        public static Vector3 Transform(Vector3 vector, Quaternion rotation)
+        public static Vector3d Transform(Vector3d vector, Quaternion rotation)
         {
-            Vector3 result;
+            Vector3d result;
             Transform(ref vector, ref rotation, out result);
             return result;
         }
@@ -1365,7 +1365,7 @@ namespace BulletSharp.Math
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Transform(Vector3[] source, ref Quaternion rotation, Vector3[] destination)
+        public static void Transform(Vector3d[] source, ref Quaternion rotation, Vector3d[] destination)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -1399,7 +1399,7 @@ namespace BulletSharp.Math
 
             for (int i = 0; i < source.Length; ++i)
             {
-                destination[i] = new Vector3(
+                destination[i] = new Vector3d(
                     ((source[i].X * num1) + (source[i].Y * num2)) + (source[i].Z * num3),
                     ((source[i].X * num4) + (source[i].Y * num5)) + (source[i].Z * num6),
                     ((source[i].X * num7) + (source[i].Y * num8)) + (source[i].Z * num9));
@@ -1412,7 +1412,7 @@ namespace BulletSharp.Math
         /// <param name="vector">The source vector.</param>
         /// <param name="transform">The transformation <see cref="Matrix"/>.</param>
         /// <param name="result">When the method completes, contains the transformed <see cref="Vector4"/>.</param>
-        public static void Transform(ref Vector3 vector, ref Matrix transform, out Vector4 result)
+        public static void Transform(ref Vector3d vector, ref Matrix transform, out Vector4 result)
         {
             result = new Vector4(
                 (vector.X * transform.M11) + (vector.Y * transform.M21) + (vector.Z * transform.M31) + transform.M41,
@@ -1427,7 +1427,7 @@ namespace BulletSharp.Math
         /// <param name="vector">The source vector.</param>
         /// <param name="transform">The transformation <see cref="Matrix"/>.</param>
         /// <returns>The transformed <see cref="Vector4"/>.</returns>
-        public static Vector4 Transform(Vector3 vector, Matrix transform)
+        public static Vector4 Transform(Vector3d vector, Matrix transform)
         {
             Vector4 result;
             Transform(ref vector, ref transform, out result);
@@ -1442,7 +1442,7 @@ namespace BulletSharp.Math
         /// <param name="destination">The array for which the transformed vectors are stored.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Transform(Vector3[] source, ref Matrix transform, Vector4[] destination)
+        public static void Transform(Vector3d[] source, ref Matrix transform, Vector4[] destination)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -1470,11 +1470,11 @@ namespace BulletSharp.Math
         /// therefore makes the vector homogeneous. The homogeneous vector is often prefered when working
         /// with coordinates as the w component can safely be ignored.
         /// </remarks>
-        public static void TransformCoordinate(ref Vector3 coordinate, ref Matrix transform, out Vector3 result)
+        public static void TransformCoordinate(ref Vector3d coordinate, ref Matrix transform, out Vector3d result)
         {
             double w = 1f / ((coordinate.X * transform.M14) + (coordinate.Y * transform.M24) + (coordinate.Z * transform.M34) + transform.M44);
 
-            result = new Vector3(
+            result = new Vector3d(
                 w * ((coordinate.X * transform.M11) + (coordinate.Y * transform.M21) + (coordinate.Z * transform.M31) + transform.M41),
                 w * ((coordinate.X * transform.M12) + (coordinate.Y * transform.M22) + (coordinate.Z * transform.M32) + transform.M42),
                 w * ((coordinate.X * transform.M13) + (coordinate.Y * transform.M23) + (coordinate.Z * transform.M33) + transform.M43));
@@ -1493,9 +1493,9 @@ namespace BulletSharp.Math
         /// therefore makes the vector homogeneous. The homogeneous vector is often prefered when working
         /// with coordinates as the w component can safely be ignored.
         /// </remarks>
-        public static Vector3 TransformCoordinate(Vector3 coordinate, Matrix transform)
+        public static Vector3d TransformCoordinate(Vector3d coordinate, Matrix transform)
         {
-            Vector3 result;
+            Vector3d result;
             TransformCoordinate(ref coordinate, ref transform, out result);
             return result;
         }
@@ -1516,7 +1516,7 @@ namespace BulletSharp.Math
         /// therefore makes the vector homogeneous. The homogeneous vector is often prefered when working
         /// with coordinates as the w component can safely be ignored.
         /// </remarks>
-        public static void TransformCoordinate(Vector3[] source, ref Matrix transform, Vector3[] destination)
+        public static void TransformCoordinate(Vector3d[] source, ref Matrix transform, Vector3d[] destination)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -1544,9 +1544,9 @@ namespace BulletSharp.Math
         /// apply. This is often prefered for normal vectors as normals purely represent direction
         /// rather than location because normal vectors should not be translated.
         /// </remarks>
-        public static void TransformNormal(ref Vector3 normal, ref Matrix transform, out Vector3 result)
+        public static void TransformNormal(ref Vector3d normal, ref Matrix transform, out Vector3d result)
         {
-            result = new Vector3(
+            result = new Vector3d(
                 (normal.X * transform.M11) + (normal.Y * transform.M21) + (normal.Z * transform.M31),
                 (normal.X * transform.M12) + (normal.Y * transform.M22) + (normal.Z * transform.M32),
                 (normal.X * transform.M13) + (normal.Y * transform.M23) + (normal.Z * transform.M33));
@@ -1565,9 +1565,9 @@ namespace BulletSharp.Math
         /// apply. This is often prefered for normal vectors as normals purely represent direction
         /// rather than location because normal vectors should not be translated.
         /// </remarks>
-        public static Vector3 TransformNormal(Vector3 normal, Matrix transform)
+        public static Vector3d TransformNormal(Vector3d normal, Matrix transform)
         {
-            Vector3 result;
+            Vector3d result;
             TransformNormal(ref normal, ref transform, out result);
             return result;
         }
@@ -1588,7 +1588,7 @@ namespace BulletSharp.Math
         /// apply. This is often prefered for normal vectors as normals purely represent direction
         /// rather than location because normal vectors should not be translated.
         /// </remarks>
-        public static void TransformNormal(Vector3[] source, ref Matrix transform, Vector3[] destination)
+        public static void TransformNormal(Vector3d[] source, ref Matrix transform, Vector3d[] destination)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -1609,9 +1609,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to add.</param>
         /// <param name="right">The second vector to add.</param>
         /// <returns>The sum of the two vectors.</returns>
-        public static Vector3 operator +(Vector3 left, Vector3 right)
+        public static Vector3d operator +(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
+            return new Vector3d(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
         }
 
         /// <summary>
@@ -1619,7 +1619,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to assert (unchange).</param>
         /// <returns>The asserted (unchanged) vector.</returns>
-        public static Vector3 operator +(Vector3 value)
+        public static Vector3d operator +(Vector3d value)
         {
             return value;
         }
@@ -1630,9 +1630,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first vector to subtract.</param>
         /// <param name="right">The second vector to subtract.</param>
         /// <returns>The difference of the two vectors.</returns>
-        public static Vector3 operator -(Vector3 left, Vector3 right)
+        public static Vector3d operator -(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
+            return new Vector3d(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
         }
 
         /// <summary>
@@ -1640,9 +1640,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The vector to negate.</param>
         /// <returns>A vector facing in the opposite direction.</returns>
-        public static Vector3 operator -(Vector3 value)
+        public static Vector3d operator -(Vector3d value)
         {
-            return new Vector3(-value.X, -value.Y, -value.Z);
+            return new Vector3d(-value.X, -value.Y, -value.Z);
         }
 
         /// <summary>
@@ -1651,9 +1651,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 operator *(double scalar, Vector3 value)
+        public static Vector3d operator *(double scalar, Vector3d value)
         {
-            return new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            return new Vector3d(value.X * scalar, value.Y * scalar, value.Z * scalar);
         }
 
         /// <summary>
@@ -1662,9 +1662,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 operator *(Vector3 value, double scalar)
+        public static Vector3d operator *(Vector3d value, double scalar)
         {
-            return new Vector3(value.X * scalar, value.Y * scalar, value.Z * scalar);
+            return new Vector3d(value.X * scalar, value.Y * scalar, value.Z * scalar);
         }
 
         /// <summary>
@@ -1673,9 +1673,9 @@ namespace BulletSharp.Math
         /// <param name="left">The vector to scale.</param>
         /// <param name="right">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 operator *(Vector3 left, Vector3 right)
+        public static Vector3d operator *(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+            return new Vector3d(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
         }
 
         /// <summary>
@@ -1684,9 +1684,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 operator /(Vector3 value, double scalar)
+        public static Vector3d operator /(Vector3d value, double scalar)
         {
-            return new Vector3(value.X / scalar, value.Y / scalar, value.Z / scalar);
+            return new Vector3d(value.X / scalar, value.Y / scalar, value.Z / scalar);
         }
 
         /// <summary>
@@ -1695,9 +1695,9 @@ namespace BulletSharp.Math
         /// <param name="left">The vector to scale.</param>
         /// <param name="right">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Vector3 operator /(Vector3 left, Vector3 right)
+        public static Vector3d operator /(Vector3d left, Vector3d right)
         {
-            return new Vector3(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
+            return new Vector3d(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
         }
 
         /// <summary>
@@ -1706,7 +1706,7 @@ namespace BulletSharp.Math
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns><c>true</c> if <paramref name="left"/> has the same value as <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator ==(Vector3 left, Vector3 right)
+        public static bool operator ==(Vector3d left, Vector3d right)
         {
             return left.Equals(right);
         }
@@ -1717,17 +1717,17 @@ namespace BulletSharp.Math
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns><c>true</c> if <paramref name="left"/> has a different value than <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(Vector3 left, Vector3 right)
+        public static bool operator !=(Vector3d left, Vector3d right)
         {
             return !left.Equals(right);
         }
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="Vector3"/> to <see cref="Vector4"/>.
+        /// Performs an explicit conversion from <see cref="Vector3d"/> to <see cref="Vector4"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector4(Vector3 value)
+        public static explicit operator Vector4(Vector3d value)
         {
             return new Vector4(value, 0.0f);
         }
@@ -1800,26 +1800,26 @@ namespace BulletSharp.Math
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Vector3"/> is equal to this instance.
+        /// Determines whether the specified <see cref="Vector3d"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="Vector3"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="Vector3d"/> to compare with this instance.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="Vector3"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="Vector3d"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Vector3 other)
+        public bool Equals(Vector3d other)
         {
             return (this.X == other.X) && (this.Y == other.Y) && (this.Z == other.Z);
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Vector3"/> is equal to this instance.
+        /// Determines whether the specified <see cref="Vector3d"/> is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="Vector3"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="Vector3d"/> to compare with this instance.</param>
         /// <param name="epsilon">The amount of error allowed.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="Vector3"/> is equal to this instance; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="Vector3d"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Vector3 other, double epsilon)
+        public bool Equals(Vector3d other, double epsilon)
         {
             return ((double)System.Math.Abs(other.X - X) < epsilon &&
                 (double)System.Math.Abs(other.Y - Y) < epsilon &&
@@ -1841,7 +1841,7 @@ namespace BulletSharp.Math
             if (obj.GetType() != GetType())
                 return false;
 
-            return Equals((Vector3)obj);
+            return Equals((Vector3d)obj);
         }
 
 #if SlimDX1xInterop
