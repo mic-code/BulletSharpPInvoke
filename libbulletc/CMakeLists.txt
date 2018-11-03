@@ -401,6 +401,8 @@ ADD_LIBRARY(${BULLETC_LIB} SHARED
     src/btWorldImporter_wrap.h
     src/hacdHACD_wrap.cpp
     src/hacdHACD_wrap.h
+    src/customMethod.cpp
+    src/customMethod.h
 )
 
 TARGET_LINK_LIBRARIES(${BULLETC_LIB} BulletCollision BulletDynamics LinearMath BulletFileLoader BulletSoftBody BulletWorldImporter BulletXmlWorldImporter HACD)
