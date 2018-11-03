@@ -20,11 +20,11 @@ static bool myCustomMaterialCombinerCallback(
 		btVector3 faceNormalLs = btCross(v[1] - v[0], v[2] - v[0]);
 		faceNormalLs.normalize();
 		btVector3 faceNormalWs = colObj1Wrap->getWorldTransform().getBasis() * faceNormalLs;
-		float nDotF = btDot(faceNormalWs, cp.m_normalWorldOnB);
+		btScalar nDotF = btDot(faceNormalWs, cp.m_normalWorldOnB);
 		if (nDotF <= 0.0f)
 		{
 			// flip the contact normal to be aligned with the face normal
-			cp.m_normalWorldOnB += -2.0f * nDotF * faceNormalWs;
+			cp.m_normalWorldOnB += -2.0 * nDotF * faceNormalWs;
 		}
 	}
 
