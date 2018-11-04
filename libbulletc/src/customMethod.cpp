@@ -32,6 +32,21 @@ static bool myCustomMaterialCombinerCallback(
 	return false;
 }
 
+btQuaternion q;
+
+void TestQuaternion2(const btQuaternion &rot)
+{
+	q = rot;
+}
+
+btScalar TestQuaternion(const btQuaternion &rot)
+{
+	TestQuaternion2(rot);
+	//q = rot;
+	return *q;
+}
+
+
 void DisableGroundUndersideCollision() {
 	gContactAddedCallback = myCustomMaterialCombinerCallback;
 }
