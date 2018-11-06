@@ -370,7 +370,7 @@ inline void MatrixTobtMatrix3x3(const btScalar* m, btMatrix3x3* t)
 #define BTVECTOR4_DEF_OUT(v)
 
 #define BTQUATERNION_DEF(v)
-#define BTQUATERNION_USE(v) *v
+#define BTQUATERNION_USE(v) *new btQuaternion(v->x(),v->y(),v->z(),v->w())
 #define BTQUATERNION_SET(to, from) *to = from
 #define BTQUATERNION_COPY(to, from) BTQUATERNION_SET(to, *from)
 #define BTQUATERNION_IN(v)
