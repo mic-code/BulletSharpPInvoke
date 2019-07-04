@@ -1,5 +1,6 @@
 #include <btBulletDynamicsCommon.h>
 #include "BulletCollision/CollisionShapes/btTriangleShape.h"
+#include "BulletCollision/CollisionDispatch/btInternalEdgeUtility.h"
 #include "customMethod.h"
 
 static bool myCustomMaterialCombinerCallback(
@@ -27,6 +28,8 @@ static bool myCustomMaterialCombinerCallback(
 			cp.m_normalWorldOnB += -2.0 * nDotF * faceNormalWs;
 		}
 	}
+
+	btAdjustInternalEdgeContacts(cp, colObj0Wrap, colObj1Wrap, partId1, index1);
 
 	//this return value is currently ignored, but to be on the safe side: return false if you don't calculate friction
 	return false;
