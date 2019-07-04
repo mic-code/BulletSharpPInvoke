@@ -211,11 +211,11 @@ namespace BulletSharp
 			btTranslationalLimitMotor2_testLimitValue(Native, limitIndex, testValue);
 		}
 
-		public Vector3 Bounce
+		public Vector3d Bounce
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getBounce(Native, out value);
 				return value;
 			}
@@ -227,33 +227,33 @@ namespace BulletSharp
 			get { return new IntArray(btTranslationalLimitMotor2_getCurrentLimit(Native), 3); }
 		}
 		*/
-		public Vector3 CurrentLimitError
+		public Vector3d CurrentLimitError
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getCurrentLimitError(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setCurrentLimitError(Native, ref value);
 		}
 
-		public Vector3 CurrentLimitErrorHi
+		public Vector3d CurrentLimitErrorHi
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getCurrentLimitErrorHi(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setCurrentLimitErrorHi(Native, ref value);
 		}
 
-		public Vector3 CurrentLinearDiff
+		public Vector3d CurrentLinearDiff
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getCurrentLinearDiff(Native, out value);
 				return value;
 			}
@@ -270,55 +270,55 @@ namespace BulletSharp
 			get { return new BoolArray(btTranslationalLimitMotor2_getEnableSpring(Native), 3); }
 		}
 		*/
-		public Vector3 EquilibriumPoint
+		public Vector3d EquilibriumPoint
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getEquilibriumPoint(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setEquilibriumPoint(Native, ref value);
 		}
 
-		public Vector3 LowerLimit
+		public Vector3d LowerLimit
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getLowerLimit(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setLowerLimit(Native, ref value);
 		}
 
-		public Vector3 MaxMotorForce
+		public Vector3d MaxMotorForce
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getMaxMotorForce(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setMaxMotorForce(Native, ref value);
 		}
 
-		public Vector3 MotorCFM
+		public Vector3d MotorCFM
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getMotorCFM(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setMotorCFM(Native, ref value);
 		}
 
-		public Vector3 MotorERP
+		public Vector3d MotorERP
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getMotorERP(Native, out value);
 				return value;
 			}
@@ -330,22 +330,22 @@ namespace BulletSharp
 			get { return new BoolArray(btTranslationalLimitMotor2_getServoMotor(Native)); }
 		}
 		*/
-		public Vector3 ServoTarget
+		public Vector3d ServoTarget
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getServoTarget(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setServoTarget(Native, ref value);
 		}
 
-		public Vector3 SpringDamping
+		public Vector3d SpringDamping
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getSpringDamping(Native, out value);
 				return value;
 			}
@@ -357,11 +357,11 @@ namespace BulletSharp
 			get { return btTranslationalLimitMotor2_getSpringDampingLimited(Native); }
 		}
 		*/
-		public Vector3 SpringStiffness
+		public Vector3d SpringStiffness
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getSpringStiffness(Native, out value);
 				return value;
 			}
@@ -373,44 +373,44 @@ namespace BulletSharp
 			get { return btTranslationalLimitMotor2_getSpringStiffnessLimited(Native); }
 		}
 		*/
-		public Vector3 StopCfm
+		public Vector3d StopCfm
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getStopCFM(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setStopCFM(Native, ref value);
 		}
 
-		public Vector3 StopEep
+		public Vector3d StopEep
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getStopERP(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setStopERP(Native, ref value);
 		}
 
-		public Vector3 TargetVelocity
+		public Vector3d TargetVelocity
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getTargetVelocity(Native, out value);
 				return value;
 			}
 			set => btTranslationalLimitMotor2_setTargetVelocity(Native, ref value);
 		}
 
-		public Vector3 UpperLimit
+		public Vector3d UpperLimit
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btTranslationalLimitMotor2_getUpperLimit(Native, out value);
 				return value;
 			}
@@ -484,9 +484,9 @@ namespace BulletSharp
 			return btGeneric6DofSpring2Constraint_getAngle(Native, axisIndex);
 		}
 
-		public Vector3 GetAxis(int axisIndex)
+		public Vector3d GetAxis(int axisIndex)
 		{
-			Vector3 value;
+			Vector3d value;
 			btGeneric6DofSpring2Constraint_getAxis(Native, axisIndex, out value);
 			return value;
 		}
@@ -511,37 +511,37 @@ namespace BulletSharp
 			return btGeneric6DofSpring2Constraint_isLimited(Native, limitIndex);
 		}
 
-		public static bool MatrixToEulerZXY(Matrix mat, ref Vector3 xyz)
+		public static bool MatrixToEulerZXY(Matrix mat, ref Vector3d xyz)
 		{
 			return btGeneric6DofSpring2Constraint_matrixToEulerZXY(ref mat, ref xyz);
 		}
 
-		public static bool MatrixToEulerZYX(Matrix mat, ref Vector3 xyz)
+		public static bool MatrixToEulerZYX(Matrix mat, ref Vector3d xyz)
 		{
 			return btGeneric6DofSpring2Constraint_matrixToEulerZYX(ref mat, ref xyz);
 		}
 
-		public static bool MatrixToEulerXZY(Matrix mat, ref Vector3 xyz)
+		public static bool MatrixToEulerXZY(Matrix mat, ref Vector3d xyz)
 		{
 			return btGeneric6DofSpring2Constraint_matrixToEulerXZY(ref mat, ref xyz);
 		}
 
-		public static bool MatrixToEulerXYZ(Matrix mat, ref Vector3 xyz)
+		public static bool MatrixToEulerXYZ(Matrix mat, ref Vector3d xyz)
 		{
 			return btGeneric6DofSpring2Constraint_matrixToEulerXYZ(ref mat, ref xyz);
 		}
 
-		public static bool MatrixToEulerYZX(Matrix mat, ref Vector3 xyz)
+		public static bool MatrixToEulerYZX(Matrix mat, ref Vector3d xyz)
 		{
 			return btGeneric6DofSpring2Constraint_matrixToEulerYZX(ref mat, ref xyz);
 		}
 
-		public static bool MatrixToEulerYXZ(Matrix mat, ref Vector3 xyz)
+		public static bool MatrixToEulerYXZ(Matrix mat, ref Vector3d xyz)
 		{
 			return btGeneric6DofSpring2Constraint_matrixToEulerYXZ(ref mat, ref xyz);
 		}
 
-		public void SetAxis(Vector3 axis1, Vector3 axis2)
+		public void SetAxis(Vector3d axis1, Vector3d axis2)
 		{
 			btGeneric6DofSpring2Constraint_setAxis(Native, ref axis1, ref axis2);
 		}
@@ -612,44 +612,44 @@ namespace BulletSharp
 			btGeneric6DofSpring2Constraint_setTargetVelocity(Native, index, velocity);
 		}
 
-		public Vector3 AngularLowerLimit
+		public Vector3d AngularLowerLimit
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGeneric6DofSpring2Constraint_getAngularLowerLimit(Native, out value);
 				return value;
 			}
 			set => btGeneric6DofSpring2Constraint_setAngularLowerLimit(Native, ref value);
 		}
 
-		public Vector3 AngularLowerLimitReversed
+		public Vector3d AngularLowerLimitReversed
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGeneric6DofSpring2Constraint_getAngularLowerLimitReversed(Native, out value);
 				return value;
 			}
 			set => btGeneric6DofSpring2Constraint_setAngularLowerLimitReversed(Native, ref value);
 		}
 
-		public Vector3 AngularUpperLimit
+		public Vector3d AngularUpperLimit
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGeneric6DofSpring2Constraint_getAngularUpperLimit(Native, out value);
 				return value;
 			}
 			set => btGeneric6DofSpring2Constraint_setAngularUpperLimit(Native, ref value);
 		}
 
-		public Vector3 AngularUpperLimitReversed
+		public Vector3d AngularUpperLimitReversed
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGeneric6DofSpring2Constraint_getAngularUpperLimitReversed(Native, out value);
 				return value;
 			}
@@ -696,22 +696,22 @@ namespace BulletSharp
 			}
 		}
 
-		public Vector3 LinearLowerLimit
+		public Vector3d LinearLowerLimit
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGeneric6DofSpring2Constraint_getLinearLowerLimit(Native, out value);
 				return value;
 			}
 			set => btGeneric6DofSpring2Constraint_setLinearLowerLimit(Native, ref value);
 		}
 
-		public Vector3 LinearUpperLimit
+		public Vector3d LinearUpperLimit
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGeneric6DofSpring2Constraint_getLinearUpperLimit(Native, out value);
 				return value;
 			}

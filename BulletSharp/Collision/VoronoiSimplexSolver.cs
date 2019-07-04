@@ -114,11 +114,11 @@ namespace BulletSharp
 			get { return btSubSimplexClosestResult_getBarycentricCoords(Native); }
 		}
 		*/
-		public Vector3 ClosestPointOnSimplex
+		public Vector3d ClosestPointOnSimplex
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btSubSimplexClosestResult_getClosestPointOnSimplex(Native, out value);
 				return value;
 			}
@@ -153,55 +153,55 @@ namespace BulletSharp
 			InitializeUserOwned(native);
 		}
 
-		public void AddVertexRef(ref Vector3 w, ref Vector3 p, ref Vector3 q)
+		public void AddVertexRef(ref Vector3d w, ref Vector3d p, ref Vector3d q)
 		{
 			btVoronoiSimplexSolver_addVertex(Native, ref w, ref p, ref q);
 		}
 
-		public void AddVertex(Vector3 w, Vector3 p, Vector3 q)
+		public void AddVertex(Vector3d w, Vector3d p, Vector3d q)
 		{
 			btVoronoiSimplexSolver_addVertex(Native, ref w, ref p, ref q);
 		}
 
-		public void BackupClosest(out Vector3 v)
+		public void BackupClosest(out Vector3d v)
 		{
 			btVoronoiSimplexSolver_backup_closest(Native, out v);
 		}
 
-		public bool Closest(out Vector3 v)
+		public bool Closest(out Vector3d v)
 		{
 			return btVoronoiSimplexSolver_closest(Native, out v);
 		}
 
-		public bool ClosestPtPointTetrahedronRef(ref Vector3 p, ref Vector3 a, ref Vector3 b, ref Vector3 c,
-			ref Vector3 d, SubSimplexClosestResult finalResult)
+		public bool ClosestPtPointTetrahedronRef(ref Vector3d p, ref Vector3d a, ref Vector3d b, ref Vector3d c,
+			ref Vector3d d, SubSimplexClosestResult finalResult)
 		{
 			return btVoronoiSimplexSolver_closestPtPointTetrahedron(Native, ref p,
 				ref a, ref b, ref c, ref d, finalResult.Native);
 		}
 
-		public bool ClosestPtPointTetrahedron(Vector3 p, Vector3 a, Vector3 b, Vector3 c,
-			Vector3 d, SubSimplexClosestResult finalResult)
+		public bool ClosestPtPointTetrahedron(Vector3d p, Vector3d a, Vector3d b, Vector3d c,
+			Vector3d d, SubSimplexClosestResult finalResult)
 		{
 			return btVoronoiSimplexSolver_closestPtPointTetrahedron(Native, ref p,
 				ref a, ref b, ref c, ref d, finalResult.Native);
 		}
 
-		public bool ClosestPtPointTriangleRef(ref Vector3 p, ref Vector3 a, ref Vector3 b, ref Vector3 c,
+		public bool ClosestPtPointTriangleRef(ref Vector3d p, ref Vector3d a, ref Vector3d b, ref Vector3d c,
 			SubSimplexClosestResult result)
 		{
 			return btVoronoiSimplexSolver_closestPtPointTriangle(Native, ref p,
 				ref a, ref b, ref c, result.Native);
 		}
 
-		public bool ClosestPtPointTriangle(Vector3 p, Vector3 a, Vector3 b, Vector3 c,
+		public bool ClosestPtPointTriangle(Vector3d p, Vector3d a, Vector3d b, Vector3d c,
 			SubSimplexClosestResult result)
 		{
 			return btVoronoiSimplexSolver_closestPtPointTriangle(Native, ref p,
 				ref a, ref b, ref c, result.Native);
 		}
 
-		public void ComputePoints(out Vector3 p1, out Vector3 p2)
+		public void ComputePoints(out Vector3d p1, out Vector3d p2)
 		{
 			btVoronoiSimplexSolver_compute_points(Native, out p1, out p2);
 		}
@@ -222,7 +222,7 @@ namespace BulletSharp
 				yBuf);
 		}
 		*/
-		public bool InSimplex(Vector3 w)
+		public bool InSimplex(Vector3d w)
 		{
 			return btVoronoiSimplexSolver_inSimplex(Native, ref w);
 		}
@@ -232,8 +232,8 @@ namespace BulletSharp
 			return btVoronoiSimplexSolver_maxVertex(Native);
 		}
 
-		public int PointOutsideOfPlane(Vector3 p, Vector3 a, Vector3 b, Vector3 c,
-			Vector3 d)
+		public int PointOutsideOfPlane(Vector3d p, Vector3d a, Vector3d b, Vector3d c,
+			Vector3d d)
 		{
 			return btVoronoiSimplexSolver_pointOutsideOfPlane(Native, ref p, ref a,
 				ref b, ref c, ref d);
@@ -265,33 +265,33 @@ namespace BulletSharp
 			set => btVoronoiSimplexSolver_setCachedBC(Native, value.Native);
 		}
 
-		public Vector3 CachedP1
+		public Vector3d CachedP1
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btVoronoiSimplexSolver_getCachedP1(Native, out value);
 				return value;
 			}
 			set => btVoronoiSimplexSolver_setCachedP1(Native, ref value);
 		}
 
-		public Vector3 CachedP2
+		public Vector3d CachedP2
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btVoronoiSimplexSolver_getCachedP2(Native, out value);
 				return value;
 			}
 			set => btVoronoiSimplexSolver_setCachedP2(Native, ref value);
 		}
 
-		public Vector3 CachedV
+		public Vector3d CachedV
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btVoronoiSimplexSolver_getCachedV(Native, out value);
 				return value;
 			}
@@ -310,11 +310,11 @@ namespace BulletSharp
 			set => btVoronoiSimplexSolver_setEqualVertexThreshold(Native, value);
 		}
 
-		public Vector3 LastW
+		public Vector3d LastW
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btVoronoiSimplexSolver_getLastW(Native, out value);
 				return value;
 			}

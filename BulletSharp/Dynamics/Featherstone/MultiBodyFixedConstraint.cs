@@ -7,7 +7,7 @@ namespace BulletSharp
 	public class MultiBodyFixedConstraint : MultiBodyConstraint
 	{
 		public MultiBodyFixedConstraint(MultiBody body, int link, RigidBody bodyB,
-			Vector3 pivotInA, Vector3 pivotInB, Matrix frameInA, Matrix frameInB)
+			Vector3d pivotInA, Vector3d pivotInB, Matrix frameInA, Matrix frameInB)
 		{
 			IntPtr native = btMultiBodyFixedConstraint_new(body.Native, link, bodyB.Native,
 				ref pivotInA, ref pivotInB, ref frameInA, ref frameInB);
@@ -16,7 +16,7 @@ namespace BulletSharp
 		}
 
 		public MultiBodyFixedConstraint(MultiBody bodyA, int linkA, MultiBody bodyB,
-			int linkB, Vector3 pivotInA, Vector3 pivotInB, Matrix frameInA, Matrix frameInB)
+			int linkB, Vector3d pivotInA, Vector3d pivotInB, Matrix frameInA, Matrix frameInB)
 		{
 			IntPtr native = btMultiBodyFixedConstraint_new2(bodyA.Native, linkA, bodyB.Native,
 				linkB, ref pivotInA, ref pivotInB, ref frameInA, ref frameInB);
@@ -46,22 +46,22 @@ namespace BulletSharp
 			set => btMultiBodyFixedConstraint_setFrameInB(Native, ref value);
 		}
 
-		public Vector3 PivotInA
+		public Vector3d PivotInA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodyFixedConstraint_getPivotInA(Native, out value);
 				return value;
 			}
 			set => btMultiBodyFixedConstraint_setPivotInA(Native, ref value);
 		}
 
-		public Vector3 PivotInB
+		public Vector3d PivotInB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodyFixedConstraint_getPivotInB(Native, out value);
 				return value;
 			}

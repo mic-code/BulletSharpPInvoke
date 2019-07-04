@@ -122,7 +122,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X, Y, and Z components.</param>
         /// <param name="w">Initial value for the W component of the vector.</param>
-        public Vector4(Vector3 value, double w)
+        public Vector4(Vector3d value, double w)
         {
             X = value.X;
             Y = value.Y;
@@ -1128,7 +1128,7 @@ namespace BulletSharp.Math
         /// <param name="vector">The vector to rotate.</param>
         /// <param name="rotation">The <see cref="SlimMath.Quaternion"/> rotation to apply.</param>
         /// <param name="result">When the method completes, contains the transformed <see cref="SlimMath.Vector4"/>.</param>
-        public static void Transform(ref Vector4 vector, ref Quaternion rotation, out Vector4 result)
+        public static void Transform(ref Vector4 vector, ref QuaternionD rotation, out Vector4 result)
         {
             double x = rotation.X + rotation.X;
             double y = rotation.Y + rotation.Y;
@@ -1166,7 +1166,7 @@ namespace BulletSharp.Math
         /// <param name="vector">The vector to rotate.</param>
         /// <param name="rotation">The <see cref="SlimMath.Quaternion"/> rotation to apply.</param>
         /// <returns>The transformed <see cref="SlimMath.Vector4"/>.</returns>
-        public static Vector4 Transform(Vector4 vector, Quaternion rotation)
+        public static Vector4 Transform(Vector4 vector, QuaternionD rotation)
         {
             Vector4 result;
             Transform(ref vector, ref rotation, out result);
@@ -1182,7 +1182,7 @@ namespace BulletSharp.Math
         /// This array may be the same array as <paramref name="source"/>.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> or <paramref name="destination"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="destination"/> is shorter in length than <paramref name="source"/>.</exception>
-        public static void Transform(Vector4[] source, ref Quaternion rotation, Vector4[] destination)
+        public static void Transform(Vector4[] source, ref QuaternionD rotation, Vector4[] destination)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -1378,9 +1378,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Vector3(Vector4 value)
+        public static explicit operator Vector3d(Vector4 value)
         {
-            return new Vector3(value.X, value.Y, value.Z);
+            return new Vector3d(value.X, value.Y, value.Z);
         }
 
         /// <summary>

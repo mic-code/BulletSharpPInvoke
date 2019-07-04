@@ -80,7 +80,7 @@ namespace BulletSharp
 		}
 
 	   public void CalculatePrincipalAxisTransform(double[] masses, ref Matrix principal,
-			out Vector3 inertia)
+			out Vector3d inertia)
 		{
 			btCompoundShape_calculatePrincipalAxisTransform(Native, masses,
 				ref principal, out inertia);

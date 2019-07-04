@@ -15,32 +15,32 @@ namespace BulletSharp
 			btConvexInternalShape_setSafeMargin(Native, minDimension, defaultMarginMultiplier);
 		}
 
-		public void SetSafeMarginRef(ref Vector3 halfExtents, double defaultMarginMultiplier = 0.1f)
+		public void SetSafeMarginRef(ref Vector3d halfExtents, double defaultMarginMultiplier = 0.1f)
 		{
 			btConvexInternalShape_setSafeMargin2(Native, ref halfExtents, defaultMarginMultiplier);
 		}
 
-		public void SetSafeMargin(Vector3 halfExtents, double defaultMarginMultiplier = 0.1f)
+		public void SetSafeMargin(Vector3d halfExtents, double defaultMarginMultiplier = 0.1f)
 		{
 			btConvexInternalShape_setSafeMargin2(Native, ref halfExtents, defaultMarginMultiplier);
 		}
 
-		public Vector3 ImplicitShapeDimensions
+		public Vector3d ImplicitShapeDimensions
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btConvexInternalShape_getImplicitShapeDimensions(Native, out value);
 				return value;
 			}
 			set { btConvexInternalShape_setImplicitShapeDimensions(Native, ref value); }
 		}
 
-		public Vector3 LocalScalingNV
+		public Vector3d LocalScalingNV
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btConvexInternalShape_getLocalScalingNV(Native, out value);
 				return value;
 			}

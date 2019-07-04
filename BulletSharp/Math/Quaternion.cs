@@ -35,7 +35,7 @@ namespace BulletSharp.Math
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     //[TypeConverter(typeof(SlimMath.Design.QuaternionConverter))]
-    public struct Quaternion : IEquatable<Quaternion>, IFormattable
+    public struct QuaternionD : IEquatable<QuaternionD>, IFormattable
     {
         /// <summary>
         /// The size of the <see cref="SlimMath.Quaternion"/> type, in bytes.
@@ -45,17 +45,17 @@ namespace BulletSharp.Math
         /// <summary>
         /// A <see cref="SlimMath.Quaternion"/> with all of its components set to zero.
         /// </summary>
-        public static readonly Quaternion Zero = new Quaternion();
+        public static readonly QuaternionD Zero = new QuaternionD();
 
         /// <summary>
         /// A <see cref="SlimMath.Quaternion"/> with all of its components set to one.
         /// </summary>
-        public static readonly Quaternion One = new Quaternion(1.0f, 1.0f, 1.0f, 1.0f);
+        public static readonly QuaternionD One = new QuaternionD(1.0f, 1.0f, 1.0f, 1.0f);
 
         /// <summary>
         /// The identity <see cref="SlimMath.Quaternion"/> (0, 0, 0, 1).
         /// </summary>
-        public static readonly Quaternion Identity = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+        public static readonly QuaternionD Identity = new QuaternionD(0.0f, 0.0f, 0.0f, 1.0f);
 
         /// <summary>
         /// The X component of the quaternion.
@@ -81,7 +81,7 @@ namespace BulletSharp.Math
         /// Initializes a new instance of the <see cref="SlimMath.Quaternion"/> struct.
         /// </summary>
         /// <param name="value">The value that will be assigned to all components.</param>
-        public Quaternion(double value)
+        public QuaternionD(double value)
         {
             X = value;
             Y = value;
@@ -93,7 +93,7 @@ namespace BulletSharp.Math
         /// Initializes a new instance of the <see cref="SlimMath.Quaternion"/> struct.
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the components.</param>
-        public Quaternion(Vector4 value)
+        public QuaternionD(Vector4 value)
         {
             X = value.X;
             Y = value.Y;
@@ -106,7 +106,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">A vector containing the values with which to initialize the X, Y, and Z components.</param>
         /// <param name="angle">Initial value for the angle of the quaternion.</param>
-        public Quaternion(Vector3 axis, double angle)
+        public QuaternionD(Vector3d axis, double angle)
         {
             double angle2 = angle * 0.5f;
             double s = (double)System.Math.Sin(angle2) / axis.Length;
@@ -123,7 +123,7 @@ namespace BulletSharp.Math
         /// <param name="y">Initial value for the Y component of the quaternion.</param>
         /// <param name="z">Initial value for the Z component of the quaternion.</param>
         /// <param name="w">Initial value for the W component of the quaternion.</param>
-        public Quaternion(double x, double y, double z, double w)
+        public QuaternionD(double x, double y, double z, double w)
         {
             X = x;
             Y = y;
@@ -137,7 +137,7 @@ namespace BulletSharp.Math
         /// <param name="values">The values to assign to the X, Y, Z, and W components of the quaternion. This must be an array with four elements.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="values"/> contains more or less than four elements.</exception>
-        public Quaternion(double[] values)
+        public QuaternionD(double[] values)
         {
             if (values == null)
                 throw new ArgumentNullException("values");
@@ -189,15 +189,15 @@ namespace BulletSharp.Math
         /// Gets the axis components of the quaternion.
         /// </summary>
         /// <value>The axis components of the quaternion.</value>
-        public Vector3 Axis
+        public Vector3d Axis
         {
             get
             {
                 double inv = 1.0f / (W * W);
                 if (inv < 10.0f * Utilities.ZeroTolerance)
-                    return Vector3.UnitX;
+                    return Vector3d.UnitX;
 
-                return new Vector3(X * inv, Y * inv, Z * inv);
+                return new Vector3d(X * inv, Y * inv, Z * inv);
             }
         }
 
@@ -284,9 +284,9 @@ namespace BulletSharp.Math
         /// <summary>
         /// Return the inverse of this quaternion.
         /// </summary>
-        public Quaternion Inverse
+        public QuaternionD Inverse
         {
-            get { return new Quaternion(-X, -Y, -Z, W); }
+            get { return new QuaternionD(-X, -Y, -Z, W); }
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to add.</param>
         /// <param name="right">The second quaternion to add.</param>
         /// <param name="result">When the method completes, contains the sum of the two quaternions.</param>
-        public static void Add(ref Quaternion left, ref Quaternion right, out Quaternion result)
+        public static void Add(ref QuaternionD left, ref QuaternionD right, out QuaternionD result)
         {
             result.X = left.X + right.X;
             result.Y = left.Y + right.Y;
@@ -367,9 +367,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to add.</param>
         /// <param name="right">The second quaternion to add.</param>
         /// <returns>The sum of the two quaternions.</returns>
-        public static Quaternion Add(Quaternion left, Quaternion right)
+        public static QuaternionD Add(QuaternionD left, QuaternionD right)
         {
-            Quaternion result;
+            QuaternionD result;
             Add(ref left, ref right, out result);
             return result;
         }
@@ -380,7 +380,7 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to subtract.</param>
         /// <param name="right">The second quaternion to subtract.</param>
         /// <param name="result">When the method completes, contains the difference of the two quaternions.</param>
-        public static void Subtract(ref Quaternion left, ref Quaternion right, out Quaternion result)
+        public static void Subtract(ref QuaternionD left, ref QuaternionD right, out QuaternionD result)
         {
             result.X = left.X - right.X;
             result.Y = left.Y - right.Y;
@@ -394,9 +394,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to subtract.</param>
         /// <param name="right">The second quaternion to subtract.</param>
         /// <returns>The difference of the two quaternions.</returns>
-        public static Quaternion Subtract(Quaternion left, Quaternion right)
+        public static QuaternionD Subtract(QuaternionD left, QuaternionD right)
         {
-            Quaternion result;
+            QuaternionD result;
             Subtract(ref left, ref right, out result);
             return result;
         }
@@ -407,7 +407,7 @@ namespace BulletSharp.Math
         /// <param name="value">The quaternion to scale.</param>
         /// <param name="scalar">The amount by which to scale the quaternion.</param>
         /// <param name="result">When the method completes, contains the scaled quaternion.</param>
-        public static void Multiply(ref Quaternion value, double scalar, out Quaternion result)
+        public static void Multiply(ref QuaternionD value, double scalar, out QuaternionD result)
         {
             result.X = value.X * scalar;
             result.Y = value.Y * scalar;
@@ -421,9 +421,9 @@ namespace BulletSharp.Math
         /// <param name="value">The quaternion to scale.</param>
         /// <param name="scalar">The amount by which to scale the quaternion.</param>
         /// <returns>The scaled quaternion.</returns>
-        public static Quaternion Multiply(Quaternion value, double scalar)
+        public static QuaternionD Multiply(QuaternionD value, double scalar)
         {
-            Quaternion result;
+            QuaternionD result;
             Multiply(ref value, scalar, out result);
             return result;
         }
@@ -434,7 +434,7 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to modulate.</param>
         /// <param name="right">The second quaternion to modulate.</param>
         /// <param name="result">When the moethod completes, contains the modulated quaternion.</param>
-        public static void Multiply(ref Quaternion left, ref Quaternion right, out Quaternion result)
+        public static void Multiply(ref QuaternionD left, ref QuaternionD right, out QuaternionD result)
         {
             double lx = left.X;
             double ly = left.Y;
@@ -457,9 +457,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to modulate.</param>
         /// <param name="right">The second quaternion to modulate.</param>
         /// <returns>The modulated quaternion.</returns>
-        public static Quaternion Multiply(Quaternion left, Quaternion right)
+        public static QuaternionD Multiply(QuaternionD left, QuaternionD right)
         {
-            Quaternion result;
+            QuaternionD result;
             Multiply(ref left, ref right, out result);
             return result;
         }
@@ -470,9 +470,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <param name="result">When the method completes, contains the scaled vector.</param>
-        public static void Divide(ref Quaternion value, double scalar, out Quaternion result)
+        public static void Divide(ref QuaternionD value, double scalar, out QuaternionD result)
         {
-            result = new Quaternion(value.X / scalar, value.Y / scalar, value.Z / scalar, value.W / scalar);
+            result = new QuaternionD(value.X / scalar, value.Y / scalar, value.Z / scalar, value.W / scalar);
         }
 
         /// <summary>
@@ -481,9 +481,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Quaternion Divide(Quaternion value, double scalar)
+        public static QuaternionD Divide(QuaternionD value, double scalar)
         {
-            return new Quaternion(value.X / scalar, value.Y / scalar, value.Z / scalar, value.W / scalar);
+            return new QuaternionD(value.X / scalar, value.Y / scalar, value.Z / scalar, value.W / scalar);
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to negate.</param>
         /// <param name="result">When the method completes, contains a quaternion facing in the opposite direction.</param>
-        public static void Negate(ref Quaternion value, out Quaternion result)
+        public static void Negate(ref QuaternionD value, out QuaternionD result)
         {
             result.X = -value.X;
             result.Y = -value.Y;
@@ -504,9 +504,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to negate.</param>
         /// <returns>A quaternion facing in the opposite direction.</returns>
-        public static Quaternion Negate(Quaternion value)
+        public static QuaternionD Negate(QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Negate(ref value, out result);
             return result;
         }
@@ -520,9 +520,9 @@ namespace BulletSharp.Math
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
         /// <param name="result">When the method completes, contains a new <see cref="SlimMath.Quaternion"/> containing the 4D Cartesian coordinates of the specified point.</param>
-        public static void Barycentric(ref Quaternion value1, ref Quaternion value2, ref Quaternion value3, double amount1, double amount2, out Quaternion result)
+        public static void Barycentric(ref QuaternionD value1, ref QuaternionD value2, ref QuaternionD value3, double amount1, double amount2, out QuaternionD result)
         {
-            Quaternion start, end;
+            QuaternionD start, end;
             Slerp(ref value1, ref value2, amount1 + amount2, out start);
             Slerp(ref value1, ref value3, amount1 + amount2, out end);
             Slerp(ref start, ref end, amount2 / (amount1 + amount2), out result);
@@ -537,9 +537,9 @@ namespace BulletSharp.Math
         /// <param name="amount1">Barycentric coordinate b2, which expresses the weighting factor toward vertex 2 (specified in <paramref name="value2"/>).</param>
         /// <param name="amount2">Barycentric coordinate b3, which expresses the weighting factor toward vertex 3 (specified in <paramref name="value3"/>).</param>
         /// <returns>A new <see cref="SlimMath.Quaternion"/> containing the 4D Cartesian coordinates of the specified point.</returns>
-        public static Quaternion Barycentric(Quaternion value1, Quaternion value2, Quaternion value3, double amount1, double amount2)
+        public static QuaternionD Barycentric(QuaternionD value1, QuaternionD value2, QuaternionD value3, double amount1, double amount2)
         {
-            Quaternion result;
+            QuaternionD result;
             Barycentric(ref value1, ref value2, ref value3, amount1, amount2, out result);
             return result;
         }
@@ -549,7 +549,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to conjugate.</param>
         /// <param name="result">When the method completes, contains the conjugated quaternion.</param>
-        public static void Conjugate(ref Quaternion value, out Quaternion result)
+        public static void Conjugate(ref QuaternionD value, out QuaternionD result)
         {
             result.X = -value.X;
             result.Y = -value.Y;
@@ -562,9 +562,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to conjugate.</param>
         /// <returns>The conjugated quaternion.</returns>
-        public static Quaternion Conjugate(Quaternion value)
+        public static QuaternionD Conjugate(QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Conjugate(ref value, out result);
             return result;
         }
@@ -575,7 +575,7 @@ namespace BulletSharp.Math
         /// <param name="left">First source quaternion.</param>
         /// <param name="right">Second source quaternion.</param>
         /// <param name="result">When the method completes, contains the dot product of the two quaternions.</param>
-        public static void Dot(ref Quaternion left, ref Quaternion right, out double result)
+        public static void Dot(ref QuaternionD left, ref QuaternionD right, out double result)
         {
             result = (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z) + (left.W * right.W);
         }
@@ -586,7 +586,7 @@ namespace BulletSharp.Math
         /// <param name="left">First source quaternion.</param>
         /// <param name="right">Second source quaternion.</param>
         /// <returns>The dot product of the two quaternions.</returns>
-        public static double Dot(Quaternion left, Quaternion right)
+        public static double Dot(QuaternionD left, QuaternionD right)
         {
             return (left.X * right.X) + (left.Y * right.Y) + (left.Z * right.Z) + (left.W * right.W);
         }
@@ -596,7 +596,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to exponentiate.</param>
         /// <param name="result">When the method completes, contains the exponentiated quaternion.</param>
-        public static void Exponential(ref Quaternion value, out Quaternion result)
+        public static void Exponential(ref QuaternionD value, out QuaternionD result)
         {
             double angle = (double)System.Math.Sqrt((value.X * value.X) + (value.Y * value.Y) + (value.Z * value.Z));
             double sin = (double)System.Math.Sin(angle);
@@ -621,9 +621,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to exponentiate.</param>
         /// <returns>The exponentiated quaternion.</returns>
-        public static Quaternion Exponential(Quaternion value)
+        public static QuaternionD Exponential(QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Exponential(ref value, out result);
             return result;
         }
@@ -633,7 +633,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to conjugate and renormalize.</param>
         /// <param name="result">When the method completes, contains the conjugated and renormalized quaternion.</param>
-        public static void Invert(ref Quaternion value, out Quaternion result)
+        public static void Invert(ref QuaternionD value, out QuaternionD result)
         {
             result = value;
             result.Invert();
@@ -644,9 +644,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to conjugate and renormalize.</param>
         /// <returns>The conjugated and renormalized quaternion.</returns>
-        public static Quaternion Invert(Quaternion value)
+        public static QuaternionD Invert(QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Invert(ref value, out result);
             return result;
         }
@@ -663,7 +663,7 @@ namespace BulletSharp.Math
         /// <code>start + (end - start) * amount</code>
         /// Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned. 
         /// </remarks>
-        public static void Lerp(ref Quaternion start, ref Quaternion end, double amount, out Quaternion result)
+        public static void Lerp(ref QuaternionD start, ref QuaternionD end, double amount, out QuaternionD result)
         {
             double inverse = 1.0f - amount;
 
@@ -697,9 +697,9 @@ namespace BulletSharp.Math
         /// <code>start + (end - start) * amount</code>
         /// Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned. 
         /// </remarks>
-        public static Quaternion Lerp(Quaternion start, Quaternion end, double amount)
+        public static QuaternionD Lerp(QuaternionD start, QuaternionD end, double amount)
         {
-            Quaternion result;
+            QuaternionD result;
             Lerp(ref start, ref end, amount, out result);
             return result;
         }
@@ -709,7 +709,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion whose logarithm will be calculated.</param>
         /// <param name="result">When the method completes, contains the natural logarithm of the quaternion.</param>
-        public static void Logarithm(ref Quaternion value, out Quaternion result)
+        public static void Logarithm(ref QuaternionD value, out QuaternionD result)
         {
             if (System.Math.Abs(value.W) < 1.0f)
             {
@@ -741,9 +741,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion whose logarithm will be calculated.</param>
         /// <returns>The natural logarithm of the quaternion.</returns>
-        public static Quaternion Logarithm(Quaternion value)
+        public static QuaternionD Logarithm(QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Logarithm(ref value, out result);
             return result;
         }
@@ -753,9 +753,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to normalize.</param>
         /// <param name="result">When the method completes, contains the normalized quaternion.</param>
-        public static void Normalize(ref Quaternion value, out Quaternion result)
+        public static void Normalize(ref QuaternionD value, out QuaternionD result)
         {
-            Quaternion temp = value;
+            QuaternionD temp = value;
             result = temp;
             result.Normalize();
         }
@@ -765,19 +765,19 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to normalize.</param>
         /// <returns>The normalized quaternion.</returns>
-        public static Quaternion Normalize(Quaternion value)
+        public static QuaternionD Normalize(QuaternionD value)
         {
             value.Normalize();
             return value;
         }
 
-        public Vector3 Rotate(Vector3 v)
+        public Vector3d Rotate(Vector3d v)
         {
-            Quaternion rotation = this;
-            Quaternion q = rotation * v;
+            QuaternionD rotation = this;
+            QuaternionD q = rotation * v;
             rotation.Invert();
             q *= rotation;
-            return new Vector3(q.X, q.Y, q.Z);
+            return new Vector3d(q.X, q.Y, q.Z);
         }
 
         /// <summary>
@@ -786,10 +786,10 @@ namespace BulletSharp.Math
         /// <param name="axis">The axis of rotation.</param>
         /// <param name="angle">The angle of rotation.</param>
         /// <param name="result">When the method completes, contains the newly created quaternion.</param>
-        public static void RotationAxis(ref Vector3 axis, double angle, out Quaternion result)
+        public static void RotationAxis(ref Vector3d axis, double angle, out QuaternionD result)
         {
-            Vector3 normalized;
-            Vector3.Normalize(ref axis, out normalized);
+            Vector3d normalized;
+            Vector3d.Normalize(ref axis, out normalized);
 
             double half = angle * 0.5f;
             double sin = (double)System.Math.Sin(half);
@@ -807,9 +807,9 @@ namespace BulletSharp.Math
         /// <param name="axis">The axis of rotation.</param>
         /// <param name="angle">The angle of rotation.</param>
         /// <returns>The newly created quaternion.</returns>
-        public static Quaternion RotationAxis(Vector3 axis, double angle)
+        public static QuaternionD RotationAxis(Vector3d axis, double angle)
         {
-            Quaternion result;
+            QuaternionD result;
             RotationAxis(ref axis, angle, out result);
             return result;
         }
@@ -819,7 +819,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="matrix">The rotation matrix.</param>
         /// <param name="result">When the method completes, contains the newly created quaternion.</param>
-        public static void RotationMatrix(ref Matrix matrix, out Quaternion result)
+        public static void RotationMatrix(ref Matrix matrix, out QuaternionD result)
         {
             double sqrt;
             double half;
@@ -872,9 +872,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="matrix">The rotation matrix.</param>
         /// <returns>The newly created quaternion.</returns>
-        public static Quaternion RotationMatrix(Matrix matrix)
+        public static QuaternionD RotationMatrix(Matrix matrix)
         {
-            Quaternion result;
+            QuaternionD result;
             RotationMatrix(ref matrix, out result);
             return result;
         }
@@ -886,7 +886,7 @@ namespace BulletSharp.Math
         /// <param name="pitch">The pitch of rotation.</param>
         /// <param name="roll">The roll of rotation.</param>
         /// <param name="result">When the method completes, contains the newly created quaternion.</param>
-        public static void RotationYawPitchRoll(double yaw, double pitch, double roll, out Quaternion result)
+        public static void RotationYawPitchRoll(double yaw, double pitch, double roll, out QuaternionD result)
         {
             double halfRoll = roll * 0.5f;
             double halfPitch = pitch * 0.5f;
@@ -912,9 +912,9 @@ namespace BulletSharp.Math
         /// <param name="pitch">The pitch of rotation.</param>
         /// <param name="roll">The roll of rotation.</param>
         /// <returns>The newly created quaternion.</returns>
-        public static Quaternion RotationYawPitchRoll(double yaw, double pitch, double roll)
+        public static QuaternionD RotationYawPitchRoll(double yaw, double pitch, double roll)
         {
-            Quaternion result;
+            QuaternionD result;
             RotationYawPitchRoll(yaw, pitch, roll, out result);
             return result;
         }
@@ -926,7 +926,7 @@ namespace BulletSharp.Math
         /// <param name="end">End quaternion.</param>
         /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
         /// <param name="result">When the method completes, contains the spherical linear interpolation of the two quaternions.</param>
-        public static void Slerp(ref Quaternion start, ref Quaternion end, double amount, out Quaternion result)
+        public static void Slerp(ref QuaternionD start, ref QuaternionD end, double amount, out QuaternionD result)
         {
             double opposite;
             double inverse;
@@ -959,9 +959,9 @@ namespace BulletSharp.Math
         /// <param name="end">End quaternion.</param>
         /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
         /// <returns>The spherical linear interpolation of the two quaternions.</returns>
-        public static Quaternion Slerp(Quaternion start, Quaternion end, double amount)
+        public static QuaternionD Slerp(QuaternionD start, QuaternionD end, double amount)
         {
-            Quaternion result;
+            QuaternionD result;
             Slerp(ref start, ref end, amount, out result);
             return result;
         }
@@ -975,9 +975,9 @@ namespace BulletSharp.Math
         /// <param name="value4">Fourth source quaternion.</param>
         /// <param name="amount">Value between 0 and 1 indicating the weight of interpolation.</param>
         /// <param name="result">When the method completes, contains the spherical quadrangle interpolation of the quaternions.</param>
-        public static void Squad(ref Quaternion value1, ref Quaternion value2, ref Quaternion value3, ref Quaternion value4, double amount, out Quaternion result)
+        public static void Squad(ref QuaternionD value1, ref QuaternionD value2, ref QuaternionD value3, ref QuaternionD value4, double amount, out QuaternionD result)
         {
-            Quaternion start, end;
+            QuaternionD start, end;
             Slerp(ref value1, ref value4, amount, out start);
             Slerp(ref value2, ref value3, amount, out end);
             Slerp(ref start, ref end, 2.0f * amount * (1.0f - amount), out result);
@@ -992,9 +992,9 @@ namespace BulletSharp.Math
         /// <param name="value4">Fourth source quaternion.</param>
         /// <param name="amount">Value between 0 and 1 indicating the weight of interpolation.</param>
         /// <returns>The spherical quadrangle interpolation of the quaternions.</returns>
-        public static Quaternion Squad(Quaternion value1, Quaternion value2, Quaternion value3, Quaternion value4, double amount)
+        public static QuaternionD Squad(QuaternionD value1, QuaternionD value2, QuaternionD value3, QuaternionD value4, double amount)
         {
-            Quaternion result;
+            QuaternionD result;
             Squad(ref value1, ref value2, ref value3, ref value4, amount, out result);
             return result;
         }
@@ -1009,14 +1009,14 @@ namespace BulletSharp.Math
         /// <param name="result1">When the method completes, contains the first control point for spherical quadrangle interpolation.</param>
         /// <param name="result2">When the method completes, contains the second control point for spherical quadrangle interpolation.</param>
         /// <param name="result3">When the method completes, contains the third control point for spherical quadrangle interpolation.</param>
-        public static void SquadSetup(ref Quaternion value1, ref Quaternion value2, ref Quaternion value3, ref Quaternion value4, out Quaternion result1, out Quaternion result2, out Quaternion result3)
+        public static void SquadSetup(ref QuaternionD value1, ref QuaternionD value2, ref QuaternionD value3, ref QuaternionD value4, out QuaternionD result1, out QuaternionD result2, out QuaternionD result3)
         {
-            Quaternion q0 = (value1 + value2).LengthSquared < (value1 - value2).LengthSquared ? -value1 : value1;
-            Quaternion q2 = (value2 + value3).LengthSquared < (value2 - value3).LengthSquared ? -value3 : value3;
-            Quaternion q3 = (value3 + value4).LengthSquared < (value3 - value4).LengthSquared ? -value4 : value4;
-            Quaternion q1 = value2;
+            QuaternionD q0 = (value1 + value2).LengthSquared < (value1 - value2).LengthSquared ? -value1 : value1;
+            QuaternionD q2 = (value2 + value3).LengthSquared < (value2 - value3).LengthSquared ? -value3 : value3;
+            QuaternionD q3 = (value3 + value4).LengthSquared < (value3 - value4).LengthSquared ? -value4 : value4;
+            QuaternionD q1 = value2;
 
-            Quaternion q1Exp, q2Exp;
+            QuaternionD q1Exp, q2Exp;
             Exponential(ref q1, out q1Exp);
             Exponential(ref q2, out q2Exp);
 
@@ -1033,9 +1033,9 @@ namespace BulletSharp.Math
         /// <param name="value3">Third source quaternion.</param>
         /// <param name="value4">Fourth source quaternion.</param>
         /// <returns>An array of three quaternions that represent control points for spherical quadrangle interpolation.</returns>
-        public static Quaternion[] SquadSetup(Quaternion value1, Quaternion value2, Quaternion value3, Quaternion value4)
+        public static QuaternionD[] SquadSetup(QuaternionD value1, QuaternionD value2, QuaternionD value3, QuaternionD value4)
         {
-            Quaternion[] results = new Quaternion[3];
+            QuaternionD[] results = new QuaternionD[3];
             SquadSetup(ref value1, ref value2, ref value3, ref value4, out results[0], out results[1], out results[2]);
 
             return results;
@@ -1047,9 +1047,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to add.</param>
         /// <param name="right">The second quaternion to add.</param>
         /// <returns>The sum of the two quaternions.</returns>
-        public static Quaternion operator +(Quaternion left, Quaternion right)
+        public static QuaternionD operator +(QuaternionD left, QuaternionD right)
         {
-            Quaternion result;
+            QuaternionD result;
             Add(ref left, ref right, out result);
             return result;
         }
@@ -1060,9 +1060,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to subtract.</param>
         /// <param name="right">The second quaternion to subtract.</param>
         /// <returns>The difference of the two quaternions.</returns>
-        public static Quaternion operator -(Quaternion left, Quaternion right)
+        public static QuaternionD operator -(QuaternionD left, QuaternionD right)
         {
-            Quaternion result;
+            QuaternionD result;
             Subtract(ref left, ref right, out result);
             return result;
         }
@@ -1072,9 +1072,9 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The quaternion to negate.</param>
         /// <returns>A quaternion facing in the opposite direction.</returns>
-        public static Quaternion operator -(Quaternion value)
+        public static QuaternionD operator -(QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Negate(ref value, out result);
             return result;
         }
@@ -1085,9 +1085,9 @@ namespace BulletSharp.Math
         /// <param name="value">The quaternion to scale.</param>
         /// <param name="scalar">The amount by which to scale the quaternion.</param>
         /// <returns>The scaled quaternion.</returns>
-        public static Quaternion operator *(double scalar, Quaternion value)
+        public static QuaternionD operator *(double scalar, QuaternionD value)
         {
-            Quaternion result;
+            QuaternionD result;
             Multiply(ref value, scalar, out result);
             return result;
         }
@@ -1098,9 +1098,9 @@ namespace BulletSharp.Math
         /// <param name="value">The quaternion to scale.</param>
         /// <param name="scalar">The amount by which to scale the quaternion.</param>
         /// <returns>The scaled quaternion.</returns>
-        public static Quaternion operator *(Quaternion value, double scalar)
+        public static QuaternionD operator *(QuaternionD value, double scalar)
         {
-            Quaternion result;
+            QuaternionD result;
             Multiply(ref value, scalar, out result);
             return result;
         }
@@ -1111,9 +1111,9 @@ namespace BulletSharp.Math
         /// <param name="left">The first quaternion to multiply.</param>
         /// <param name="right">The second quaternion to multiply.</param>
         /// <returns>The multiplied quaternion.</returns>
-        public static Quaternion operator *(Quaternion left, Quaternion right)
+        public static QuaternionD operator *(QuaternionD left, QuaternionD right)
         {
-            Quaternion result;
+            QuaternionD result;
             Multiply(ref left, ref right, out result);
             return result;
         }
@@ -1124,9 +1124,9 @@ namespace BulletSharp.Math
         /// <param name="left">The quaternion to multiply.</param>
         /// <param name="right">The vector to multiply.</param>
         /// <returns>The multiplied quaternion.</returns>
-        public static Quaternion operator *(Quaternion q, Vector3 w)
+        public static QuaternionD operator *(QuaternionD q, Vector3d w)
         {
-            return new Quaternion(
+            return new QuaternionD(
                 q.W * w.X + q.Y * w.Z - q.Z * w.Y,
                 q.W * w.Y + q.Z * w.X - q.X * w.Z,
                 q.W * w.Z + q.X * w.Y - q.Y * w.X,
@@ -1139,9 +1139,9 @@ namespace BulletSharp.Math
         /// <param name="value">The vector to scale.</param>
         /// <param name="scalar">The amount by which to scale the vector.</param>
         /// <returns>The scaled vector.</returns>
-        public static Quaternion operator /(Quaternion value, double scalar)
+        public static QuaternionD operator /(QuaternionD value, double scalar)
         {
-            return new Quaternion(value.X / scalar, value.Y / scalar, value.Z / scalar, value.W / scalar);
+            return new QuaternionD(value.X / scalar, value.Y / scalar, value.Z / scalar, value.W / scalar);
         }
 
         /// <summary>
@@ -1150,7 +1150,7 @@ namespace BulletSharp.Math
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns><c>true</c> if <paramref name="left"/> has the same value as <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator ==(Quaternion left, Quaternion right)
+        public static bool operator ==(QuaternionD left, QuaternionD right)
         {
             return left.Equals(right);
         }
@@ -1161,7 +1161,7 @@ namespace BulletSharp.Math
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns><c>true</c> if <paramref name="left"/> has a different value than <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(Quaternion left, Quaternion right)
+        public static bool operator !=(QuaternionD left, QuaternionD right)
         {
             return !left.Equals(right);
         }
@@ -1240,7 +1240,7 @@ namespace BulletSharp.Math
         /// <returns>
         /// <c>true</c> if the specified <see cref="SlimMath.Quaternion"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Quaternion other)
+        public bool Equals(QuaternionD other)
         {
             return (this.X == other.X) && (this.Y == other.Y) && (this.Z == other.Z) && (this.W == other.W);
         }
@@ -1253,7 +1253,7 @@ namespace BulletSharp.Math
         /// <returns>
         /// <c>true</c> if the specified <see cref="SlimMath.Quaternion"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Quaternion other, double epsilon)
+        public bool Equals(QuaternionD other, double epsilon)
         {
             return ((double)System.Math.Abs(other.X - X) < epsilon &&
                 (double)System.Math.Abs(other.Y - Y) < epsilon &&
@@ -1276,7 +1276,7 @@ namespace BulletSharp.Math
             if (obj.GetType() != GetType())
                 return false;
 
-            return Equals((Quaternion)obj);
+            return Equals((QuaternionD)obj);
         }
 
 #if SlimDX1xInterop

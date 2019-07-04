@@ -7,7 +7,7 @@ namespace BulletSharp
 {
 	public class StaticPlaneShape : ConcaveShape
 	{
-		public StaticPlaneShape(Vector3 planeNormal, double planeConstant)
+		public StaticPlaneShape(Vector3d planeNormal, double planeConstant)
 		{
 			IntPtr native = btStaticPlaneShape_new(ref planeNormal, planeConstant);
 			InitializeCollisionShape(native);
@@ -15,11 +15,11 @@ namespace BulletSharp
 
 		public double PlaneConstant => btStaticPlaneShape_getPlaneConstant(Native);
 
-		public Vector3 PlaneNormal
+		public Vector3d PlaneNormal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btStaticPlaneShape_getPlaneNormal(Native, out value);
 				return value;
 			}

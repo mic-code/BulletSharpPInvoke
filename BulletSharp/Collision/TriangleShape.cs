@@ -18,18 +18,18 @@ namespace BulletSharp
 			InitializeCollisionShape(native);
 		}
 
-		public TriangleShape(Vector3 p0, Vector3 p1, Vector3 p2)
+		public TriangleShape(Vector3d p0, Vector3d p1, Vector3d p2)
 		{
 			IntPtr native = btTriangleShape_new2(ref p0, ref p1, ref p2);
 			InitializeCollisionShape(native);
 		}
 
-		public void CalcNormal(out Vector3 normal)
+		public void CalcNormal(out Vector3d normal)
 		{
 			btTriangleShape_calcNormal(Native, out normal);
 		}
 
-		public void GetPlaneEquation(int i, out Vector3 planeNormal, out Vector3 planeSupport)
+		public void GetPlaneEquation(int i, out Vector3d planeNormal, out Vector3d planeSupport)
 		{
 			btTriangleShape_getPlaneEquation(Native, i, out planeNormal, out planeSupport);
 		}

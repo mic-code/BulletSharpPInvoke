@@ -16,7 +16,7 @@ namespace BulletSharp
 		}
 
 		public MultimaterialTriangleMeshShape(StridingMeshInterface meshInterface,
-			bool useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax,
+			bool useQuantizedAabbCompression, Vector3d bvhAabbMin, Vector3d bvhAabbMax,
 			bool buildBvh = true)
 		{
 			IntPtr native = btMultimaterialTriangleMeshShape_new2(meshInterface.Native, useQuantizedAabbCompression,

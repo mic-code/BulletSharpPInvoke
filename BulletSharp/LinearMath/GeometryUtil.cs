@@ -6,16 +6,16 @@ namespace BulletSharp
 {
 	public static class GeometryUtil
 	{
-		public static bool AreVerticesBehindPlane(Vector3 planeNormal, double planeConstant, IEnumerable<Vector3> vertices,
+		public static bool AreVerticesBehindPlane(Vector3d planeNormal, double planeConstant, IEnumerable<Vector3d> vertices,
 			double margin)
 		{
 			return vertices.All(v => planeNormal.Dot(v) + planeConstant <= margin);
 		}
 
-		public static List<Vector4> GetPlaneEquationsFromVertices(ICollection<Vector3> vertices)
+		public static List<Vector4> GetPlaneEquationsFromVertices(ICollection<Vector3d> vertices)
 		{
 			int numVertices = vertices.Count;
-			Vector3[] vertexArray = vertices.ToArray();
+			Vector3d[] vertexArray = vertices.ToArray();
 			var planeEquations = new List<Vector4>();
 
 			for (int i = 0; i < numVertices; i++)
@@ -24,10 +24,10 @@ namespace BulletSharp
 				{
 					for (int k = j + 1; k < numVertices; k++)
 					{
-						Vector3 edge0 = vertexArray[j] - vertexArray[i];
-						Vector3 edge1 = vertexArray[k] - vertexArray[i];
+						Vector3d edge0 = vertexArray[j] - vertexArray[i];
+						Vector3d edge1 = vertexArray[k] - vertexArray[i];
 
-						Vector3 normal = edge0.Cross(edge1);
+						Vector3d normal = edge0.Cross(edge1);
 						if (normal.LengthSquared > 0.0001)
 						{
 							normal.Normalize();
@@ -57,28 +57,28 @@ namespace BulletSharp
 			return planeEquations;
 		}
 
-		private static bool Vector4EnumerableContainsVector3(IEnumerable<Vector4> vertices, Vector3 vertex)
+		private static bool Vector4EnumerableContainsVector3(IEnumerable<Vector4> vertices, Vector3d vertex)
 		{
 			return vertices.Any(v => {
-				var v3 = new Vector3(v.X, v.Y, v.Z);
+				var v3 = new Vector3d(v.X, v.Y, v.Z);
 				return v3.Dot(vertex) > 0.999;
 			});
 		}
 
-		public static List<Vector3> GetVerticesFromPlaneEquations(ICollection<Vector4> planeEquations)
+		public static List<Vector3d> GetVerticesFromPlaneEquations(ICollection<Vector4> planeEquations)
 		{
 			int numPlanes = planeEquations.Count;
-			Vector3[] planeNormals = new Vector3[numPlanes];
+			Vector3d[] planeNormals = new Vector3d[numPlanes];
 			double[] planeConstants = new double[numPlanes];
 			int i = 0;
 			foreach (Vector4 plane in planeEquations)
 			{
-				planeNormals[i] = new Vector3(plane.X, plane.Y, plane.Z);
+				planeNormals[i] = new Vector3d(plane.X, plane.Y, plane.Z);
 				planeConstants[i] = plane.W;
 				i++;
 			}
 
-			var vertices = new List<Vector3>();
+			var vertices = new List<Vector3d>();
 
 			for (i = 0; i < numPlanes; i++)
 			{
@@ -86,9 +86,9 @@ namespace BulletSharp
 				{
 					for (int k = j + 1; k < numPlanes; k++)
 					{
-						Vector3 n2n3 = planeNormals[j].Cross(planeNormals[k]);
-						Vector3 n3n1 = planeNormals[k].Cross(planeNormals[i]);
-						Vector3 n1n2 = planeNormals[i].Cross(planeNormals[j]);
+						Vector3d n2n3 = planeNormals[j].Cross(planeNormals[k]);
+						Vector3d n3n1 = planeNormals[k].Cross(planeNormals[i]);
+						Vector3d n1n2 = planeNormals[i].Cross(planeNormals[j]);
 
 						if ((n2n3.LengthSquared > 0.0001f) &&
 							 (n3n1.LengthSquared > 0.0001f) &&
@@ -107,7 +107,7 @@ namespace BulletSharp
 								n2n3 *= planeConstants[i];
 								n3n1 *= planeConstants[j];
 								n1n2 *= planeConstants[k];
-								Vector3 potentialPoint = quotient * (n2n3 + n3n1 + n1n2);
+								Vector3d potentialPoint = quotient * (n2n3 + n3n1 + n1n2);
 
 								//check if inside, and replace supportingVertexOut if needed
 								if (IsPointInsidePlanes(planeEquations, potentialPoint, 0.01f))
@@ -124,9 +124,9 @@ namespace BulletSharp
 		}
 
 		public static bool IsPointInsidePlanes(IEnumerable<Vector4> planeEquations,
-			Vector3 point, double margin)
+			Vector3d point, double margin)
 		{
-			return planeEquations.All(p => new Vector3(p.X, p.Y, p.Z).Dot(point) + p.W <= margin);
+			return planeEquations.All(p => new Vector3d(p.X, p.Y, p.Z).Dot(point) + p.W <= margin);
 		}
 	}
 }

@@ -108,7 +108,7 @@ namespace BulletSharp
 			return _constraints[index];
 		}
 
-		public void GetGravity(out Vector3 gravity)
+		public void GetGravity(out Vector3d gravity)
 		{
 			btDynamicsWorld_getGravity(Native, out gravity);
 		}
@@ -160,7 +160,7 @@ namespace BulletSharp
 			CollisionObjectArray.Remove(body);
 		}
 
-		public void SetGravity(ref Vector3 gravity)
+		public void SetGravity(ref Vector3d gravity)
 		{
 			btDynamicsWorld_setGravity(Native, ref gravity);
 		}
@@ -261,11 +261,11 @@ namespace BulletSharp
 			}
 		}
 
-		public Vector3 Gravity
+		public Vector3d Gravity
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btDynamicsWorld_getGravity(Native, out value);
 				return value;
 			}

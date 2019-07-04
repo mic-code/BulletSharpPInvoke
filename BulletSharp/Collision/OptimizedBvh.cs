@@ -26,7 +26,7 @@ namespace BulletSharp
 		}
 
 		public void Build(StridingMeshInterface triangles, bool useQuantizedAabbCompression,
-			Vector3 bvhAabbMin, Vector3 bvhAabbMax)
+			Vector3d bvhAabbMin, Vector3d bvhAabbMax)
 		{
 			btOptimizedBvh_build(Native, triangles.Native, useQuantizedAabbCompression,
 				ref bvhAabbMin, ref bvhAabbMax);
@@ -39,13 +39,13 @@ namespace BulletSharp
 				swapEndian));
 		}
 
-		public void Refit(StridingMeshInterface triangles, Vector3 aabbMin, Vector3 aabbMax)
+		public void Refit(StridingMeshInterface triangles, Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btOptimizedBvh_refit(Native, triangles.Native, ref aabbMin, ref aabbMax);
 		}
 
-		public void RefitPartial(StridingMeshInterface triangles, Vector3 aabbMin,
-			Vector3 aabbMax)
+		public void RefitPartial(StridingMeshInterface triangles, Vector3d aabbMin,
+			Vector3d aabbMax)
 		{
 			btOptimizedBvh_refitPartial(Native, triangles.Native, ref aabbMin,
 				ref aabbMax);

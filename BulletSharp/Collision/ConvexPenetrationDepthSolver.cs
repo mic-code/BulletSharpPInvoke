@@ -11,8 +11,8 @@ namespace BulletSharp
 		}
 
 		public bool CalcPenDepth(VoronoiSimplexSolver simplexSolver, ConvexShape convexA,
-			ConvexShape convexB, Matrix transA, Matrix transB, out Vector3 v, out Vector3 pa,
-			out Vector3 pb, DebugDraw debugDraw)
+			ConvexShape convexB, Matrix transA, Matrix transB, out Vector3d v, out Vector3d pa,
+			out Vector3d pb, DebugDraw debugDraw)
 		{
 			return btConvexPenetrationDepthSolver_calcPenDepth(Native, simplexSolver.Native,
 				convexA.Native, convexB.Native, ref transA, ref transB, out v, out pa,

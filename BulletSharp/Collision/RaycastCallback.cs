@@ -16,22 +16,22 @@ namespace BulletSharp
             Terminator = -1
 		}
 
-        public TriangleRaycastCallback(ref Vector3 from, ref Vector3 to, EFlags flags)
+        public TriangleRaycastCallback(ref Vector3d from, ref Vector3d to, EFlags flags)
         {
             HitFraction = 1.0f;
         }
 
-        public TriangleRaycastCallback(ref Vector3 from, ref Vector3 to)
+        public TriangleRaycastCallback(ref Vector3d from, ref Vector3d to)
             : this(ref from, ref to, EFlags.None)
         {
         }
 
-        public override void ProcessTriangle(ref Vector3 point0, ref Vector3 point1, ref Vector3 point2, int partId, int triangleIndex)
+        public override void ProcessTriangle(ref Vector3d point0, ref Vector3d point1, ref Vector3d point2, int partId, int triangleIndex)
         {
-            Vector3 v10 = point1 - point0;
-            Vector3 v20 = point2 - point0;
+            Vector3d v10 = point1 - point0;
+            Vector3d v20 = point2 - point0;
 
-            Vector3 triangleNormal = v10.Cross(v20);
+            Vector3d triangleNormal = v10.Cross(v20);
 
             double dist;
             point0.Dot(ref triangleNormal, out dist);
@@ -61,23 +61,23 @@ namespace BulletSharp
             {
                 double edgeTolerance = triangleNormal.LengthSquared;
                 edgeTolerance *= -0.0001f;
-                Vector3 point = Vector3.Lerp(From, To, distance);
+                Vector3d point = Vector3d.Lerp(From, To, distance);
                 {
-                    Vector3 v0p; v0p = point0 - point;
-                    Vector3 v1p; v1p = point1 - point;
-                    Vector3 cp0; cp0 = v0p.Cross(v1p);
+                    Vector3d v0p; v0p = point0 - point;
+                    Vector3d v1p; v1p = point1 - point;
+                    Vector3d cp0; cp0 = v0p.Cross(v1p);
 
                     double dot;
                     cp0.Dot(ref triangleNormal, out dot);
                     if (dot >= edgeTolerance)
                     {
-                        Vector3 v2p; v2p = point2 - point;
-                        Vector3 cp1;
+                        Vector3d v2p; v2p = point2 - point;
+                        Vector3d cp1;
                         cp1 = v1p.Cross(v2p);
                         cp1.Dot(ref triangleNormal, out dot);
                         if (dot >= edgeTolerance)
                         {
-                            Vector3 cp2;
+                            Vector3d cp2;
                             cp2 = v2p.Cross(v0p);
 
                             cp2.Dot(ref triangleNormal, out dot);
@@ -100,12 +100,12 @@ namespace BulletSharp
             }
         }
 
-        public abstract double ReportHit(ref Vector3 hitNormalLocal, double hitFraction, int partId, int triangleIndex);
+        public abstract double ReportHit(ref Vector3d hitNormalLocal, double hitFraction, int partId, int triangleIndex);
 
         public EFlags Flags { get; set; }
-        public Vector3 From { get; set; }
+        public Vector3d From { get; set; }
         public double HitFraction { get; set; }
-        public Vector3 To { get; set; }
+        public Vector3d To { get; set; }
 	}
 
 	public abstract class TriangleConvexcastCallback : TriangleCallback
@@ -122,12 +122,12 @@ namespace BulletSharp
             HitFraction = 1.0f;
         }
 
-        public override void ProcessTriangle(ref Vector3 point0, ref Vector3 point1, ref Vector3 point2, int partId, int triangleIndex)
+        public override void ProcessTriangle(ref Vector3d point0, ref Vector3d point1, ref Vector3d point2, int partId, int triangleIndex)
         {
             throw new NotImplementedException();
         }
 
-        public abstract double ReportHit(ref Vector3 hitNormalLocal, ref Vector3 hitPointLocal, double hitFraction, int partId, int triangleIndex);
+        public abstract double ReportHit(ref Vector3d hitNormalLocal, ref Vector3d hitPointLocal, double hitFraction, int partId, int triangleIndex);
 
         public double AllowedPenetration { get; set; }
         public ConvexShape ConvexShape { get; set; }

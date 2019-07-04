@@ -36,7 +36,7 @@ namespace BulletSharp
 			return new UnmanagedMemoryStream((byte*)vertexBase.ToPointer(), length, length, FileAccess.ReadWrite);
 		}
 
-		public void CalculateAabbBruteForce(out Vector3 aabbMin, out Vector3 aabbMax)
+		public void CalculateAabbBruteForce(out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btStridingMeshInterface_calculateAabbBruteForce(Native, out aabbMin,
 				out aabbMax);
@@ -65,13 +65,13 @@ namespace BulletSharp
 				out numFaces, out indicesType, subpart);
 		}
 
-		public void GetPremadeAabb(out Vector3 aabbMin, out Vector3 aabbMax)
+		public void GetPremadeAabb(out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btStridingMeshInterface_getPremadeAabb(Native, out aabbMin, out aabbMax);
 		}
 
 		public void InternalProcessAllTriangles(InternalTriangleIndexCallback callback,
-			Vector3 aabbMin, Vector3 aabbMax)
+			Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btStridingMeshInterface_InternalProcessAllTriangles(Native, callback.Native,
 				ref aabbMin, ref aabbMax);
@@ -92,12 +92,12 @@ namespace BulletSharp
 			return Marshal.PtrToStringAnsi(btStridingMeshInterface_serialize(Native, dataBuffer, serializer.Native));
 		}
 
-		public void SetPremadeAabb(ref Vector3 aabbMin, ref Vector3 aabbMax)
+		public void SetPremadeAabb(ref Vector3d aabbMin, ref Vector3d aabbMax)
 		{
 			btStridingMeshInterface_setPremadeAabb(Native, ref aabbMin, ref aabbMax);
 		}
 
-		public void SetPremadeAabb(Vector3 aabbMin, Vector3 aabbMax)
+		public void SetPremadeAabb(Vector3d aabbMin, Vector3d aabbMax)
 		{
 			btStridingMeshInterface_setPremadeAabb(Native, ref aabbMin, ref aabbMax);
 		}
@@ -116,11 +116,11 @@ namespace BulletSharp
 
 		public int NumSubParts => btStridingMeshInterface_getNumSubParts(Native);
 
-		public Vector3 Scaling
+		public Vector3d Scaling
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btStridingMeshInterface_getScaling(Native, out value);
 				return value;
 			}

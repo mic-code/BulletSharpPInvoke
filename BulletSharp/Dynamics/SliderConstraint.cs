@@ -57,7 +57,7 @@ namespace BulletSharp
 		}
 
 		public void GetInfo2NonVirtual(ConstraintInfo2 info, Matrix transA, Matrix transB,
-			Vector3 linVelA, Vector3 linVelB, double rbAinvMass, double rbBinvMass)
+			Vector3d linVelA, Vector3d linVelB, double rbAinvMass, double rbBinvMass)
 		{
 			btSliderConstraint_getInfo2NonVirtual(Native, info.Native, ref transA,
 				ref transB, ref linVelA, ref linVelB, rbAinvMass, rbBinvMass);
@@ -83,21 +83,21 @@ namespace BulletSharp
 			btSliderConstraint_testLinLimits(Native);
 		}
 
-		public Vector3 AncorInA
+		public Vector3d AncorInA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btSliderConstraint_getAncorInA(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 AncorInB
+		public Vector3d AncorInB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btSliderConstraint_getAncorInB(Native, out value);
 				return value;
 			}

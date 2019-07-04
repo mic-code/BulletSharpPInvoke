@@ -12,18 +12,18 @@ namespace BulletSharp
 		{
 		}
 
-		public void GetEdge(int i, out Vector3 pa, out Vector3 pb)
+		public void GetEdge(int i, out Vector3d pa, out Vector3d pb)
 		{
 			btPolyhedralConvexShape_getEdge(Native, i, out pa, out pb);
 		}
 
-		public void GetPlane(out Vector3 planeNormal, out Vector3 planeSupport, int i)
+		public void GetPlane(out Vector3d planeNormal, out Vector3d planeSupport, int i)
 		{
 			btPolyhedralConvexShape_getPlane(Native, out planeNormal, out planeSupport,
 				i);
 		}
 
-		public void GetVertex(int i, out Vector3 vtx)
+		public void GetVertex(int i, out Vector3d vtx)
 		{
 			btPolyhedralConvexShape_getVertex(Native, i, out vtx);
 		}
@@ -34,12 +34,12 @@ namespace BulletSharp
 				shiftVerticesByMargin);
 		}
 
-		public bool IsInsideRef(ref Vector3 pt, double tolerance)
+		public bool IsInsideRef(ref Vector3d pt, double tolerance)
 		{
 			return btPolyhedralConvexShape_isInside(Native, ref pt, tolerance);
 		}
 
-		public bool IsInside(Vector3 pt, double tolerance)
+		public bool IsInside(Vector3d pt, double tolerance)
 		{
 			return btPolyhedralConvexShape_isInside(Native, ref pt, tolerance);
 		}
@@ -79,14 +79,14 @@ namespace BulletSharp
 		{
 		}
 
-		public void GetNonvirtualAabbRef(ref Matrix trans, out Vector3 aabbMin, out Vector3 aabbMax,
+		public void GetNonvirtualAabbRef(ref Matrix trans, out Vector3d aabbMin, out Vector3d aabbMax,
 			double margin)
 		{
 			btPolyhedralConvexAabbCachingShape_getNonvirtualAabb(Native, ref trans,
 				out aabbMin, out aabbMax, margin);
 		}
 
-		public void GetNonvirtualAabb(Matrix trans, out Vector3 aabbMin, out Vector3 aabbMax,
+		public void GetNonvirtualAabb(Matrix trans, out Vector3d aabbMin, out Vector3d aabbMax,
 			double margin)
 		{
 			btPolyhedralConvexAabbCachingShape_getNonvirtualAabb(Native, ref trans,

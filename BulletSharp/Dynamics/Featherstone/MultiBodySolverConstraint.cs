@@ -15,22 +15,22 @@ namespace BulletSharp
 			InitializeUserOwned(native);
 		}
 
-		public Vector3 AngularComponentA
+		public Vector3d AngularComponentA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySolverConstraint_getAngularComponentA(Native, out value);
 				return value;
 			}
 			set => btMultiBodySolverConstraint_setAngularComponentA(Native, ref value);
 		}
 
-		public Vector3 AngularComponentB
+		public Vector3d AngularComponentB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySolverConstraint_getAngularComponentB(Native, out value);
 				return value;
 			}
@@ -55,22 +55,22 @@ namespace BulletSharp
 			set => btMultiBodySolverConstraint_setCfm(Native, value);
 		}
 
-		public Vector3 ContactNormal1
+		public Vector3d ContactNormal1
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySolverConstraint_getContactNormal1(Native, out value);
 				return value;
 			}
 			set => btMultiBodySolverConstraint_setContactNormal1(Native, ref value);
 		}
 
-		public Vector3 ContactNormal2
+		public Vector3d ContactNormal2
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySolverConstraint_getContactNormal2(Native, out value);
 				return value;
 			}
@@ -195,22 +195,22 @@ namespace BulletSharp
 			set => btMultiBodySolverConstraint_setOverrideNumSolverIterations(Native, value);
 		}
 
-		public Vector3 Relpos1CrossNormal
+		public Vector3d Relpos1CrossNormal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySolverConstraint_getRelpos1CrossNormal(Native, out value);
 				return value;
 			}
 			set => btMultiBodySolverConstraint_setRelpos1CrossNormal(Native, ref value);
 		}
 
-		public Vector3 Relpos2CrossNormal
+		public Vector3d Relpos2CrossNormal
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btMultiBodySolverConstraint_getRelpos2CrossNormal(Native, out value);
 				return value;
 			}

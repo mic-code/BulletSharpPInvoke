@@ -41,8 +41,8 @@ namespace BulletSharp
 			InitializeUserOwned(native);
 		}
 
-		public bool GetSphereDistanceRef(CollisionObjectWrapper boxObjWrap, out Vector3 v3PointOnBox,
-			out Vector3 normal, out double penetrationDepth, Vector3 v3SphereCenter,
+		public bool GetSphereDistanceRef(CollisionObjectWrapper boxObjWrap, out Vector3d v3PointOnBox,
+			out Vector3d normal, out double penetrationDepth, Vector3d v3SphereCenter,
 			double fRadius, double maxContactDistance)
 		{
 			return btSphereBoxCollisionAlgorithm_getSphereDistance(Native, boxObjWrap.Native,
@@ -50,8 +50,8 @@ namespace BulletSharp
 				fRadius, maxContactDistance);
 		}
 
-		public bool GetSphereDistance(CollisionObjectWrapper boxObjWrap, out Vector3 v3PointOnBox,
-			out Vector3 normal, out double penetrationDepth, Vector3 v3SphereCenter,
+		public bool GetSphereDistance(CollisionObjectWrapper boxObjWrap, out Vector3d v3PointOnBox,
+			out Vector3d normal, out double penetrationDepth, Vector3d v3SphereCenter,
 			double fRadius, double maxContactDistance)
 		{
 			return btSphereBoxCollisionAlgorithm_getSphereDistance(Native, boxObjWrap.Native,
@@ -59,15 +59,15 @@ namespace BulletSharp
 				fRadius, maxContactDistance);
 		}
 
-		public double GetSpherePenetrationRef(ref Vector3 boxHalfExtent, ref Vector3 sphereRelPos,
-			out Vector3 closestPoint, out Vector3 normal)
+		public double GetSpherePenetrationRef(ref Vector3d boxHalfExtent, ref Vector3d sphereRelPos,
+			out Vector3d closestPoint, out Vector3d normal)
 		{
 			return btSphereBoxCollisionAlgorithm_getSpherePenetration(Native, ref boxHalfExtent,
 				ref sphereRelPos, out closestPoint, out normal);
 		}
 
-		public double GetSpherePenetration(Vector3 boxHalfExtent, Vector3 sphereRelPos,
-			out Vector3 closestPoint, out Vector3 normal)
+		public double GetSpherePenetration(Vector3d boxHalfExtent, Vector3d sphereRelPos,
+			out Vector3d closestPoint, out Vector3d normal)
 		{
 			return btSphereBoxCollisionAlgorithm_getSpherePenetration(Native, ref boxHalfExtent,
 				ref sphereRelPos, out closestPoint, out normal);

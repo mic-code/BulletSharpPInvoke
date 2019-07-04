@@ -7,8 +7,8 @@ namespace BulletSharp
 {
 	public class GearConstraint : TypedConstraint
 	{
-		public GearConstraint(RigidBody rigidBodyA, RigidBody rigidBodyB, Vector3 axisInA,
-			Vector3 axisInB, double ratio = 1.0f)
+		public GearConstraint(RigidBody rigidBodyA, RigidBody rigidBodyB, Vector3d axisInA,
+			Vector3d axisInB, double ratio = 1.0f)
 		{
 			IntPtr native = btGearConstraint_new(rigidBodyA.Native, rigidBodyB.Native,
 				ref axisInA, ref axisInB, ratio);
@@ -16,22 +16,22 @@ namespace BulletSharp
 			InitializeMembers(rigidBodyA, rigidBodyB);
 		}
 
-		public Vector3 AxisA
+		public Vector3d AxisA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGearConstraint_getAxisA(Native, out value);
 				return value;
 			}
 			set => btGearConstraint_setAxisA(Native, ref value);
 		}
 
-		public Vector3 AxisB
+		public Vector3d AxisB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGearConstraint_getAxisB(Native, out value);
 				return value;
 			}

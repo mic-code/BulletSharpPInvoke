@@ -55,7 +55,7 @@ namespace BulletSharp
 			InitializeUserOwned(native);
 		}
 
-		public void CollideSingleContact(Quaternion perturbeRot, CollisionObjectWrapper body0Wrap,
+		public void CollideSingleContact(QuaternionD perturbeRot, CollisionObjectWrapper body0Wrap,
 			CollisionObjectWrapper body1Wrap, DispatcherInfo dispatchInfo, ManifoldResult resultOut)
 		{
 			btConvexPlaneCollisionAlgorithm_collideSingleContact(Native, ref perturbeRot,

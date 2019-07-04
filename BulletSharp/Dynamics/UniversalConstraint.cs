@@ -6,8 +6,8 @@ namespace BulletSharp
 {
 	public class UniversalConstraint : Generic6DofConstraint
 	{
-		public UniversalConstraint(RigidBody rigidBodyA, RigidBody rigidBodyB, Vector3 anchor,
-			Vector3 axis1, Vector3 axis2)
+		public UniversalConstraint(RigidBody rigidBodyA, RigidBody rigidBodyB, Vector3d anchor,
+			Vector3d axis1, Vector3d axis2)
 		{
 			IntPtr native = btUniversalConstraint_new(rigidBodyA.Native, rigidBodyB.Native,
 				ref anchor, ref axis1, ref axis2);
@@ -25,21 +25,21 @@ namespace BulletSharp
 			btUniversalConstraint_setUpperLimit(Native, ang1max, ang2max);
 		}
 
-		public Vector3 Anchor
+		public Vector3d Anchor
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btUniversalConstraint_getAnchor(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 Anchor2
+		public Vector3d Anchor2
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btUniversalConstraint_getAnchor2(Native, out value);
 				return value;
 			}
@@ -49,21 +49,21 @@ namespace BulletSharp
 
 		public double Angle2 => btUniversalConstraint_getAngle2(Native);
 
-		public Vector3 Axis1
+		public Vector3d Axis1
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btUniversalConstraint_getAxis1(Native, out value);
 				return value;
 			}
 		}
 
-		public Vector3 Axis2
+		public Vector3d Axis2
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btUniversalConstraint_getAxis2(Native, out value);
 				return value;
 			}

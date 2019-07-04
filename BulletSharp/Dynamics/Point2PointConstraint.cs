@@ -44,7 +44,7 @@ namespace BulletSharp
 	public class Point2PointConstraint : TypedConstraint
 	{
 		public Point2PointConstraint(RigidBody rigidBodyA, RigidBody rigidBodyB,
-			Vector3 pivotInA, Vector3 pivotInB)
+			Vector3d pivotInA, Vector3d pivotInB)
 		{
 			IntPtr native = btPoint2PointConstraint_new(rigidBodyA.Native, rigidBodyB.Native,
 				ref pivotInA, ref pivotInB);
@@ -52,7 +52,7 @@ namespace BulletSharp
 			InitializeMembers(rigidBodyA, rigidBodyB);
 		}
 
-		public Point2PointConstraint(RigidBody rigidBodyA, Vector3 pivotInA)
+		public Point2PointConstraint(RigidBody rigidBodyA, Vector3d pivotInA)
 		{
 			IntPtr native = btPoint2PointConstraint_new2(rigidBodyA.Native, ref pivotInA);
 			InitializeUserOwned(native);
@@ -77,22 +77,22 @@ namespace BulletSharp
 
 		public Point2PointFlags Flags => btPoint2PointConstraint_getFlags(Native);
 
-		public Vector3 PivotInA
+		public Vector3d PivotInA
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btPoint2PointConstraint_getPivotInA(Native, out value);
 				return value;
 			}
 			set => btPoint2PointConstraint_setPivotA(Native, ref value);
 		}
 
-		public Vector3 PivotInB
+		public Vector3d PivotInB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btPoint2PointConstraint_getPivotInB(Native, out value);
 				return value;
 			}

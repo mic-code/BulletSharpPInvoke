@@ -310,18 +310,18 @@ namespace BulletSharp.Math
         /// <summary>
         /// Gets or sets the translation of the matrix; that is M41, M42, and M43.
         /// </summary>
-        public Vector3 Origin
+        public Vector3d Origin
         {
-            get { return new Vector3(M41, M42, M43); }
+            get { return new Vector3d(M41, M42, M43); }
             set { M41 = value.X; M42 = value.Y; M43 = value.Z; }
         }
 
         /// <summary>
         /// Gets or sets the scale of the matrix; that is M11, M22, and M33.
         /// </summary>
-        public Vector3 ScaleVector
+        public Vector3d ScaleVector
         {
-            get { return new Vector3(M11, M22, M33); }
+            get { return new Vector3d(M11, M22, M33); }
             set { M11 = value.X; M22 = value.Y; M33 = value.Z; }
         }
 
@@ -583,7 +583,7 @@ namespace BulletSharp.Math
         /// <remarks>
         /// This method is designed to decompose an SRT transformation matrix only.
         /// </remarks>
-        public bool Decompose(out Vector3 scale, out Quaternion rotation, out Vector3 translation)
+        public bool Decompose(out Vector3d scale, out QuaternionD rotation, out Vector3d translation)
         {
             //Source: Unknown
             //References: http://www.gamedev.net/community/forums/topic.asp?topic_id=441695
@@ -603,7 +603,7 @@ namespace BulletSharp.Math
                 System.Math.Abs(scale.Y) < Utilities.ZeroTolerance ||
                 System.Math.Abs(scale.Z) < Utilities.ZeroTolerance)
             {
-                rotation = Quaternion.Identity;
+                rotation = QuaternionD.Identity;
                 return false;
             }
 
@@ -623,7 +623,7 @@ namespace BulletSharp.Math
 
             rotationmatrix.M44 = 1f;
 
-            Quaternion.RotationMatrix(ref rotationmatrix, out rotation);
+            QuaternionD.RotationMatrix(ref rotationmatrix, out rotation);
             return true;
         }
 
@@ -1744,11 +1744,11 @@ namespace BulletSharp.Math
         /// <param name="cameraUpVector">The up vector of the camera.</param>
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <param name="result">When the method completes, contains the created billboard matrix.</param>
-        public static void Billboard(ref Vector3 objectPosition, ref Vector3 cameraPosition, ref Vector3 cameraUpVector, ref Vector3 cameraForwardVector, out Matrix result)
+        public static void Billboard(ref Vector3d objectPosition, ref Vector3d cameraPosition, ref Vector3d cameraUpVector, ref Vector3d cameraForwardVector, out Matrix result)
         {
-            Vector3 crossed;
-            Vector3 final;
-            Vector3 difference = objectPosition - cameraPosition;
+            Vector3d crossed;
+            Vector3d final;
+            Vector3d difference = objectPosition - cameraPosition;
 
             double lengthsq = difference.LengthSquared;
             if (lengthsq < Utilities.ZeroTolerance)
@@ -1756,9 +1756,9 @@ namespace BulletSharp.Math
             else
                 difference *= (double)(1.0 / System.Math.Sqrt(lengthsq));
 
-            Vector3.Cross(ref cameraUpVector, ref difference, out crossed);
+            Vector3d.Cross(ref cameraUpVector, ref difference, out crossed);
             crossed.Normalize();
-            Vector3.Cross(ref difference, ref crossed, out final);
+            Vector3d.Cross(ref difference, ref crossed, out final);
 
             result.M11 = crossed.X;
             result.M12 = crossed.Y;
@@ -1786,7 +1786,7 @@ namespace BulletSharp.Math
         /// <param name="cameraUpVector">The up vector of the camera.</param>
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <returns>The created billboard matrix.</returns>
-        public static Matrix Billboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUpVector, Vector3 cameraForwardVector)
+        public static Matrix Billboard(Vector3d objectPosition, Vector3d cameraPosition, Vector3d cameraUpVector, Vector3d cameraForwardVector)
         {
             Matrix result;
             Billboard(ref objectPosition, ref cameraPosition, ref cameraUpVector, ref cameraForwardVector, out result);
@@ -1800,21 +1800,21 @@ namespace BulletSharp.Math
         /// <param name="target">The camera look-at target.</param>
         /// <param name="up">The camera's up vector.</param>
         /// <param name="result">When the method completes, contains the created look-at matrix.</param>
-        public static void LookAtLH(ref Vector3 eye, ref Vector3 target, ref Vector3 up, out Matrix result)
+        public static void LookAtLH(ref Vector3d eye, ref Vector3d target, ref Vector3d up, out Matrix result)
         {
-            Vector3 xaxis, yaxis, zaxis;
-            Vector3.Subtract(ref target, ref eye, out zaxis); zaxis.Normalize();
-            Vector3.Cross(ref up, ref zaxis, out xaxis); xaxis.Normalize();
-            Vector3.Cross(ref zaxis, ref xaxis, out yaxis);
+            Vector3d xaxis, yaxis, zaxis;
+            Vector3d.Subtract(ref target, ref eye, out zaxis); zaxis.Normalize();
+            Vector3d.Cross(ref up, ref zaxis, out xaxis); xaxis.Normalize();
+            Vector3d.Cross(ref zaxis, ref xaxis, out yaxis);
 
             result = Matrix.Identity;
             result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
             result.M12 = yaxis.X; result.M22 = yaxis.Y; result.M32 = yaxis.Z;
             result.M13 = zaxis.X; result.M23 = zaxis.Y; result.M33 = zaxis.Z;
 
-            Vector3.Dot(ref xaxis, ref eye, out result.M41);
-            Vector3.Dot(ref yaxis, ref eye, out result.M42);
-            Vector3.Dot(ref zaxis, ref eye, out result.M43);
+            Vector3d.Dot(ref xaxis, ref eye, out result.M41);
+            Vector3d.Dot(ref yaxis, ref eye, out result.M42);
+            Vector3d.Dot(ref zaxis, ref eye, out result.M43);
             result.M41 = -result.M41;
             result.M42 = -result.M42;
             result.M43 = -result.M43;
@@ -1827,7 +1827,7 @@ namespace BulletSharp.Math
         /// <param name="target">The camera look-at target.</param>
         /// <param name="up">The camera's up vector.</param>
         /// <returns>The created look-at matrix.</returns>
-        public static Matrix LookAtLH(Vector3 eye, Vector3 target, Vector3 up)
+        public static Matrix LookAtLH(Vector3d eye, Vector3d target, Vector3d up)
         {
             Matrix result;
             LookAtLH(ref eye, ref target, ref up, out result);
@@ -1841,21 +1841,21 @@ namespace BulletSharp.Math
         /// <param name="target">The camera look-at target.</param>
         /// <param name="up">The camera's up vector.</param>
         /// <param name="result">When the method completes, contains the created look-at matrix.</param>
-        public static void LookAtRH(ref Vector3 eye, ref Vector3 target, ref Vector3 up, out Matrix result)
+        public static void LookAtRH(ref Vector3d eye, ref Vector3d target, ref Vector3d up, out Matrix result)
         {
-            Vector3 xaxis, yaxis, zaxis;
-            Vector3.Subtract(ref eye, ref target, out zaxis); zaxis.Normalize();
-            Vector3.Cross(ref up, ref zaxis, out xaxis); xaxis.Normalize();
-            Vector3.Cross(ref zaxis, ref xaxis, out yaxis);
+            Vector3d xaxis, yaxis, zaxis;
+            Vector3d.Subtract(ref eye, ref target, out zaxis); zaxis.Normalize();
+            Vector3d.Cross(ref up, ref zaxis, out xaxis); xaxis.Normalize();
+            Vector3d.Cross(ref zaxis, ref xaxis, out yaxis);
 
             result = Matrix.Identity;
             result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
             result.M12 = yaxis.X; result.M22 = yaxis.Y; result.M32 = yaxis.Z;
             result.M13 = zaxis.X; result.M23 = zaxis.Y; result.M33 = zaxis.Z;
 
-            Vector3.Dot(ref xaxis, ref eye, out result.M41);
-            Vector3.Dot(ref yaxis, ref eye, out result.M42);
-            Vector3.Dot(ref zaxis, ref eye, out result.M43);
+            Vector3d.Dot(ref xaxis, ref eye, out result.M41);
+            Vector3d.Dot(ref yaxis, ref eye, out result.M42);
+            Vector3d.Dot(ref zaxis, ref eye, out result.M43);
             result.M41 = -result.M41;
             result.M42 = -result.M42;
             result.M43 = -result.M43;
@@ -1868,7 +1868,7 @@ namespace BulletSharp.Math
         /// <param name="target">The camera look-at target.</param>
         /// <param name="up">The camera's up vector.</param>
         /// <returns>The created look-at matrix.</returns>
-        public static Matrix LookAtRH(Vector3 eye, Vector3 target, Vector3 up)
+        public static Matrix LookAtRH(Vector3d eye, Vector3d target, Vector3d up)
         {
             Matrix result;
             LookAtRH(ref eye, ref target, ref up, out result);
@@ -2222,7 +2222,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="scale">Scaling factor for all three axes.</param>
         /// <param name="result">When the method completes, contains the created scaling matrix.</param>
-        public static void Scaling(ref Vector3 scale, out Matrix result)
+        public static void Scaling(ref Vector3d scale, out Matrix result)
         {
             Scaling(scale.X, scale.Y, scale.Z, out result);
         }
@@ -2232,7 +2232,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="scale">Scaling factor for all three axes.</param>
         /// <returns>The created scaling matrix.</returns>
-        public static Matrix Scaling(Vector3 scale)
+        public static Matrix Scaling(Vector3d scale)
         {
             Matrix result;
             Scaling(ref scale, out result);
@@ -2384,7 +2384,7 @@ namespace BulletSharp.Math
         /// <param name="axis">The axis around which to rotate. This parameter is assumed to be normalized.</param>
         /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
         /// <param name="result">When the method completes, contains the created rotation matrix.</param>
-        public static void RotationAxis(ref Vector3 axis, double angle, out Matrix result)
+        public static void RotationAxis(ref Vector3d axis, double angle, out Matrix result)
         {
             double x = axis.X;
             double y = axis.Y;
@@ -2416,7 +2416,7 @@ namespace BulletSharp.Math
         /// <param name="axis">The axis around which to rotate. This parameter is assumed to be normalized.</param>
         /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
         /// <returns>The created rotation matrix.</returns>
-        public static Matrix RotationAxis(Vector3 axis, double angle)
+        public static Matrix RotationAxis(Vector3d axis, double angle)
         {
             Matrix result;
             RotationAxis(ref axis, angle, out result);
@@ -2428,7 +2428,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="rotation">The quaternion to use to build the matrix.</param>
         /// <param name="result">The created rotation matrix.</param>
-        public static void RotationQuaternion(ref Quaternion rotation, out Matrix result)
+        public static void RotationQuaternion(ref QuaternionD rotation, out Matrix result)
         {
             double xx = rotation.X * rotation.X;
             double yy = rotation.Y * rotation.Y;
@@ -2457,7 +2457,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="rotation">The quaternion to use to build the matrix.</param>
         /// <returns>The created rotation matrix.</returns>
-        public static Matrix RotationQuaternion(Quaternion rotation)
+        public static Matrix RotationQuaternion(QuaternionD rotation)
         {
             Matrix result;
             RotationQuaternion(ref rotation, out result);
@@ -2473,8 +2473,8 @@ namespace BulletSharp.Math
         /// <param name="result">When the method completes, contains the created rotation matrix.</param>
         public static void RotationYawPitchRoll(double yaw, double pitch, double roll, out Matrix result)
         {
-            Quaternion quaternion = new Quaternion();
-            Quaternion.RotationYawPitchRoll(yaw, pitch, roll, out quaternion);
+            QuaternionD quaternion = new QuaternionD();
+            QuaternionD.RotationYawPitchRoll(yaw, pitch, roll, out quaternion);
             RotationQuaternion(ref quaternion, out result);
         }
 
@@ -2497,7 +2497,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The offset for all three coordinate planes.</param>
         /// <param name="result">When the method completes, contains the created translation matrix.</param>
-        public static void Translation(ref Vector3 value, out Matrix result)
+        public static void Translation(ref Vector3d value, out Matrix result)
         {
             Translation(value.X, value.Y, value.Z, out result);
         }
@@ -2507,7 +2507,7 @@ namespace BulletSharp.Math
         /// </summary>
         /// <param name="value">The offset for all three coordinate planes.</param>
         /// <returns>The created translation matrix.</returns>
-        public static Matrix Translation(Vector3 value)
+        public static Matrix Translation(Vector3d value)
         {
             Matrix result;
             Translation(ref value, out result);
@@ -2550,7 +2550,7 @@ namespace BulletSharp.Math
         /// <param name="rotation">The rotation of the transformation.</param>
         /// <param name="translation">The translation factor of the transformation.</param>
         /// <param name="result">When the method completes, contains the created affine transformation matrix.</param>
-        public static void AffineTransformation(double scaling, ref Quaternion rotation, ref Vector3 translation, out Matrix result)
+        public static void AffineTransformation(double scaling, ref QuaternionD rotation, ref Vector3d translation, out Matrix result)
         {
             result = Scaling(scaling) * RotationQuaternion(rotation) * Translation(translation);
         }
@@ -2562,7 +2562,7 @@ namespace BulletSharp.Math
         /// <param name="rotation">The rotation of the transformation.</param>
         /// <param name="translation">The translation factor of the transformation.</param>
         /// <returns>The created affine transformation matrix.</returns>
-        public static Matrix AffineTransformation(double scaling, Quaternion rotation, Vector3 translation)
+        public static Matrix AffineTransformation(double scaling, QuaternionD rotation, Vector3d translation)
         {
             Matrix result;
             AffineTransformation(scaling, ref rotation, ref translation, out result);
@@ -2577,7 +2577,7 @@ namespace BulletSharp.Math
         /// <param name="rotation">The rotation of the transformation.</param>
         /// <param name="translation">The translation factor of the transformation.</param>
         /// <param name="result">When the method completes, contains the created affine transformation matrix.</param>
-        public static void AffineTransformation(double scaling, ref Vector3 rotationCenter, ref Quaternion rotation, ref Vector3 translation, out Matrix result)
+        public static void AffineTransformation(double scaling, ref Vector3d rotationCenter, ref QuaternionD rotation, ref Vector3d translation, out Matrix result)
         {
             result = Scaling(scaling) * Translation(-rotationCenter) * RotationQuaternion(rotation) *
                 Translation(rotationCenter) * Translation(translation);
@@ -2591,7 +2591,7 @@ namespace BulletSharp.Math
         /// <param name="rotation">The rotation of the transformation.</param>
         /// <param name="translation">The translation factor of the transformation.</param>
         /// <returns>The created affine transformation matrix.</returns>
-        public static Matrix AffineTransformation(double scaling, Vector3 rotationCenter, Quaternion rotation, Vector3 translation)
+        public static Matrix AffineTransformation(double scaling, Vector3d rotationCenter, QuaternionD rotation, Vector3d translation)
         {
             Matrix result;
             AffineTransformation(scaling, ref rotationCenter, ref rotation, ref translation, out result);
@@ -2608,7 +2608,7 @@ namespace BulletSharp.Math
         /// <param name="rotation">The rotation of the transformation.</param>
         /// <param name="translation">The translation factor of the transformation.</param>
         /// <param name="result">When the method completes, contains the created transformation matrix.</param>
-        public static void Transformation(ref Vector3 scalingCenter, ref Quaternion scalingRotation, ref Vector3 scaling, ref Vector3 rotationCenter, ref Quaternion rotation, ref Vector3 translation, out Matrix result)
+        public static void Transformation(ref Vector3d scalingCenter, ref QuaternionD scalingRotation, ref Vector3d scaling, ref Vector3d rotationCenter, ref QuaternionD rotation, ref Vector3d translation, out Matrix result)
         {
             Matrix sr = RotationQuaternion(scalingRotation);
 
@@ -2626,7 +2626,7 @@ namespace BulletSharp.Math
         /// <param name="rotation">The rotation of the transformation.</param>
         /// <param name="translation">The translation factor of the transformation.</param>
         /// <returns>The created transformation matrix.</returns>
-        public static Matrix Transformation(Vector3 scalingCenter, Quaternion scalingRotation, Vector3 scaling, Vector3 rotationCenter, Quaternion rotation, Vector3 translation)
+        public static Matrix Transformation(Vector3d scalingCenter, QuaternionD scalingRotation, Vector3d scaling, Vector3d rotationCenter, QuaternionD rotation, Vector3d translation)
         {
             Matrix result;
             Transformation(ref scalingCenter, ref scalingRotation, ref scaling, ref rotationCenter, ref rotation, ref translation, out result);

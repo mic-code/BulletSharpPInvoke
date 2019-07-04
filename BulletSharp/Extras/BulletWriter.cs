@@ -73,7 +73,7 @@ namespace BulletSharp
             Write(value);
         }
 
-        public void Write(Vector3 value)
+        public void Write(Vector3d value)
         {
             Write(value.X);
             Write(value.Y);
@@ -81,7 +81,7 @@ namespace BulletSharp
             BaseStream.Position += 4; // Write(value.W);
         }
 
-        public void Write(Vector3 value, int position)
+        public void Write(Vector3d value, int position)
         {
             BaseStream.Position = position;
             Write(value);

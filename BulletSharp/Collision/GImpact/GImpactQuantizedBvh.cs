@@ -131,7 +131,7 @@ namespace BulletSharp
 			return btQuantizedBvhTree_isLeafNode(Native, nodeIndex);
 		}
 
-		public void QuantizePoint(ushort[] quantizedpoint, Vector3 point)
+		public void QuantizePoint(ushort[] quantizedpoint, Vector3d point)
 		{
 			btQuantizedBvhTree_quantizePoint(Native, quantizedpoint, ref point);
 		}

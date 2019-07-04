@@ -45,12 +45,12 @@ namespace BulletSharp
 				Native, index));
 		}
 
-		public void RayTestRef(ref Vector3 rayFromWorld, ref Vector3 rayToWorld, RayResultCallback resultCallback)
+		public void RayTestRef(ref Vector3d rayFromWorld, ref Vector3d rayToWorld, RayResultCallback resultCallback)
 		{
 			btGhostObject_rayTest(Native, ref rayFromWorld, ref rayToWorld, resultCallback.Native);
 		}
 
-		public void RayTest(Vector3 rayFromWorld, Vector3 rayToWorld, RayResultCallback resultCallback)
+		public void RayTest(Vector3d rayFromWorld, Vector3d rayToWorld, RayResultCallback resultCallback)
 		{
 			btGhostObject_rayTest(Native, ref rayFromWorld, ref rayToWorld, resultCallback.Native);
 		}

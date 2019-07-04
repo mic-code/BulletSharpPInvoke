@@ -54,7 +54,7 @@ namespace BulletSharp
 			{
 			}
 
-			public void AddContactPoint(Vector3 normalOnBInWorld, Vector3 pointInWorld,
+			public void AddContactPoint(Vector3d normalOnBInWorld, Vector3d pointInWorld,
 				double depth)
 			{
 				btDiscreteCollisionDetectorInterface_Result_addContactPoint(Native,
@@ -104,11 +104,11 @@ namespace BulletSharp
 			//InitializeUserOwned(native);
 		}
 
-		public Vector3 ClosestPointInB
+		public Vector3d ClosestPointInB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btStorageResult_getClosestPointInB(Native, out value);
 				return value;
 			}
@@ -121,11 +121,11 @@ namespace BulletSharp
 			set => btStorageResult_setDistance(Native, value);
 		}
 
-		public Vector3 NormalOnSurfaceB
+		public Vector3d NormalOnSurfaceB
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btStorageResult_getNormalOnSurfaceB(Native, out value);
 				return value;
 			}

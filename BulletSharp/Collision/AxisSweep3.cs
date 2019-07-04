@@ -8,7 +8,7 @@ namespace BulletSharp
 	{
 		private OverlappingPairCallback _overlappingPairUserCallback;
 
-		public AxisSweep3(Vector3 worldAabbMin, Vector3 worldAabbMax, ushort maxHandles = 16384,
+		public AxisSweep3(Vector3d worldAabbMin, Vector3d worldAabbMax, ushort maxHandles = 16384,
 			OverlappingPairCache pairCache = null, bool disableRaycastAccelerator = false)
 		{
 			IntPtr native = btAxisSweep3_new(ref worldAabbMin, ref worldAabbMax, maxHandles,
@@ -19,7 +19,7 @@ namespace BulletSharp
 				btBroadphaseInterface_getOverlappingPairCache(Native), this));
 		}
 
-		public ushort AddHandle(Vector3 aabbMin, Vector3 aabbMax, IntPtr pOwner,
+		public ushort AddHandle(Vector3d aabbMin, Vector3d aabbMax, IntPtr pOwner,
 			int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher,
 			IntPtr multiSapProxy)
 		{
@@ -27,7 +27,7 @@ namespace BulletSharp
 				collisionFilterGroup, collisionFilterMask, dispatcher.Native);
 		}
 
-		public ushort AddHandleRef(ref Vector3 aabbMin, ref Vector3 aabbMax, IntPtr pOwner,
+		public ushort AddHandleRef(ref Vector3d aabbMin, ref Vector3d aabbMax, IntPtr pOwner,
 			int collisionFilterGroup, int collisionFilterMask,
 			Dispatcher dispatcher, IntPtr multiSapProxy)
 		{
@@ -35,8 +35,8 @@ namespace BulletSharp
 				collisionFilterGroup, collisionFilterMask, dispatcher.Native);
 		}
 
-		public override BroadphaseProxy CreateProxy(ref Vector3 aabbMin,
-			ref Vector3 aabbMax, int shapeType, IntPtr userPtr, int collisionFilterGroup,
+		public override BroadphaseProxy CreateProxy(ref Vector3d aabbMin,
+			ref Vector3d aabbMax, int shapeType, IntPtr userPtr, int collisionFilterGroup,
 			int collisionFilterMask, Dispatcher dispatcher)
 		{
 			//throw new NotImplementedException();
@@ -63,12 +63,12 @@ namespace BulletSharp
 			return btAxisSweep3_testAabbOverlap(Native, proxy0.Native, proxy1.Native);
 		}
 
-		public void UnQuantize(BroadphaseProxy proxy, out Vector3 aabbMin, out Vector3 aabbMax)
+		public void UnQuantize(BroadphaseProxy proxy, out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btAxisSweep3_unQuantize(Native, proxy.Native, out aabbMin, out aabbMax);
 		}
 
-		public void UpdateHandle(ushort handle, Vector3 aabbMin, Vector3 aabbMax,
+		public void UpdateHandle(ushort handle, Vector3d aabbMin, Vector3d aabbMax,
 			Dispatcher dispatcher)
 		{
 			btAxisSweep3_updateHandle(Native, handle, ref aabbMin, ref aabbMax,
@@ -92,7 +92,7 @@ namespace BulletSharp
 	{
 		private OverlappingPairCallback _overlappingPairUserCallback;
 
-		public AxisSweep3_32Bit(Vector3 worldAabbMin, Vector3 worldAabbMax, uint maxHandles = 1500000,
+		public AxisSweep3_32Bit(Vector3d worldAabbMin, Vector3d worldAabbMax, uint maxHandles = 1500000,
 			OverlappingPairCache pairCache = null, bool disableRaycastAccelerator = false)
 		{
 			IntPtr native = bt32BitAxisSweep3_new(ref worldAabbMin, ref worldAabbMax, maxHandles,
@@ -103,14 +103,14 @@ namespace BulletSharp
 				btBroadphaseInterface_getOverlappingPairCache(Native), this));
 		}
 
-		public uint AddHandle(Vector3 aabbMin, Vector3 aabbMax, IntPtr pOwner, int collisionFilterGroup,
+		public uint AddHandle(Vector3d aabbMin, Vector3d aabbMax, IntPtr pOwner, int collisionFilterGroup,
 			int collisionFilterMask, Dispatcher dispatcher, IntPtr multiSapProxy)
 		{
 			return bt32BitAxisSweep3_addHandle(Native, ref aabbMin, ref aabbMax,
 				pOwner, collisionFilterGroup, collisionFilterMask, dispatcher.Native);
 		}
 
-		public uint AddHandleRef(ref Vector3 aabbMin, ref Vector3 aabbMax, IntPtr pOwner,
+		public uint AddHandleRef(ref Vector3d aabbMin, ref Vector3d aabbMax, IntPtr pOwner,
 			int collisionFilterGroup, int collisionFilterMask,
 			Dispatcher dispatcher, IntPtr multiSapProxy)
 		{
@@ -118,7 +118,7 @@ namespace BulletSharp
 				pOwner, collisionFilterGroup, collisionFilterMask, dispatcher.Native);
 		}
 
-		public override BroadphaseProxy CreateProxy(ref Vector3 aabbMin, ref Vector3 aabbMax, int shapeType, IntPtr userPtr, int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher)
+		public override BroadphaseProxy CreateProxy(ref Vector3d aabbMin, ref Vector3d aabbMax, int shapeType, IntPtr userPtr, int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher)
 		{
 			//throw new NotImplementedException();
 			return new BroadphaseProxy(btBroadphaseInterface_createProxy(Native, ref aabbMin, ref aabbMax, shapeType, userPtr, collisionFilterGroup, collisionFilterMask, dispatcher.Native));
@@ -144,12 +144,12 @@ namespace BulletSharp
 			return bt32BitAxisSweep3_testAabbOverlap(Native, proxy0.Native, proxy1.Native);
 		}
 
-		public void UnQuantize(BroadphaseProxy proxy, out Vector3 aabbMin, out Vector3 aabbMax)
+		public void UnQuantize(BroadphaseProxy proxy, out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			bt32BitAxisSweep3_unQuantize(Native, proxy.Native, out aabbMin, out aabbMax);
 		}
 
-		public void UpdateHandle(uint handle, Vector3 aabbMin, Vector3 aabbMax, Dispatcher dispatcher)
+		public void UpdateHandle(uint handle, Vector3d aabbMin, Vector3d aabbMax, Dispatcher dispatcher)
 		{
 			bt32BitAxisSweep3_updateHandle(Native, handle, ref aabbMin, ref aabbMax,
 				dispatcher.Native);

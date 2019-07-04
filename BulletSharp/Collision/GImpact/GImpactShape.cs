@@ -22,7 +22,7 @@ namespace BulletSharp
 			InitializeCollisionShape(native);
 		}
 
-		public void SetVertices(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
+		public void SetVertices(Vector3d v0, Vector3d v1, Vector3d v2, Vector3d v3)
 		{
 			btTetrahedronShapeEx_setVertices(Native, ref v0, ref v1, ref v2, ref v3);
 		}
@@ -46,7 +46,7 @@ namespace BulletSharp
 			btGImpactShapeInterface_getBulletTriangle(Native, primitiveIndex, triangle.Native);
 		}
 
-		public void GetChildAabb(int childIndex, Matrix transform, out Vector3 aabbMin, out Vector3 aabbMax)
+		public void GetChildAabb(int childIndex, Matrix transform, out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btGImpactShapeInterface_getChildAabb(Native, childIndex, ref transform,
 				out aabbMin, out aabbMax);
@@ -76,26 +76,26 @@ namespace BulletSharp
 			btGImpactShapeInterface_postUpdate(Native);
 		}
 
-		public void ProcessAllTrianglesRayRef(TriangleCallback callback, ref Vector3 rayFrom,
-			ref Vector3 rayTo)
+		public void ProcessAllTrianglesRayRef(TriangleCallback callback, ref Vector3d rayFrom,
+			ref Vector3d rayTo)
 		{
 			btGImpactShapeInterface_processAllTrianglesRay(Native, callback.Native,
 				ref rayFrom, ref rayTo);
 		}
 
-		public void ProcessAllTrianglesRay(TriangleCallback callback, Vector3 rayFrom,
-			Vector3 rayTo)
+		public void ProcessAllTrianglesRay(TriangleCallback callback, Vector3d rayFrom,
+			Vector3d rayTo)
 		{
 			btGImpactShapeInterface_processAllTrianglesRay(Native, callback.Native,
 				ref rayFrom, ref rayTo);
 		}
 
-		public void RayTestRef(ref Vector3 rayFrom, ref Vector3 rayTo, RayResultCallback resultCallback)
+		public void RayTestRef(ref Vector3d rayFrom, ref Vector3d rayTo, RayResultCallback resultCallback)
 		{
 			btGImpactShapeInterface_rayTest(Native, ref rayFrom, ref rayTo, resultCallback.Native);
 		}
 
-		public void RayTest(Vector3 rayFrom, Vector3 rayTo, RayResultCallback resultCallback)
+		public void RayTest(Vector3d rayFrom, Vector3d rayTo, RayResultCallback resultCallback)
 		{
 			btGImpactShapeInterface_rayTest(Native, ref rayFrom, ref rayTo, resultCallback.Native);
 		}
@@ -237,7 +237,7 @@ namespace BulletSharp
 				faceIndex, out i0, out i1, out i2b);
 		}
 
-		public void GetVertex(uint vertexIndex, out Vector3 vertex)
+		public void GetVertex(uint vertexIndex, out Vector3d vertex)
 		{
 			btGImpactMeshShapePart_TrimeshPrimitiveManager_get_vertex(Native,
 				vertexIndex, out vertex);
@@ -311,11 +311,11 @@ namespace BulletSharp
 			set => btGImpactMeshShapePart_TrimeshPrimitiveManager_setPart(Native, value);
 		}
 
-		public Vector3 Scale
+		public Vector3d Scale
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btGImpactMeshShapePart_TrimeshPrimitiveManager_getScale(Native, out value);
 				return value;
 			}
@@ -369,7 +369,7 @@ namespace BulletSharp
 			throw new InvalidOperationException();
 		}
 
-		public void GetVertex(int vertexIndex, out Vector3 vertex)
+		public void GetVertex(int vertexIndex, out Vector3d vertex)
 		{
 			btGImpactMeshShapePart_getVertex(Native, vertexIndex, out vertex);
 		}

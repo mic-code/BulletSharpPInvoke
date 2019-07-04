@@ -51,7 +51,7 @@ namespace BulletSharp
 			btDbvtBroadphase_collide(Native, dispatcher.Native);
 		}
 
-		public override BroadphaseProxy CreateProxy(ref Vector3 aabbMin, ref Vector3 aabbMax, int shapeType, IntPtr userPtr, int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher)
+		public override BroadphaseProxy CreateProxy(ref Vector3d aabbMin, ref Vector3d aabbMax, int shapeType, IntPtr userPtr, int collisionFilterGroup, int collisionFilterMask, Dispatcher dispatcher)
 		{
 			return new DbvtProxy(btBroadphaseInterface_createProxy(Native, ref aabbMin, ref aabbMax, shapeType, userPtr, collisionFilterGroup, collisionFilterMask, dispatcher.Native));
 		}
@@ -66,15 +66,15 @@ namespace BulletSharp
 			btDbvtBroadphase_performDeferredRemoval(Native, dispatcher.Native);
 		}
 
-		public void SetAabbForceUpdateRef(BroadphaseProxy absproxy, ref Vector3 aabbMin,
-			ref Vector3 aabbMax, Dispatcher __unnamed3)
+		public void SetAabbForceUpdateRef(BroadphaseProxy absproxy, ref Vector3d aabbMin,
+			ref Vector3d aabbMax, Dispatcher __unnamed3)
 		{
 			btDbvtBroadphase_setAabbForceUpdate(Native, absproxy.Native, ref aabbMin,
 				ref aabbMax, __unnamed3.Native);
 		}
 
-		public void SetAabbForceUpdate(BroadphaseProxy absproxy, Vector3 aabbMin,
-			Vector3 aabbMax, Dispatcher __unnamed3)
+		public void SetAabbForceUpdate(BroadphaseProxy absproxy, Vector3d aabbMin,
+			Vector3d aabbMax, Dispatcher __unnamed3)
 		{
 			btDbvtBroadphase_setAabbForceUpdate(Native, absproxy.Native, ref aabbMin,
 				ref aabbMax, __unnamed3.Native);

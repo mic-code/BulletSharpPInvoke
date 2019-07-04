@@ -41,8 +41,8 @@ namespace BulletSharp
             {
                 case BroadphaseNativeType.StaticPlaneShape:
                 {
-                    Vector3 localScaling = BulletReader.ToVector3(data, StaticPlaneShapeData.Offset("LocalScaling"));
-                    Vector3 planeNormal = BulletReader.ToVector3(data, StaticPlaneShapeData.Offset("PlaneNormal"));
+                    Vector3d localScaling = BulletReader.ToVector3(data, StaticPlaneShapeData.Offset("LocalScaling"));
+                    Vector3d planeNormal = BulletReader.ToVector3(data, StaticPlaneShapeData.Offset("PlaneNormal"));
                     float planeConstant = BitConverter.ToSingle(data, StaticPlaneShapeData.Offset("PlaneConstant"));
                     shape = CreatePlaneShape(ref planeNormal, planeConstant);
                     shape.LocalScaling = localScaling;
@@ -101,14 +101,14 @@ namespace BulletSharp
                 case BroadphaseNativeType.MultiSphereShape:
                 case BroadphaseNativeType.SphereShape:
                 {
-                    Vector3 localScaling = BulletReader.ToVector3(data, ConvexInternalShapeData.Offset("LocalScaling"));
-                    Vector3 implicitShapeDimensions = BulletReader.ToVector3(data, ConvexInternalShapeData.Offset("ImplicitShapeDimensions"));
+                    Vector3d localScaling = BulletReader.ToVector3(data, ConvexInternalShapeData.Offset("LocalScaling"));
+                    Vector3d implicitShapeDimensions = BulletReader.ToVector3(data, ConvexInternalShapeData.Offset("ImplicitShapeDimensions"));
                     float collisionMargin = BitConverter.ToSingle(data, ConvexInternalShapeData.Offset("CollisionMargin"));
                     switch (type)
                     {
                         case BroadphaseNativeType.BoxShape:
                         {
-                            Vector3 boxExtents = implicitShapeDimensions/localScaling + new Vector3(collisionMargin);
+                            Vector3d boxExtents = implicitShapeDimensions/localScaling + new Vector3d(collisionMargin);
                             BoxShape box = CreateBoxShape(ref boxExtents) as BoxShape;
                             //box.InitializePolyhedralFeatures();
                             shape = box;
@@ -116,7 +116,7 @@ namespace BulletSharp
                         }
                         case BroadphaseNativeType.CapsuleShape:
                         {
-                            Vector3 halfExtents = implicitShapeDimensions + new Vector3(collisionMargin);
+                            Vector3d halfExtents = implicitShapeDimensions + new Vector3d(collisionMargin);
                             int upAxis = BitConverter.ToInt32(data, CapsuleShapeData.Offset("UpAxis"));
                             switch (upAxis)
                             {
@@ -137,7 +137,7 @@ namespace BulletSharp
                         }
                         case BroadphaseNativeType.ConeShape:
                         {
-                            Vector3 halfExtents = implicitShapeDimensions; // + new Vector3(collisionMargin);
+                            Vector3d halfExtents = implicitShapeDimensions; // + new Vector3(collisionMargin);
                             int upAxis = BitConverter.ToInt32(data, ConeShapeData.Offset("UpAxis"));
                             switch (upAxis)
                             {
@@ -169,7 +169,7 @@ namespace BulletSharp
                             for (int i = 0; i < numPoints; i++)
                             {
                                 int v = i * vectorLength;
-                                Vector3 point = isFloat
+                                Vector3d point = isFloat
                                     ? BulletReader.ToVector3(points, v)
                                     : BulletReader.ToVector3Double(points, v);
                                 hullShape.AddPoint(point);
@@ -181,7 +181,7 @@ namespace BulletSharp
                         }
                         case BroadphaseNativeType.CylinderShape:
                         {
-                            Vector3 halfExtents = implicitShapeDimensions + new Vector3(collisionMargin);
+                            Vector3d halfExtents = implicitShapeDimensions + new Vector3d(collisionMargin);
                             int upAxis = BitConverter.ToInt32(data, CylinderShapeData.Offset("UpAxis"));
                             switch (upAxis)
                             {
@@ -205,7 +205,7 @@ namespace BulletSharp
                             long localPositionArrayPtr = BulletReader.ToPtr(data, MultiSphereShapeData.Offset("LocalPositionArrayPtr"));
                             int localPositionArraySize = BitConverter.ToInt32(data, MultiSphereShapeData.Offset("LocalPositionArraySize"));
                             byte[] localPositionArray = libPointers[localPositionArrayPtr];
-                            Vector3[] positions = new Vector3[localPositionArraySize];
+                            Vector3d[] positions = new Vector3d[localPositionArraySize];
                             double[] radi = new double[localPositionArraySize];
                             int positionAndRadiusLength = Marshal.SizeOf(typeof(PositionAndRadius));
                             for (int i = 0; i < localPositionArraySize; i++)
@@ -283,10 +283,10 @@ namespace BulletSharp
             {
                 case TypedConstraintType.Point2Point:
                 {
-                    Vector3 pivotInA = BulletReader.ToVector3(data, Point2PointConstraintFloatData.Offset("PivotInA"));
+                    Vector3d pivotInA = BulletReader.ToVector3(data, Point2PointConstraintFloatData.Offset("PivotInA"));
                     if (rigidBodyA != null && rigidBodyB != null)
                     {
-                        Vector3 pivotInB = BulletReader.ToVector3(data, Point2PointConstraintFloatData.Offset("PivotInB"));
+                        Vector3d pivotInB = BulletReader.ToVector3(data, Point2PointConstraintFloatData.Offset("PivotInB"));
                         constraint = CreatePoint2PointConstraint(rigidBodyA, rigidBodyB, ref pivotInA, ref pivotInB);
                     }
                     else
@@ -476,8 +476,8 @@ namespace BulletSharp
                     GearConstraint gear;
                     if (rigidBodyA != null && rigidBodyB != null)
                     {
-                        Vector3 axisInA = BulletReader.ToVector3(data, GearConstraintFloatData.Offset("AxisInA"));
-                        Vector3 axisInB = BulletReader.ToVector3(data, GearConstraintFloatData.Offset("AxisInB"));
+                        Vector3d axisInA = BulletReader.ToVector3(data, GearConstraintFloatData.Offset("AxisInA"));
+                        Vector3d axisInB = BulletReader.ToVector3(data, GearConstraintFloatData.Offset("AxisInB"));
                         float ratio = BitConverter.ToSingle(data, GearConstraintFloatData.Offset("Ratio"));
                         gear = CreateGearConstraint(rigidBodyA, rigidBodyB, ref axisInA, ref axisInB, ratio);
                     }
@@ -560,10 +560,10 @@ namespace BulletSharp
                     rbbFrame = rbbFrame * sharedFrame;
                     Generic6DofSpring2Constraint dof = new Generic6DofSpring2Constraint(rigidBodyA, rigidBodyB, rbaFrame, rbbFrame, RotateOrder.XYZ)
                     {
-                        LinearLowerLimit = Vector3.Zero,
-                        LinearUpperLimit = Vector3.Zero,
-                        AngularLowerLimit = Vector3.Zero,
-                        AngularUpperLimit = Vector3.Zero
+                        LinearLowerLimit = Vector3d.Zero,
+                        LinearUpperLimit = Vector3d.Zero,
+                        AngularLowerLimit = Vector3d.Zero,
+                        AngularUpperLimit = Vector3d.Zero
                     };
                     constraint = dof;
                     break;
@@ -610,8 +610,8 @@ namespace BulletSharp
             float restitution = BitConverter.ToSingle(data, cod + CollisionObjectFloatData.Offset("Restitution"));
 
             float inverseMass = BitConverter.ToSingle(data, RigidBodyFloatData.Offset("InverseMass"));
-            Vector3 angularFactor = BulletReader.ToVector3(data, RigidBodyFloatData.Offset("AngularFactor"));
-            Vector3 linearFactor = BulletReader.ToVector3(data, RigidBodyFloatData.Offset("LinearFactor"));
+            Vector3d angularFactor = BulletReader.ToVector3(data, RigidBodyFloatData.Offset("AngularFactor"));
+            Vector3d linearFactor = BulletReader.ToVector3(data, RigidBodyFloatData.Offset("LinearFactor"));
 
             CollisionShape shape = _shapeMap[collisionShapePtr];
 
@@ -653,8 +653,8 @@ namespace BulletSharp
             double restitution = BitConverter.ToDouble(data, cod + CollisionObjectFloatData.Offset("Restitution"));
 
             double inverseMass = BitConverter.ToDouble(data, RigidBodyFloatData.Offset("InverseMass"));
-            Vector3 angularFactor = BulletReader.ToVector3Double(data, RigidBodyFloatData.Offset("AngularFactor"));
-            Vector3 linearFactor = BulletReader.ToVector3Double(data, RigidBodyFloatData.Offset("LinearFactor"));
+            Vector3d angularFactor = BulletReader.ToVector3Double(data, RigidBodyFloatData.Offset("AngularFactor"));
+            Vector3d linearFactor = BulletReader.ToVector3Double(data, RigidBodyFloatData.Offset("LinearFactor"));
 
             CollisionShape shape = _shapeMap[collisionShapePtr];
 
@@ -686,7 +686,7 @@ namespace BulletSharp
             _bodyMap.Add(data, body);
         }
 
-        public CollisionShape CreateBoxShape(ref Vector3 halfExtents)
+        public CollisionShape CreateBoxShape(ref Vector3d halfExtents)
 		{
             BoxShape shape = new BoxShape(halfExtents);
             _allocatedCollisionShapes.Add(shape);
@@ -810,7 +810,7 @@ namespace BulletSharp
             return shape;
 		}
 
-		public GearConstraint CreateGearConstraint(RigidBody rbA, RigidBody rbB, ref Vector3 axisInA, ref Vector3 axisInB, float ratio)
+		public GearConstraint CreateGearConstraint(RigidBody rbA, RigidBody rbB, ref Vector3d axisInA, ref Vector3d axisInB, float ratio)
 		{
 			GearConstraint constraint = new GearConstraint(rbA, rbB, axisInA, axisInB, ratio);
             _allocatedConstraints.Add(constraint);
@@ -884,7 +884,7 @@ namespace BulletSharp
         {
             TriangleIndexVertexArray meshInterface = CreateTriangleMeshContainer();
             long meshPartsPtr = BulletReader.ToPtr(data, offset + StridingMeshInterfaceData.Offset("MeshPartsPtr"));
-            Vector3 scaling = BulletReader.ToVector3(data, offset + StridingMeshInterfaceData.Offset("Scaling"));
+            Vector3d scaling = BulletReader.ToVector3(data, offset + StridingMeshInterfaceData.Offset("Scaling"));
             int numMeshParts = BitConverter.ToInt32(data, offset + StridingMeshInterfaceData.Offset("NumMeshParts"));
 
             byte[] meshParts = libPointers[meshPartsPtr];
@@ -935,7 +935,7 @@ namespace BulletSharp
             return meshInterface;
         }
 
-        public MultiSphereShape CreateMultiSphereShape(Vector3[] positions, double[] radi)
+        public MultiSphereShape CreateMultiSphereShape(Vector3d[] positions, double[] radi)
 		{
 			MultiSphereShape shape = new MultiSphereShape(positions, radi);
             _allocatedCollisionShapes.Add(shape);
@@ -949,21 +949,21 @@ namespace BulletSharp
             return bvh;
 		}
         
-		public CollisionShape CreatePlaneShape(ref Vector3 planeNormal, float planeConstant)
+		public CollisionShape CreatePlaneShape(ref Vector3d planeNormal, float planeConstant)
 		{
             StaticPlaneShape shape = new StaticPlaneShape(planeNormal, planeConstant);
             _allocatedCollisionShapes.Add(shape);
             return shape;
 		}
 
-		public Point2PointConstraint CreatePoint2PointConstraint(RigidBody rbA, RigidBody rbB, ref Vector3 pivotInA, ref Vector3 pivotInB)
+		public Point2PointConstraint CreatePoint2PointConstraint(RigidBody rbA, RigidBody rbB, ref Vector3d pivotInA, ref Vector3d pivotInB)
 		{
             Point2PointConstraint constraint = new Point2PointConstraint(rbA, rbB, pivotInA, pivotInB);
             _allocatedConstraints.Add(constraint);
             return constraint;
 		}
 
-		public Point2PointConstraint CreatePoint2PointConstraint(RigidBody rbA, ref Vector3 pivotInA)
+		public Point2PointConstraint CreatePoint2PointConstraint(RigidBody rbA, ref Vector3d pivotInA)
 		{
 			Point2PointConstraint constraint = new Point2PointConstraint(rbA, pivotInA);
             _allocatedConstraints.Add(constraint);
@@ -972,14 +972,14 @@ namespace BulletSharp
 
 		public virtual RigidBody CreateRigidBody(bool isDynamic, double mass, ref Matrix startTransform, CollisionShape shape, string bodyName)
 		{
-            Vector3 localInertia;
+            Vector3d localInertia;
             if (mass != 0.0f)
             {
                 shape.CalculateLocalInertia(mass, out localInertia);
             }
             else
             {
-                localInertia = Vector3.Zero;
+                localInertia = Vector3d.Zero;
             }
 
             RigidBody body;
@@ -1003,7 +1003,7 @@ namespace BulletSharp
             return body;
 		}
 
-		public ScaledBvhTriangleMeshShape CreateScaledTriangleMeshShape(BvhTriangleMeshShape meshShape, ref Vector3 localScalingbtBvhTriangleMeshShape)
+		public ScaledBvhTriangleMeshShape CreateScaledTriangleMeshShape(BvhTriangleMeshShape meshShape, ref Vector3d localScalingbtBvhTriangleMeshShape)
 		{
             ScaledBvhTriangleMeshShape shape = new ScaledBvhTriangleMeshShape(meshShape, localScalingbtBvhTriangleMeshShape);
             _allocatedCollisionShapes.Add(shape);
@@ -1152,7 +1152,7 @@ namespace BulletSharp
             return _allocatedTriangleInfoMaps[index];
 		}
         
-		public void SetDynamicsWorldInfo(ref Vector3 gravity, ContactSolverInfo solverInfo)
+		public void SetDynamicsWorldInfo(ref Vector3d gravity, ContactSolverInfo solverInfo)
 		{
             if (_dynamicsWorld != null)
             {

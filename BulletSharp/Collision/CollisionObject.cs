@@ -117,7 +117,7 @@ namespace BulletSharp
 			btCollisionObject_forceActivationState(Native, newState);
 		}
 
-		public bool GetCustomDebugColor(out Vector3 colorRgb)
+		public bool GetCustomDebugColor(out Vector3d colorRgb)
 		{
 			return btCollisionObject_getCustomDebugColor(Native, out colorRgb);
 		}
@@ -162,13 +162,13 @@ namespace BulletSharp
 			btCollisionObject_serializeSingleObject(Native, serializer.Native);
 		}
 
-		public void SetAnisotropicFrictionRef(ref Vector3 anisotropicFriction,
+		public void SetAnisotropicFrictionRef(ref Vector3d anisotropicFriction,
 			AnisotropicFrictionFlags frictionMode = AnisotropicFrictionFlags.Friction)
 		{
 			btCollisionObject_setAnisotropicFriction(Native, ref anisotropicFriction, frictionMode);
 		}
 
-		public void SetAnisotropicFriction(Vector3 anisotropicFriction,
+		public void SetAnisotropicFriction(Vector3d anisotropicFriction,
 			AnisotropicFrictionFlags frictionMode = AnisotropicFrictionFlags.Friction)
 		{
 			btCollisionObject_setAnisotropicFriction(Native, ref anisotropicFriction,
@@ -180,7 +180,7 @@ namespace BulletSharp
 			btCollisionObject_setContactStiffnessAndDamping(Native, stiffness, damping);
 		}
 
-		public void SetCustomDebugColor(Vector3 colorRgb)
+		public void SetCustomDebugColor(Vector3d colorRgb)
 		{
 			btCollisionObject_setCustomDebugColor(Native, ref colorRgb);
 		}
@@ -196,11 +196,11 @@ namespace BulletSharp
 			set => btCollisionObject_setActivationState(Native, value);
 		}
 
-		public Vector3 AnisotropicFriction
+		public Vector3d AnisotropicFriction
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionObject_getAnisotropicFriction(Native, out value);
 				return value;
 			}
@@ -285,22 +285,22 @@ namespace BulletSharp
 
 		public CollisionObjectTypes InternalType => btCollisionObject_getInternalType(Native);
 
-		public Vector3 InterpolationAngularVelocity
+		public Vector3d InterpolationAngularVelocity
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionObject_getInterpolationAngularVelocity(Native, out value);
 				return value;
 			}
 			set => btCollisionObject_setInterpolationAngularVelocity(Native, ref value);
 		}
 
-		public Vector3 InterpolationLinearVelocity
+		public Vector3d InterpolationLinearVelocity
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionObject_getInterpolationLinearVelocity(Native, out value);
 				return value;
 			}

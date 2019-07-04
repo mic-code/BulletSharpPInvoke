@@ -41,14 +41,14 @@ namespace BulletSharp
 			throw new InvalidOperationException("Unknown collision object!");
 		}
 
-		public Vector3 CalculateLocalInertia(double mass)
+		public Vector3d CalculateLocalInertia(double mass)
 		{
-			Vector3 inertia;
+			Vector3d inertia;
 			btCollisionShape_calculateLocalInertia(Native, mass, out inertia);
 			return inertia;
 		}
 
-		public void CalculateLocalInertia(double mass, out Vector3 inertia)
+		public void CalculateLocalInertia(double mass, out Vector3d inertia)
 		{
 			btCollisionShape_calculateLocalInertia(Native, mass, out inertia);
 		}
@@ -58,30 +58,30 @@ namespace BulletSharp
 			return btCollisionShape_calculateSerializeBufferSize(Native);
 		}
 
-		public void CalculateTemporalAabbRef(ref Matrix curTrans, ref Vector3 linvel, ref Vector3 angvel,
-			double timeStep, out Vector3 temporalAabbMin, out Vector3 temporalAabbMax)
+		public void CalculateTemporalAabbRef(ref Matrix curTrans, ref Vector3d linvel, ref Vector3d angvel,
+			double timeStep, out Vector3d temporalAabbMin, out Vector3d temporalAabbMax)
 		{
 			btCollisionShape_calculateTemporalAabb(Native, ref curTrans, ref linvel, ref angvel, timeStep, out temporalAabbMin, out temporalAabbMax);
 		}
 
-		public void CalculateTemporalAabb(Matrix curTrans, Vector3 linvel, Vector3 angvel,
-			double timeStep, out Vector3 temporalAabbMin, out Vector3 temporalAabbMax)
+		public void CalculateTemporalAabb(Matrix curTrans, Vector3d linvel, Vector3d angvel,
+			double timeStep, out Vector3d temporalAabbMin, out Vector3d temporalAabbMax)
 		{
 			btCollisionShape_calculateTemporalAabb(Native, ref curTrans, ref linvel,
 				ref angvel, timeStep, out temporalAabbMin, out temporalAabbMax);
 		}
 
-		public void GetAabbRef(ref Matrix t, out Vector3 aabbMin, out Vector3 aabbMax)
+		public void GetAabbRef(ref Matrix t, out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btCollisionShape_getAabb(Native, ref t, out aabbMin, out aabbMax);
 		}
 
-		public void GetAabb(Matrix t, out Vector3 aabbMin, out Vector3 aabbMax)
+		public void GetAabb(Matrix t, out Vector3d aabbMin, out Vector3d aabbMax)
 		{
 			btCollisionShape_getAabb(Native, ref t, out aabbMin, out aabbMax);
 		}
 
-		public void GetBoundingSphere(out Vector3 center, out double radius)
+		public void GetBoundingSphere(out Vector3d center, out double radius)
 		{
 			btCollisionShape_getBoundingSphere(Native, out center, out radius);
 		}
@@ -118,11 +118,11 @@ namespace BulletSharp
 
 		public double AngularMotionDisc => btCollisionShape_getAngularMotionDisc(Native);
 
-		public Vector3 AnisotropicRollingFrictionDirection
+		public Vector3d AnisotropicRollingFrictionDirection
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionShape_getAnisotropicRollingFrictionDirection(Native, out value);
 				return value;
 			}
@@ -144,11 +144,11 @@ namespace BulletSharp
 
 		public bool IsSoftBody => btCollisionShape_isSoftBody(Native);
 
-		public Vector3 LocalScaling
+		public Vector3d LocalScaling
 		{
 			get
 			{
-				Vector3 value;
+				Vector3d value;
 				btCollisionShape_getLocalScaling(Native, out value);
 				return value;
 			}

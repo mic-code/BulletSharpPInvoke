@@ -75,9 +75,9 @@ namespace BulletSharp
 			return btConeTwistConstraint_getLimit(Native, limitIndex);
 		}
 
-		public Vector3 GetPointForAngle(double fAngleInRadians, double fLength)
+		public Vector3d GetPointForAngle(double fAngleInRadians, double fLength)
 		{
-			Vector3 value;
+			Vector3d value;
 			btConeTwistConstraint_GetPointForAngle(Native, fAngleInRadians, fLength,
 				out value);
 			return value;
@@ -110,7 +110,7 @@ namespace BulletSharp
 			btConeTwistConstraint_setMaxMotorImpulseNormalized(Native, maxMotorImpulse);
 		}
 
-		public void SetMotorTargetInConstraintSpace(Quaternion q)
+		public void SetMotorTargetInConstraintSpace(QuaternionD q)
 		{
 			btConeTwistConstraint_setMotorTargetInConstraintSpace(Native, ref q);
 		}
@@ -196,11 +196,11 @@ namespace BulletSharp
 			set => btConeTwistConstraint_setMaxMotorImpulse(Native, value);
 		}
 
-		public Quaternion MotorTarget
+		public QuaternionD MotorTarget
 		{
 			get
 			{
-				Quaternion value;
+				QuaternionD value;
 				btConeTwistConstraint_getMotorTarget(Native, out value);
 				return value;
 			}
